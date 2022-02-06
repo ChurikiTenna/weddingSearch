@@ -52,10 +52,10 @@ class LogInViewController: BasicViewController {
         
         var y = selectionBar.frame.maxY+30
         
-        emailInputF = TextFieldAndTtl(textF_rect(y: &y), ttl: "メールアドレス", to: view)
+        emailInputF = TextFieldAndTtl(.textF_rect(centerX: view.w/2, y: &y), ttl: "メールアドレス", to: view)
         emailInputF.textField.keyboardType = .emailAddress
         
-        passwordF = TextFieldAndTtl(textF_rect(y: &y), ttl: "パスワード", to: view)
+        passwordF = TextFieldAndTtl(.textF_rect(centerX: view.w/2, y: &y), ttl: "パスワード", to: view)
         passwordF.textField.isSecureTextEntry = true
         passwordF.textField.keyboardType = .alphabet
         

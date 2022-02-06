@@ -9,12 +9,17 @@ import UIKit
 import AVFoundation
 import AVKit
 
+var s: CGRect!
+
 enum Font {
     case normal
     case bold
     
     func with(_ size: CGFloat) -> UIFont {
-        return UIFont(name: "Rounded Mplus 1c", size: size)!
+        switch self {
+        case .normal: return .systemFont(ofSize: size)
+        case .bold: return .boldSystemFont(ofSize: size)
+        }
     }
 }
 
@@ -121,16 +126,16 @@ extension UIView {
         let tap = UITapGestureRecognizer(target: target, action: action)
         addGestureRecognizer(tap)
     }
+    func addSwipe(_ target: Any?, action: Selector) {
+        isUserInteractionEnabled = true
+        let tap = UISwipeGestureRecognizer(target: target, action: action)
+        addGestureRecognizer(tap)
+    }
     
-    convenience init(_ frame: CGRect? = nil, color: UIColor = .clear, to v: UIView, insert: Int = -1) {
-        if let f = frame { self.init(frame: f) }
-        else { self.init() }
+    convenience init(_ frame: CGRect? = nil, color: UIColor = .clear, to v: UIView) {
+        self.init(frame: frame ?? .zero)
         backgroundColor = color
-        if insert >= 0 {
-            v.insertSubview(self, at: insert)
-        } else {
-            v.addSubview(self)
-        }
+        v.addSubview(self)
     }
     internal static func grayBack(to v: UIView, alpha: CGFloat = 0.3) -> UIView {
         var view = v
@@ -158,7 +163,7 @@ extension UIView {
         }
     }
     /// アプリ共通の影を設定する
-    func shadow(radius: CGFloat = 5, opacity: Float = 0.3, color: UIColor = .dark()) {
+    func shadow(radius: CGFloat = 5, opacity: Float = 0.3, color: UIColor = .black) {
         layer.shadowColor = color.cgColor
         layer.shadowOpacity = opacity
         layer.shadowRadius = radius
@@ -411,33 +416,21 @@ extension CGRect {
     init(x: CGFloat = 0, y: CGFloat = 0, w: CGFloat = UIScreen.main.bounds.width, h: CGFloat = 0) {
         self.init(x: x, y: y, width: w, height: h)
     }
-    internal static var yokoNaga: CGRect {
-        return CGRect(w: UIScreen.main.bounds.width)
-    }
     static func colorBtn(x: CGFloat, y: CGFloat) -> CGRect {
-        let h: CGFloat = 60
-        return CGRect(x: x, y: y, w: h*2.28, h: h)
+        return CGRect(x: x, y: y, w: 300, h: 50)
     }
     static func colorBtn(centerX: CGFloat, y: CGFloat) -> CGRect {
-        let h: CGFloat = 60
-        return CGRect(x: centerX-h*1.14, y: y, w: h*2.28, h: h)
+        return CGRect(x: centerX-60, y: y, w: 120, h: 50)
     }
     static func colorBtn(maxX: CGFloat, y: CGFloat) -> CGRect {
-        let h: CGFloat = 60
-        return CGRect(x: maxX-h*2.28, y: y, w: h*2.28, h: h)
-    }
-    static func textF_rect(y: inout CGFloat, plusY: CGFloat = 20, view: UIView) -> CGRect {
-        let r = CGRect(x: 30, y: y, w: view.w-60, h: 100)
-        y = r.maxY+plusY
-        return r
-    }
-    // ちょっと左
-    static func textF_rect_l(y: inout CGFloat, plusY: CGFloat = 20, noTitle: Bool, view: UIView) -> CGRect {
-        let r = CGRect(x: 30, y: y, w: view.w-90, h: noTitle ? 60 : 90)
-        y = r.maxY+plusY
-        return r
+        return CGRect(x: maxX-120, y: y, w: 120, h: 50)
     }
     
+    static func textF_rect(centerX: CGFloat, y: inout CGFloat) -> CGRect {
+        let r = CGRect(x: centerX-150, y: y, w: 300, h: 80)
+        y = r.maxY+10
+        return r
+    }
     static func full_rect(y: inout CGFloat, h: CGFloat, plusY: CGFloat = 20, view: UIView) -> CGRect {
         let r = CGRect(x: 30, y: y, w: view.w-60, h: h)
         y = r.maxY+plusY
@@ -456,26 +449,19 @@ extension CGRect {
 extension UIColor {
     
     internal static var themeColor: UIColor {
-        return theme(alpha: 1)
-    }
-    internal static func theme(alpha: CGFloat) -> UIColor {
-        return UIColor(hue: 40/360, saturation: 83/100, brightness: 1, alpha: alpha)
+        return UIColor(hue: 253/360, saturation: 64/100, brightness: 96/100, alpha: 1)
     }
     internal static var themePale: UIColor {
-        return UIColor(hue: 44/360, saturation: 37/100, brightness: 1, alpha: 1)
+        return UIColor(hue: 246/360, saturation: 8/100, brightness: 96/100, alpha: 1)
     }
-    internal static var themeSuperPale: UIColor {
-        return UIColor(hue: 44/360, saturation: 25/100, brightness: 1, alpha: 1)
+    internal static var brown: UIColor {
+        return UIColor(hue: 23/360, saturation: 78/100, brightness: 72/100, alpha: 1)
     }
-    internal static func dark(alpha: CGFloat = 1) -> UIColor {
-        return UIColor(hue: 195/360, saturation: 1, brightness: 20/100, alpha: alpha)
+    internal static var lineGreen: UIColor {
+        return UIColor(hue: 106/360, saturation: 71/100, brightness: 75/100, alpha: 1)
     }
     static func gray(alpha: CGFloat) -> UIColor {
         UIColor(red: 0, green: 0, blue: 40/255, alpha: alpha)
-    }
-    
-    internal static var themeRed: UIColor {
-        return UIColor(hue: 0.06, saturation: 0.88, brightness: 1, alpha: 1)
     }
     internal static var superPaleGray: UIColor {
         return UIColor(white: 0.92, alpha: 1)

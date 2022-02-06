@@ -13,7 +13,6 @@
 		213D596327AA29C500022EDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 213D596127AA29C500022EDD /* Main.storyboard */; };
 		213D596527AA29C700022EDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 213D596427AA29C700022EDD /* Assets.xcassets */; };
 		213D596827AA29C700022EDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 213D596627AA29C700022EDD /* LaunchScreen.storyboard */; };
-		213D59ED27AF459700022EDD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 213D59EC27AF459700022EDD /* GoogleService-Info.plist */; };
 		213D5A0027AF48D200022EDD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D59F027AF48D100022EDD /* Constants.swift */; };
 		213D5A0127AF48D200022EDD /* CameraBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D59F127AF48D100022EDD /* CameraBtn.swift */; };
 		213D5A0227AF48D200022EDD /* TextConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D59F227AF48D100022EDD /* TextConverter.swift */; };
@@ -27,6 +26,10 @@
 		213D5A0C27AF48D200022EDD /* SwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D59FD27AF48D100022EDD /* SwitchView.swift */; };
 		213D5A0D27AF48D200022EDD /* BasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D59FE27AF48D100022EDD /* BasicViewController.swift */; };
 		213D5A0E27AF48D200022EDD /* Btns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D59FF27AF48D100022EDD /* Btns.swift */; };
+		213D5A1027AF4FD300022EDD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 213D5A0F27AF4FD300022EDD /* GoogleService-Info.plist */; };
+		213D5A1327AF51CB00022EDD /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D5A1227AF51CB00022EDD /* HomeController.swift */; };
+		213D5A1527AF522D00022EDD /* RequestEstimateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D5A1427AF522D00022EDD /* RequestEstimateController.swift */; };
+		213D5A1727AF526600022EDD /* MyPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D5A1627AF526600022EDD /* MyPageController.swift */; };
 		AE5CB6A09FD5D92F0F3F5E2D /* Pods_weddingSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6114A2B338B67F18C21D05BF /* Pods_weddingSearch.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,7 +43,6 @@
 		213D596427AA29C700022EDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		213D596727AA29C700022EDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		213D596927AA29C700022EDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		213D59EC27AF459700022EDD /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		213D59EE27AF482D00022EDD /* weddingSearch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = weddingSearch.entitlements; sourceTree = "<group>"; };
 		213D59F027AF48D100022EDD /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		213D59F127AF48D100022EDD /* CameraBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraBtn.swift; sourceTree = "<group>"; };
@@ -55,6 +57,10 @@
 		213D59FD27AF48D100022EDD /* SwitchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchView.swift; sourceTree = "<group>"; };
 		213D59FE27AF48D100022EDD /* BasicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicViewController.swift; sourceTree = "<group>"; };
 		213D59FF27AF48D100022EDD /* Btns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Btns.swift; sourceTree = "<group>"; };
+		213D5A0F27AF4FD300022EDD /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		213D5A1227AF51CB00022EDD /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		213D5A1427AF522D00022EDD /* RequestEstimateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestEstimateController.swift; sourceTree = "<group>"; };
+		213D5A1627AF526600022EDD /* MyPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageController.swift; sourceTree = "<group>"; };
 		4DA5E8A715144A48BD9B2E8E /* Pods-weddingSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weddingSearch.release.xcconfig"; path = "Target Support Files/Pods-weddingSearch/Pods-weddingSearch.release.xcconfig"; sourceTree = "<group>"; };
 		6114A2B338B67F18C21D05BF /* Pods_weddingSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_weddingSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -105,12 +111,13 @@
 				213D595B27AA29C500022EDD /* AppDelegate.swift */,
 				213D595D27AA29C500022EDD /* SceneDelegate.swift */,
 				213D595F27AA29C500022EDD /* ViewController.swift */,
+				213D5A1127AF51AD00022EDD /* MainControllers */,
 				213D59EF27AF48D100022EDD /* Templates */,
 				213D596127AA29C500022EDD /* Main.storyboard */,
 				213D596427AA29C700022EDD /* Assets.xcassets */,
+				213D5A0F27AF4FD300022EDD /* GoogleService-Info.plist */,
 				213D596627AA29C700022EDD /* LaunchScreen.storyboard */,
 				213D596927AA29C700022EDD /* Info.plist */,
-				213D59EC27AF459700022EDD /* GoogleService-Info.plist */,
 			);
 			path = weddingSearch;
 			sourceTree = "<group>";
@@ -141,6 +148,16 @@
 				213D59FB27AF48D100022EDD /* Models.swift */,
 			);
 			path = Firebase;
+			sourceTree = "<group>";
+		};
+		213D5A1127AF51AD00022EDD /* MainControllers */ = {
+			isa = PBXGroup;
+			children = (
+				213D5A1227AF51CB00022EDD /* HomeController.swift */,
+				213D5A1427AF522D00022EDD /* RequestEstimateController.swift */,
+				213D5A1627AF526600022EDD /* MyPageController.swift */,
+			);
+			path = MainControllers;
 			sourceTree = "<group>";
 		};
 		9440CD101C5785A792AE4C44 /* Frameworks */ = {
@@ -212,7 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				213D596827AA29C700022EDD /* LaunchScreen.storyboard in Resources */,
-				213D59ED27AF459700022EDD /* GoogleService-Info.plist in Resources */,
+				213D5A1027AF4FD300022EDD /* GoogleService-Info.plist in Resources */,
 				213D596527AA29C700022EDD /* Assets.xcassets in Resources */,
 				213D596327AA29C500022EDD /* Main.storyboard in Resources */,
 			);
@@ -272,14 +289,17 @@
 				213D5A0427AF48D200022EDD /* InputViews.swift in Sources */,
 				213D595C27AA29C500022EDD /* AppDelegate.swift in Sources */,
 				213D5A0927AF48D200022EDD /* Firebase.swift in Sources */,
+				213D5A1527AF522D00022EDD /* RequestEstimateController.swift in Sources */,
 				213D595E27AA29C500022EDD /* SceneDelegate.swift in Sources */,
 				213D5A0827AF48D200022EDD /* SearchFieldView.swift in Sources */,
 				213D5A0627AF48D200022EDD /* Extensions.swift in Sources */,
+				213D5A1327AF51CB00022EDD /* HomeController.swift in Sources */,
 				213D5A0C27AF48D200022EDD /* SwitchView.swift in Sources */,
 				213D5A0B27AF48D200022EDD /* LogInViewController.swift in Sources */,
 				213D5A0127AF48D200022EDD /* CameraBtn.swift in Sources */,
 				213D5A0027AF48D200022EDD /* Constants.swift in Sources */,
 				213D5A0727AF48D200022EDD /* CachedImages.swift in Sources */,
+				213D5A1727AF526600022EDD /* MyPageController.swift in Sources */,
 				213D5A0227AF48D200022EDD /* TextConverter.swift in Sources */,
 				213D5A0E27AF48D200022EDD /* Btns.swift in Sources */,
 				213D5A0A27AF48D200022EDD /* Models.swift in Sources */,

@@ -17,7 +17,7 @@ class BasicViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         overrideUserInterfaceStyle = .light
-        view.backgroundColor = .themeSuperPale
+        view.backgroundColor = .white
     }
     /// table notfound
     func showNotFound(_ arry: [Any]?, text: String, y: CGFloat? = nil) -> Int {
@@ -33,7 +33,7 @@ class BasicViewController: UIViewController {
     //scroll
     var scroll: UIScrollView!
     func setScrollView(y: CGFloat) {
-        scroll = UIScrollView(CGRect(y: y, w: view.w, h: view.h-y), to: view, insert: 0)
+        scroll = UIScrollView(CGRect(y: y, w: view.w, h: view.h-y), to: view)
         scroll.alwaysBounceVertical = true
     }
     //rect
@@ -41,9 +41,6 @@ class BasicViewController: UIViewController {
         let r = CGRect(x: 60, y: y, w: view.w-120, h: h)
         y = r.maxY+plusY
         return r
-    }
-    func textF_rect(y: inout CGFloat, plusY: CGFloat = 20) -> CGRect {
-        return .textF_rect(y: &y, plusY: plusY, view: view)
     }
     func full_rect(h: CGFloat, y: inout CGFloat, plusY: CGFloat = 20) -> CGRect {
         return .full_rect(y: &y, h: h, view: view)
