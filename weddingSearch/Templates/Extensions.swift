@@ -128,7 +128,7 @@ extension UIView {
     }
     func addSwipe(_ target: Any?, action: Selector) {
         isUserInteractionEnabled = true
-        let tap = UISwipeGestureRecognizer(target: target, action: action)
+        let tap = UIPanGestureRecognizer(target: target, action: action)
         addGestureRecognizer(tap)
     }
     
@@ -279,11 +279,10 @@ extension UIButton {
     }
     
     //背景青ボタン
-    static func coloredBtn(_ f: CGRect, text: String, to view: UIView,
+    static func coloredBtn(_ f: CGRect, text: String, color: UIColor = .themeColor, to view: UIView,
                            action: @escaping () -> Void) -> UIButton {
-        let btn = UIButton(f, text: text, font: .bold, textColor: .black, color: .clear, to: view)
+        let btn = UIButton(f, text: text, font: .bold, textSize: 17, textColor: .white, color: color, to: view)
         btn.round(0.5)
-        btn.setBackgroundImage(UIImage(named: "colorBtn"), for: .normal)
         btn.addAction {
             action()
         }
@@ -416,19 +415,19 @@ extension CGRect {
     init(x: CGFloat = 0, y: CGFloat = 0, w: CGFloat = UIScreen.main.bounds.width, h: CGFloat = 0) {
         self.init(x: x, y: y, width: w, height: h)
     }
-    static func colorBtn(x: CGFloat, y: CGFloat) -> CGRect {
-        return CGRect(x: x, y: y, w: 300, h: 50)
-    }
     static func colorBtn(centerX: CGFloat, y: CGFloat) -> CGRect {
-        return CGRect(x: centerX-60, y: y, w: 120, h: 50)
+        return CGRect(x: centerX-150, y: y, w: 300, h: 50)
+    }
+    static func colorBtn(x: CGFloat, y: CGFloat) -> CGRect {
+        return CGRect(x: x, y: y, w: 120, h: 50)
     }
     static func colorBtn(maxX: CGFloat, y: CGFloat) -> CGRect {
         return CGRect(x: maxX-120, y: y, w: 120, h: 50)
     }
     
-    static func textF_rect(centerX: CGFloat, y: inout CGFloat) -> CGRect {
-        let r = CGRect(x: centerX-150, y: y, w: 300, h: 80)
-        y = r.maxY+10
+    static func fill_rect(y: inout CGFloat, h: CGFloat, plusY: CGFloat = 20, view: UIView) -> CGRect {
+        let r = CGRect(y: y, w: view.w, h: h)
+        y = r.maxY+plusY
         return r
     }
     static func full_rect(y: inout CGFloat, h: CGFloat, plusY: CGFloat = 20, view: UIView) -> CGRect {
@@ -464,7 +463,7 @@ extension UIColor {
         UIColor(red: 0, green: 0, blue: 40/255, alpha: alpha)
     }
     internal static var superPaleGray: UIColor {
-        return UIColor(white: 0.92, alpha: 1)
+        return UIColor(white: 0.96, alpha: 1)
     }
     
     internal static func gradient(_ size: CGSize, colors: [UIColor]) -> UIColor {
@@ -520,10 +519,6 @@ extension UIImageView {
 
 extension UIViewController {
     
-    @objc func showLoginController() {
-        let vc = LogInViewController()
-        present(vc, animated: true, completion: nil)
-    }
     @objc func dismissSelf() {
         dismiss(animated: true, completion: nil)
     }
@@ -567,21 +562,33 @@ extension UIViewController {
                    cancelBtnTitle: String? = nil,
                    completion: (() -> Void)? = nil) {
         let v = UIView.grayBack(to: view)
-        let white = UIImageView(CGRect(x: v.w/2-150, y: v.h/2-200, w: 300, h: 300), name: "message", to: v)
-        let lbl = UILabel(CGRect(x: 40, y: 40, w: white.w-80, h: white.h-80), lines: -1, to: white)
+        let white = UIView(CGRect(x: v.w/2-150, y: v.h/2-200, w: 300, h: 300), color: .white, to: v)
+        white.round(20)
+        let lbl = UILabel(CGRect(x: 40, y: 40, w: white.w-80, h: white.h-80-50), lines: -1, to: white)
         lbl.attributedText = .twoLine(text: title, gray: message, miniText: 15)
-        _ = UIButton.coloredBtn(.colorBtn(maxX: white.maxX, y: white.maxY+10), text: btnTitle, to: v, action: {
-            v.closeSelf()
-            completion?()
-        })
         if let image = image {
             lbl.fitHeight()
             _ = UIImageView(CGRect(x: white.w/2-50, y: white.h/2-20, w: 100, h: 100), name: image, to: white)
         }
-        if let cancelButtonTitle = cancelBtnTitle {
-            _ = UIButton.coloredBtn(.colorBtn(x: white.minX, y: white.maxY+10), text: cancelButtonTitle, to: v, action: {
+        
+        _=UIView(CGRect(y: white.h-50, w: white.w, h: 1), color: .superPaleGray, to: white)
+        
+        var okRect = CGRect(y: white.h-50, w: white.w, h: 50)
+        if let cancelBtnTitle = cancelBtnTitle {
+            let cancelBtn = UIButton(CGRect(y: white.h-50, w: white.w/2, h: 50),
+                                     text: cancelBtnTitle, font: .bold, textSize: 18, textColor: .red, to: white)
+            cancelBtn.addAction {
                 v.closeSelf()
-            })
+            }
+            
+            _=UIView(CGRect(x: cancelBtn.maxX-0.5, y: white.h-50, w: 1, h: 50), color: .superPaleGray, to: white)
+            okRect.origin.x = white.w/2
+            okRect.size.width = white.w/2
+        }
+        let okBtn = UIButton(okRect, text: btnTitle, font: .bold, textSize: 18, to: white)
+        okBtn.addAction {
+            v.closeSelf()
+            completion?()
         }
     }
 }
@@ -649,10 +656,10 @@ extension NSAttributedString {
     static func twoLine(text: String, gray: String, miniText: CGFloat = 13) -> NSMutableAttributedString {
         let attr = NSMutableAttributedString(string: text + "\n",
                                              attributes: [.foregroundColor: UIColor.black,
-                                                          .font: Font.normal.with(miniText+2)])
+                                                          .font: Font.bold.with(miniText+4)])
         attr.append(NSAttributedString(string: gray + "\n",
                                        attributes: [.foregroundColor : UIColor.gray,
-                                                    .font: Font.bold.with(miniText)]))
+                                                    .font: Font.normal.with(miniText)]))
         attr.appendParaStyle(align: .left, lineSpacing: 1)
         return attr
     }
@@ -685,7 +692,7 @@ class TextField: UITextField {
         self.init(frame: f)
         backgroundColor = .white
         round(8)
-        font = Font.normal.with(f.height*0.6)
+        font = Font.normal.with(f.height*0.5)
         textColor = .black
         returnKeyType = .done
         self.delegate = delegate

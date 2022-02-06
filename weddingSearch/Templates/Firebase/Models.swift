@@ -5,9 +5,17 @@
 //  Created by 中力天和 on 2022/01/18.
 //
 
-import Foundation
+import FirebaseFirestoreSwift
+import FirebaseFirestore
 
 struct User: Codable {
-    var name = ""
-    var email = ""
+    
+    var nameKanji = ""
+    var surnameKanji = ""
+    
+    var nameKana = ""
+    var surnameKana = ""
+    
+    var birthDate: Timestamp!
+    var gender = ""
 }

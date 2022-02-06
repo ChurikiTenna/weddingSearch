@@ -13,12 +13,13 @@ enum ImageType: String {
     case bubble = "text.bubble"
     case highlighter
     case ellipsis
-    case trash
+    case multiply
     case camera
     case paperplane = "paperplane.fill"
     case chevronBtn
     case scissors
     case closeBtn
+    case chevronL = "chevron.left"
     case chevronR = "chevron.right"
     case chevronL2 = "chevron.left.2"
     case chevronR2 = "chevron.right.2"

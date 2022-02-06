@@ -15,90 +15,170 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 
-class LogInViewController: BasicViewController {
+class LogInView: UIScrollView {
      
-    var btns = [UIButton]()
+    var base: UIView!
+    var stepRounds = [UIView]()
+    var stepLbls = [UILabel]()
     
+    // step0
     var emailInputF: TextFieldAndTtl!
-    var passwordF: TextFieldAndTtl!
-    
+    //var passwordF: TextFieldAndTtl!
     var registerBtn: UIButton!
-    
     var otherLbl: UILabel?
-    
     var appleButton: UIButton!
-    var googleButton: UIButton?
     
-    var selectionBar: UIView!
+    //step1
+    var surnameKanjiF: TextFieldAndTtl!
+    var nameKanjiF: TextFieldAndTtl!
+    var surnameKanaF: TextFieldAndTtl!
+    var nameKanaF: TextFieldAndTtl!
+    var birthDateF: BirthDateField!
+    var genderF: TextFieldAndTtl!
     
-    override func viewWillAppear(_ animated: Bool) {
-        if registerBtn != nil { return }
-        super.viewWillAppear(animated)
-        view.backgroundColor = .white
+    init(to v: UIView) {
+        super.init(frame: v.fitRect)
+        backgroundColor = .superPaleGray
         
-        let exp = UILabel(CGRect(x: 16, y: 20, w: view.w-32, h: 30), text: "続けるにはログインが必要です", font: .bold, textSize: 16, align: .center, to: view)
+        v.addSubview(self)
+        _=UIButton.closeBtn(to: self, x: 10, y: s.minY+10, theme: .clearBlack, type: .multiply, action: closeSelf)
+        base = UIView(fitRect, color: .clear, to: self)
         
-        var x = CGFloat()
-        for text in ["新規登録", "ログイン"] {
+        let wd: CGFloat = 20
+        let gap: CGFloat = 80
+        var x = (w-wd*3-gap*2)/2
+        let steps = ["SNS認証", "プロフイール入力", "登録完了"]
+        for text in steps {
             
-            let btn = UIButton(CGRect(x: x, y: exp.frame.maxY+10, w: view.w/2, h: 40), text: text, textSize: 16, to: view)
-            btn.addTarget(self, action: #selector(changeSignUpOrIn), for: .touchUpInside)
-            if x == 0 {
-                selectionBar = UIView(CGRect(y: btn.frame.maxY, w: btn.frame.width, h: 5), color: .themeColor, to: view)
+            let round = UIView(CGRect(x: x, y: s.minY+60, w: wd, h: wd), to: self)
+            round.round()
+            stepRounds.append(round)
+            
+            let lbl = UILabel(CGRect(x: x-50, y: round.maxY, w: wd+100, h: 30),
+                              text: text, align: .center, to: self)
+            stepLbls.append(lbl)
+            
+            if text != steps.last {
+                _=UIView(CGRect(x: round.maxX+5, y: round.center.y-2, w: gap-10, h: 4), color: UIColor(white: 0.9, alpha: 1), to: self)
             }
-            btns.append(btn)
-            x += safe.width/2
+            
+            x = round.maxX+gap
         }
         
-        var y = selectionBar.frame.maxY+30
+        step(0)
+    }
+    func step(_ idx: Int) {
+        for i in 0..<stepRounds.count {
+            stepRounds[i].backgroundColor = idx==i ? .gray : UIColor(white: 0.9, alpha: 1)
+        }
+        for sub in base.subviews { sub.removeFromSuperview() }
+        switch idx {
+        case 0: snsRegisterView()
+        case 1: registerUserView()
+        default: break
+        }
+    }
+    
+    func snsRegisterView() {
         
-        emailInputF = TextFieldAndTtl(.textF_rect(centerX: view.w/2, y: &y), ttl: "メールアドレス", to: view)
-        emailInputF.textField.keyboardType = .emailAddress
+        var y = stepLbls[0].frame.maxY+60
         
-        passwordF = TextFieldAndTtl(.textF_rect(centerX: view.w/2, y: &y), ttl: "パスワード", to: view)
+        emailInputF = TextFieldAndTtl(textF_rect(y: &y, plusY: 20), ttl: "電話番号", to: base)
+        emailInputF.textField.keyboardType = .phonePad
+        /*
+        passwordF = TextFieldAndTtl(.textF_rect(centerX: self.w/2, y: &y), ttl: "パスワード（８桁以上）", to: self)
         passwordF.textField.isSecureTextEntry = true
         passwordF.textField.keyboardType = .alphabet
         
         
-        let forgetBtn = UIButton(full_rect(h: 30, y: &y), text: "パスワードを忘れましたか？", textSize: 14, textColor: .gray, to: view)
-        forgetBtn.addTarget(self, action: #selector(passwordReset), for: .touchUpInside)
+        let forgetBtn = UIButton(.full_rect(y: &y, h: 30, view: self),
+                                 text: "パスワードを忘れましたか？", textSize: 14, textColor: .gray, to: self)
+        forgetBtn.addTarget(self, action: #selector(passwordReset), for: .touchUpInside)*/
         
-        registerBtn = UIButton.coloredBtn(.colorBtn(centerX: view.w/2, y: y), text: "登録", to: view, action: registerWithPassword)
+        registerBtn = UIButton.coloredBtn(.colorBtn(centerX: w/2, y: y),
+                                          text: "SNS認証", to: base, action: registerWithPassword)
         y = registerBtn.maxY+20
         
-        otherLbl = UILabel(full_rect(h: 20, y: &y), text: "その他の登録方法", textColor: .lightGray, align: .center, to: view)
+        otherLbl = UILabel(.full_rect(y: &y, h: 30, view: base),
+                           text: "その他の登録方法", textColor: .lightGray, align: .center, to: base)
         
         
-        appleButton = UIButton.coloredBtn(.colorBtn(centerX: view.w/2, y: y), text: "", to: view, action: signInWithApple)
+        appleButton = UIButton.coloredBtn(.colorBtn(centerX: self.w/2, y: y),
+                                          text: "Appleで登録", color: .black, to: base, action: signInWithApple)
         appleButton.setImage(UIImage(named: "apple"), for: .normal)
         y = appleButton.maxY+20
         
         y += 20
-        let kiyaku = UIButton(CGRect(x: 0, y: y), text: "利用規約・", textSize: 14, textColor: .link, to: view)
+        let kiyaku = UIButton(CGRect(x: 0, y: y),
+                              text: "利用規約・", textSize: 14, textColor: .link, to: base)
         kiyaku.sizeToFit()
         kiyaku.addTarget(self, action: #selector(open_kiyaku), for: .touchUpInside)
         
-        let kojinjouhou = UIButton(CGRect(x: 0, y: y), text: "個人情報保護方針", textSize: 14, textColor: .link, to: view)
+        let kojinjouhou = UIButton(CGRect(x: 0, y: y),
+                                   text: "個人情報保護方針", textSize: 14, textColor: .link, to: base)
         kojinjouhou.sizeToFit()
         kojinjouhou.addTarget(self, action: #selector(open_kojinjouhouhogo), for: .touchUpInside)
         centerMe([kiyaku, kojinjouhou])
         
-        changeSignUpOrIn(btns[0])
+    }
+    
+    func registerUserView() {
+        
+        var y = stepLbls[0].frame.maxY+60
+        
+        surnameKanjiF = TextFieldAndTtl(textF_rect(y: &y), ttl: "姓", to: base)
+        nameKanjiF = TextFieldAndTtl(textF_rect(y: &y), ttl: "名", to: base)
+        surnameKanaF = TextFieldAndTtl(textF_rect(y: &y), ttl: "セイ", to: base)
+        nameKanaF = TextFieldAndTtl(textF_rect(y: &y), ttl: "メイ", to: base)
+        birthDateF = BirthDateField.initMe(textF_rect(y: &y), user: User(), to: base)
+        genderF = TextFieldAndTtl(textF_rect(y: &y), ttl: "性別", to: base)
+        
+        _ = UIButton.coloredBtn(.colorBtn(centerX: base.w/2, y: y), text: "内容を確認して登録", to: base) {
+            var errors = [String]()
+            if self.surnameKanjiF.empty { errors.append("姓を入力してください") }
+            if self.nameKanjiF.empty { errors.append("名を入力してください") }
+            if self.surnameKanaF.empty { errors.append("セイを入力してください") }
+            if self.nameKanaF.empty { errors.append("メイを入力してください") }
+            if self.birthDateF.empty { errors.append("生年月日を入力してください") }
+            if self.genderF.empty { errors.append("性別を入力してください") }
+            if errors.count > 0 {
+                self.showAlert(title: "未入力の項目があります", message: errors.joined(separator: "\n"))
+            } else {
+                let user = User(nameKanji: self.nameKanjiF.text,
+                                surnameKanji: self.surnameKanjiF.text,
+                                nameKana: self.nameKanaF.text,
+                                surnameKana: self.surnameKanaF.text,
+                                birthDate: self.birthDateF.date!.toDate().timestamp(),
+                                gender: self.genderF.text)
+                try! Ref.users.document(SignIn.uid!).setData(from: user, merge: true) {_ in
+                    self.didSuccessLogin()
+                }
+            }
+        }
+        contentSize.height = y+20
+    }
+    
+    func textF_rect(y: inout CGFloat, plusY: CGFloat = 10) -> CGRect {
+        return .fill_rect(y: &y, h: 70, plusY: plusY, view: self)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     func centerMe(_ views: [UIView]) {
         // 1番目が一番左、最後が一番右の一列に並んだviewsで、viewの間に隙間は無いとする
         var wd = CGFloat()
         views.forEach { wd += $0.w }
-        var x = (view.w-wd)/2
-        for view in views {
-            view.frame.origin.x = x
-            x = view.maxX
+        var x = (self.w-wd)/2
+        for v in views {
+            v.frame.origin.x = x
+            x = v.maxX
         }
     }
-    @objc func passwordReset() {
-        view.endEditing(true)
+    /*@objc func passwordReset() {
+        endEditing(true)
         if emailInputF.text.isEmpty {
-            showAlert(title: "メールアドレスを入力してください")
+            showAlert(title: "電話番号を入力してください")
             return
         }
         Auth.auth().sendPasswordReset(withEmail: emailInputF.text) { e in
@@ -108,7 +188,7 @@ class LogInViewController: BasicViewController {
                 self.showAlert(title: "パスワードリセットのメールを送信しました")
             }
         }
-    }
+    }*/
     @objc func open_kiyaku() {
         guard let url = URL(string: "todo kiyaku")
         else {
@@ -129,32 +209,15 @@ class LogInViewController: BasicViewController {
             UIApplication.shared.open(url)
         }
     }
-    // 実際には特に効果なし
-    @objc func changeSignUpOrIn(_ b: UIButton) {
-        UIView.animate(withDuration: 0.2, animations: {
-            self.selectionBar.frame.origin.x = b.frame.minX
-        }, completion: {_ in
-        
-            var text = "ログイン"
-            if self.selectionBar.frame.origin.x == 0 {
-                text = "登録"
-            }
-            self.appleButton?.setTitle(" Appleで\(text)", for: .normal)
-            self.googleButton?.setTitle("Googleで\(text)", for: .normal)
-            self.registerBtn.setTitle(text, for: .normal)
-            self.otherLbl?.text = "その他の\(text)方法"
-        })
-    }
-    
     // Unhashed nonce.
     private(set) var currentNonce: String?
     
     // ログイン成功
     func didSuccessLogin() {
         print("didSuccessLogin")
-        self.waiting = false
+        self.waitingController.waiting = false
         NotificationCenter.post(.logInStatusUpdated)
-        dismiss(animated: true) { }
+        closeSelf()
     }
     
     private func randomNonceString(length: Int = 32) -> String {
@@ -200,13 +263,13 @@ class LogInViewController: BasicViewController {
         ac.performRequests()
     }
     @objc func signInWithGoogle() {
-        waiting = true
+        waitingController.waiting = true
         guard let clientId = FirebaseApp.app()?.options.clientID else {
             noticeFailDelegate(cause: "")
             return
         }
         let signInConfig = GIDConfiguration.init(clientID: clientId)
-        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
+        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: parentViewController) { user, error in
             if let error = error {
                 self.noticeFailDelegate(cause: error.localizedDescription)
                 return
@@ -222,7 +285,8 @@ class LogInViewController: BasicViewController {
         }
     }
     @objc func registerWithPassword() {
-        waiting = true
+        //todo with phoneNumber https://firebase.google.com/docs/auth/ios/phone-auth?authuser=0
+        /*waitingController.waiting = true
         let email = emailInputF.text
         let password = passwordF.text
         guard email.isValidEmail else {
@@ -250,7 +314,7 @@ class LogInViewController: BasicViewController {
                 }
                 self.registerUser(result)
             }
-        }
+        }*/
     }
     private func sha256(_ input: String) -> String {
         let inputData = Data(input.utf8)
@@ -261,13 +325,13 @@ class LogInViewController: BasicViewController {
         return hashString
     }
 }
-extension LogInViewController: ASAuthorizationControllerPresentationContextProviding {
+extension LogInView: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        return view.window!
+        return window!
     }
 }
 
-extension LogInViewController {
+extension LogInView {
     
     func registerUser(_ result: AuthDataResult) {
         
@@ -283,29 +347,19 @@ extension LogInViewController {
                 return
             }
             // ユーザー情報を登録する
-            try! Ref.users.document(result.user.uid).setData(from: User(name: result.user.displayName ?? "", email: result.user.email ?? ""), merge: true) {_ in
-                self.didSuccessLogin()
-            }
+            self.step(1)
         }
     }
     
-    /// SafariViewControllerに遷移する
-    /// - Parameter urlString: 表示するURL
-    private func transitionSafariViewController(urlString: String) {
-        guard let url = URL(string: urlString) else { return }
-        let vc = SFSafariViewController(url: url)
-        vc.dismissButtonStyle = .close
-        present(vc, animated: true, completion: nil)
-    }
     /// ログインに失敗した通知を送る
     private func noticeFailDelegate(cause: String) {
-        waiting = false
+        waitingController.waiting = false
         showAlert(title: "サインインに失敗しました", message: cause, completion: nil)
         print("ログインに失敗しました", cause)
     }
 }
 
-extension LogInViewController: ASAuthorizationControllerDelegate {
+extension LogInView: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }

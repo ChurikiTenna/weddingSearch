@@ -106,51 +106,7 @@ class TextConverter {
         }
     }
 }
-struct Time {
-    var hour = 0
-    var min = 0
-}
-struct YMD {
-    var year = 0
-    var month = 0
-    var day = 0
-    var start: Time!
-    var end: Time!
-    
-    func isSameDay(with date: YMD) -> Bool {
-        return (date.year==year && date.month==month && date.day==day)
-    }
-    func isSameDayAndTime(with date: YMD) -> Bool {
-        return (date.year==year && date.month==month && date.day==day && date.start?.hour==start?.hour && date.start?.min==start?.min)
-    }
-    // 日付までdateに
-    func toDate(time: Time?) -> Date {
-        let calendar = Calendar(identifier: .gregorian)
-        var components = DateComponents()
-        components.timeZone = .current
-        components.year = year
-        components.month = month
-        components.day = day
-        if let time = time {
-            components.hour = time.hour
-            components.minute = time.min
-        }
-        return calendar.date(from: components)!
-    }
-    func toDateAndTime() -> String {
-        var date = toDate(time: nil).toString(format: .MDE)
-        if date == Date().toString(format: .MDE) {
-            date = "今日"
-        }
-        var dateText = "\(date)"
-        if start != nil, end != nil {
-            dateText += "\(start.hour.toTime):\(start.min.toTime)〜\(end.hour.toTime):\(end.min.toTime)"
-        } else if let start = start {
-            dateText += "\(start.hour.toTime):\(start.min.toTime)"
-        }
-        return dateText
-    }
-}
+
 extension Int {
     
     var toTime: String {

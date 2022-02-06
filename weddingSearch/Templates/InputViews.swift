@@ -250,21 +250,20 @@ class TextFieldAndTtl: UIView {
     var text: String {
         textField.text ?? ""
     }
+    var empty: Bool {
+        text.isEmpty
+    }
     
-    // h==100 がいいよ
     init(_ f: CGRect, ttl: String, placeholder: String? = nil, text: String? = nil, to view: UIView) {
         super.init(frame: f)
         view.addSubview(self)
+        backgroundColor = .white
         
-        let ht: CGFloat = 60
-        let wd = ht*3.94
-        ttlLbl = UILabel.grayTtl(CGRect(x: (w-wd)/2+10, y: 0, w: w, h: ttl.count==0 ? 0 : 20), ttl: ttl, to: self)
+        ttlLbl = UILabel.grayTtl(CGRect(x: 20, y: 0, w: w-20, h: ttl.count==0 ? 0 : 30), ttl: ttl, to: self)
         ttlLbl.fitWidth(maxW: w-ttlLbl.maxX)
         
-        let imgV = UIImageView(CGRect(x: (w-wd)/2, y: ttlLbl.maxY+5, w: wd, h: ht), name: "whiteBase", to: self)
-        textField = TextField(CGRect(x: imgV.minX+20, y: imgV.minY+15, w: imgV.w-40, h: imgV.h-40), delegate: self,
+        textField = TextField(CGRect(x: 20, y: ttlLbl.maxY, w: w-40, h: h-ttlLbl.maxY), delegate: self,
                               placeholder: (placeholder == nil ? "\(ttl)を入力" : placeholder!), to: self)
-        textField.backgroundColor = .clear
         
         if let text = text {
             textField.text = text
