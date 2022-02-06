@@ -38,19 +38,21 @@ class LogInView: UIScrollView {
     
     init(to v: UIView) {
         super.init(frame: v.fitRect)
-        backgroundColor = .superPaleGray
+        backgroundColor = .superPaleBackGray
         
         v.addSubview(self)
         _=UIButton.closeBtn(to: self, x: 10, y: s.minY+10, theme: .clearBlack, type: .multiply, action: closeSelf)
         base = UIView(fitRect, color: .clear, to: self)
         
-        let wd: CGFloat = 20
+        let wd: CGFloat = 30
         let gap: CGFloat = 80
         var x = (w-wd*3-gap*2)/2
+        var idx = 1
         let steps = ["SNS認証", "プロフイール入力", "登録完了"]
         for text in steps {
             
-            let round = UIView(CGRect(x: x, y: s.minY+60, w: wd, h: wd), to: self)
+            let round = UILabel(CGRect(x: x, y: s.minY+70, w: wd, h: wd),
+                                text: "\(idx)", font: .bold, textColor: .white, align: .center, to: self)
             round.round()
             stepRounds.append(round)
             
@@ -59,9 +61,10 @@ class LogInView: UIScrollView {
             stepLbls.append(lbl)
             
             if text != steps.last {
-                _=UIView(CGRect(x: round.maxX+5, y: round.center.y-2, w: gap-10, h: 4), color: UIColor(white: 0.9, alpha: 1), to: self)
+                _=UIView(CGRect(x: round.maxX+5, y: round.center.y-2, w: gap-10, h: 4), color: .superPaleGray, to: self)
             }
             
+            idx += 1
             x = round.maxX+gap
         }
         
@@ -69,7 +72,8 @@ class LogInView: UIScrollView {
     }
     func step(_ idx: Int) {
         for i in 0..<stepRounds.count {
-            stepRounds[i].backgroundColor = idx==i ? .gray : UIColor(white: 0.9, alpha: 1)
+            stepRounds[i].backgroundColor = idx >= i ? .gray : .superPaleGray
+            stepLbls[i].textColor = idx >= i ? .gray : .superPaleGray
         }
         for sub in base.subviews { sub.removeFromSuperview() }
         switch idx {
@@ -79,9 +83,21 @@ class LogInView: UIScrollView {
         }
     }
     
+    func setHead(_ title: String, sub: String) -> CGFloat {
+        
+        var y = s.minY+10
+        
+        _ = UILabel(.full_rect(y: &y, h: 40, plusY: 90, view: base),
+                    text: title, font: .bold, textSize: 18, align: .center, to: base)
+        
+        _ = UILabel(.full_rect(y: &y, h: 50, view: base), text: sub, lines: -1, to: base)
+        
+        return y
+    }
+    
     func snsRegisterView() {
         
-        var y = stepLbls[0].frame.maxY+60
+        var y = setHead("携帯番号登録", sub: "ご本人確認のため、SMS認証を行います。\n携帯番号を入力してください。")
         
         emailInputF = TextFieldAndTtl(textF_rect(y: &y, plusY: 20), ttl: "電話番号", to: base)
         emailInputF.textField.keyboardType = .phonePad
@@ -124,7 +140,7 @@ class LogInView: UIScrollView {
     
     func registerUserView() {
         
-        var y = stepLbls[0].frame.maxY+60
+        var y = setHead("プロフィール入力", sub: "必要なプロフィールを入力してください。\n事前登録で、式場をスムーズに予約できます。")
         
         surnameKanjiF = TextFieldAndTtl(textF_rect(y: &y), ttl: "姓", to: base)
         nameKanjiF = TextFieldAndTtl(textF_rect(y: &y), ttl: "名", to: base)

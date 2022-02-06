@@ -7,8 +7,6 @@
 
 import UIKit
 
-var safe: CGRect!
-
 class BasicViewController: UIViewController {
     
     var headerGrad: UIView?
@@ -64,10 +62,10 @@ class BasicViewController: UIViewController {
         y = v.maxY
         return v
     }
-    func header(_ ttl: String, withClose: Bool, s: CGRect? = nil) {
-        head = view.header(ttl, y: s?.minY ?? safe.minY)
+    func header(_ ttl: String, withClose: Bool) {
+        head = view.header(ttl, y: s.minY)
         if withClose {
-            _=UIButton.closeBtn(to: view, y: safe.minY+10, action: dismissSelf)
+            _=UIButton.closeBtn(to: view, y: s.minY+10, action: dismissSelf)
         }
     }
     // 待ってる途中
@@ -165,67 +163,5 @@ extension TableViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellHeight[indexPath] ?? 300
-    }
-}
-
-// CollectionView専用viewcontroller
-class CollectionViewController: BasicViewController {
-    
-    var collectionView: UICollectionView!
-    
-    var notFound: UILabel!
-    var ttl = ""
-    var notFoundTitle = ""
-    
-    var noMore = false
-    //var last: DocumentSnapshot?
-    var withClose = true
-    
-    override func viewWillAppear(_ animated: Bool) {
-        if collectionView != nil { return }
-        super.viewWillAppear(animated)
-        if safe != nil { initMe() }
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        if collectionView != nil { return }
-        super.viewDidAppear(animated)
-        if safe == nil { safe = view.safeAreaLayoutGuide.layoutFrame }
-        initMe()
-    }
-    private func initMe() {
-        header(ttl, withClose: withClose)
-        
-        let rect = CGRect(x: 5, y: head.maxY+1, w: view.w-10, h: safe.maxY-head.maxY-1)
-        var my_layer = UICollectionViewFlowLayout()
-        my_layer.scrollDirection = .vertical
-        my_layer.itemSize = CGSize(width: rect.width/2-2.5, height: rect.width)
-        my_layer.minimumInteritemSpacing = 5
-        my_layer.minimumLineSpacing = 5
-        layer(&my_layer)
-        collectionView = UICollectionView(frame: rect, collectionViewLayout: my_layer)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.backgroundColor = .white
-        view.addSubview(collectionView)
-    }
-    func layer(_ layer: inout UICollectionViewFlowLayout) { }
-    @objc func refresh() { collectionView.refreshControl?.endRefreshing() }
-    func getMore() {}
-    func makeCell(for idx: IndexPath) -> UICollectionViewCell? { return nil }
-    func componentCount() -> Int { return 0 }
-}
-extension CollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        notFound?.removeFromSuperview()
-        if componentCount() == 0 {
-            notFound = UILabel(collectionView.frame, text: notFoundTitle, textColor: .gray, align: .center, to: view)
-        }
-        return componentCount()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = makeCell(for: indexPath)!
-        cell.backgroundColor = .white
-        return cell
     }
 }

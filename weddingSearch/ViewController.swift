@@ -13,9 +13,9 @@ class ViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        SignIn.logout()
         overrideUserInterfaceStyle = .light
-        setUI()
+        
         NotificationCenter.addObserver(self, action: #selector(setUI), name: .logInStatusUpdated)
         
         tabBar.tintColor = .black
@@ -26,22 +26,23 @@ class ViewController: UITabBarController {
         appearance.backgroundColor = .white
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = appearance
+        
     }
     @objc func setUI() {
         vcs = []
         
         let vc0 = HomeController()
-        vc0.tabBarItem = UITabBarItem(title: "ホーム", image: UIImage(named: "asobu"), tag: 0)
+        vc0.tabBarItem = UITabBarItem(title: "ホーム", image: UIImage(systemName: "house"), tag: 0)
         //vc0.tabBarItem.selectedImage = UIImage(named: "asobu_s")
         vcs.append(vc0)
         
         let vc1 = RequestEstimateController()
-        vc1.tabBarItem = UITabBarItem(title: "見積もり依頼", image: UIImage(named: "myPage"), tag: 1)
+        vc1.tabBarItem = UITabBarItem(title: "見積もり依頼", image: UIImage(systemName: "doc.text.magnifyingglass"), tag: 1)
         //vc1.tabBarItem.selectedImage = UIImage(named: "myPage_s")
         vcs.append(vc1)
         
         let vc2 = MyPageController()
-        vc2.tabBarItem = UITabBarItem(title: "マイページ", image: UIImage(named: "myPage"), tag: 1)
+        vc2.tabBarItem = UITabBarItem(title: "マイページ", image: UIImage(systemName: "person"), tag: 1)
         //vc2.tabBarItem.selectedImage = UIImage(named: "myPage_s")
         vcs.append(vc2)
 
@@ -50,10 +51,13 @@ class ViewController: UITabBarController {
     }
     override func viewDidAppear(_ animated: Bool) {
         s = view.safeAreaLayoutGuide.layoutFrame
+        
         if SignIn.uid == nil {
             let vc = FirstController()
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: false)
+        } else {
+            setUI()
         }
     }
 }

@@ -9,4 +9,9 @@ import UIKit
 
 class HomeController: BasicViewController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        header("ホーム", withClose: false)
+    }
 }

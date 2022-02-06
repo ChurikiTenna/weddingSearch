@@ -180,8 +180,7 @@ class OptionViewController: BasicViewController {
     override func viewWillAppear(_ animated: Bool) {
         if head != nil { return }
         view.backgroundColor = .white
-        head = view.header(ttl, y: safe.minY)
-        _=UIButton.closeBtn(to: view, action: dismissSelf)
+        header(ttl, withClose: true)
         
         var y = head.maxY+20
         for i in 0..<options.count {

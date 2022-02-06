@@ -198,10 +198,10 @@ class UICalender: UIView {
         
         didSetMonth()
         
-        backBtn = ImageBtn(CGPoint(x: 10, y: 5), image: .chevronL, theme: .theme, to: self)
+        backBtn = ImageBtn(CGPoint(x: 10, y: 5), image: .chevronL, theme: .clearTheme, to: self)
         backBtn.tag = -1
         backBtn.addTarget(self, action: #selector(moveMonth), for: .touchUpInside)
-        nextBtn = ImageBtn(CGPoint(x: w-50, y: 5), image: .chevronR, theme: .theme, to: self)
+        nextBtn = ImageBtn(CGPoint(x: w-50, y: 5), image: .chevronR, theme: .clearTheme, to: self)
         nextBtn.tag = 1
         nextBtn.addTarget(self, action: #selector(moveMonth), for: .touchUpInside)
         

@@ -43,17 +43,13 @@ extension UIView {
     var slightlyBiggerRect: CGRect {
         CGRect(x: minX-5, y: minY-5, w: w+10, h: w+10)
     }
-    func header(_ text: String, y: CGFloat = 0, h: CGFloat = 60) -> UILabel {
+    func header(_ text: String, y: CGFloat = 0, h: CGFloat = 50) -> UILabel {
         let v = UIView(CGRect(w: w, h: y+h), color: .white, to: self)
         let header = UILabel(CGRect(x: 50, y: y, w: w-100, h: h-1),
                              color: .white,
                              text: text, font: .bold, textSize: 20, lines: 2, align: .center,
                              to: v)
-        var x: CGFloat = -1
-        while x < w {
-            let bar = UIImageView(CGRect(x: x, y: v.h-5, w: 210, h: 10), name: "bar", to: v)
-            x = bar.maxX-5
-        }
+        v.underBar()
         return header
     }
     
@@ -258,7 +254,7 @@ extension UIButton {
         return btn
     }
     // 背景色なしの目立つボタン
-    static func boldBtn(text: String, y: CGFloat = safe.minY, target: Any?, action: Selector, to v: UIView) -> UIButton {
+    static func boldBtn(text: String, y: CGFloat = s.minY, target: Any?, action: Selector, to v: UIView) -> UIButton {
         
         let btn = UIButton(CGRect(x: v.w-100, y: y, w: 80, h: 50),
                            text: text, font: .bold, textSize: 18, textColor: .black, to: v)
@@ -463,6 +459,9 @@ extension UIColor {
         UIColor(red: 0, green: 0, blue: 40/255, alpha: alpha)
     }
     internal static var superPaleGray: UIColor {
+        return UIColor(white: 0.92, alpha: 1)
+    }
+    internal static var superPaleBackGray: UIColor {
         return UIColor(white: 0.96, alpha: 1)
     }
     
