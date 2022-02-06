@@ -13,9 +13,25 @@
 		213D596327AA29C500022EDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 213D596127AA29C500022EDD /* Main.storyboard */; };
 		213D596527AA29C700022EDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 213D596427AA29C700022EDD /* Assets.xcassets */; };
 		213D596827AA29C700022EDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 213D596627AA29C700022EDD /* LaunchScreen.storyboard */; };
+		213D59ED27AF459700022EDD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 213D59EC27AF459700022EDD /* GoogleService-Info.plist */; };
+		213D5A0027AF48D200022EDD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D59F027AF48D100022EDD /* Constants.swift */; };
+		213D5A0127AF48D200022EDD /* CameraBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D59F127AF48D100022EDD /* CameraBtn.swift */; };
+		213D5A0227AF48D200022EDD /* TextConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D59F227AF48D100022EDD /* TextConverter.swift */; };
+		213D5A0427AF48D200022EDD /* InputViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D59F427AF48D100022EDD /* InputViews.swift */; };
+		213D5A0627AF48D200022EDD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D59F627AF48D100022EDD /* Extensions.swift */; };
+		213D5A0727AF48D200022EDD /* CachedImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D59F727AF48D100022EDD /* CachedImages.swift */; };
+		213D5A0827AF48D200022EDD /* SearchFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D59F827AF48D100022EDD /* SearchFieldView.swift */; };
+		213D5A0927AF48D200022EDD /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D59FA27AF48D100022EDD /* Firebase.swift */; };
+		213D5A0A27AF48D200022EDD /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D59FB27AF48D100022EDD /* Models.swift */; };
+		213D5A0B27AF48D200022EDD /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D59FC27AF48D100022EDD /* LogInViewController.swift */; };
+		213D5A0C27AF48D200022EDD /* SwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D59FD27AF48D100022EDD /* SwitchView.swift */; };
+		213D5A0D27AF48D200022EDD /* BasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D59FE27AF48D100022EDD /* BasicViewController.swift */; };
+		213D5A0E27AF48D200022EDD /* Btns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D59FF27AF48D100022EDD /* Btns.swift */; };
+		AE5CB6A09FD5D92F0F3F5E2D /* Pods_weddingSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6114A2B338B67F18C21D05BF /* Pods_weddingSearch.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C1479D04B181DB1BB102CDF /* Pods-weddingSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weddingSearch.debug.xcconfig"; path = "Target Support Files/Pods-weddingSearch/Pods-weddingSearch.debug.xcconfig"; sourceTree = "<group>"; };
 		213D595827AA29C500022EDD /* weddingSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weddingSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		213D595B27AA29C500022EDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		213D595D27AA29C500022EDD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +40,23 @@
 		213D596427AA29C700022EDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		213D596727AA29C700022EDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		213D596927AA29C700022EDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		213D59EC27AF459700022EDD /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		213D59EE27AF482D00022EDD /* weddingSearch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = weddingSearch.entitlements; sourceTree = "<group>"; };
+		213D59F027AF48D100022EDD /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		213D59F127AF48D100022EDD /* CameraBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraBtn.swift; sourceTree = "<group>"; };
+		213D59F227AF48D100022EDD /* TextConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextConverter.swift; sourceTree = "<group>"; };
+		213D59F427AF48D100022EDD /* InputViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputViews.swift; sourceTree = "<group>"; };
+		213D59F627AF48D100022EDD /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		213D59F727AF48D100022EDD /* CachedImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedImages.swift; sourceTree = "<group>"; };
+		213D59F827AF48D100022EDD /* SearchFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFieldView.swift; sourceTree = "<group>"; };
+		213D59FA27AF48D100022EDD /* Firebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
+		213D59FB27AF48D100022EDD /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		213D59FC27AF48D100022EDD /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		213D59FD27AF48D100022EDD /* SwitchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchView.swift; sourceTree = "<group>"; };
+		213D59FE27AF48D100022EDD /* BasicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicViewController.swift; sourceTree = "<group>"; };
+		213D59FF27AF48D100022EDD /* Btns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Btns.swift; sourceTree = "<group>"; };
+		4DA5E8A715144A48BD9B2E8E /* Pods-weddingSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weddingSearch.release.xcconfig"; path = "Target Support Files/Pods-weddingSearch/Pods-weddingSearch.release.xcconfig"; sourceTree = "<group>"; };
+		6114A2B338B67F18C21D05BF /* Pods_weddingSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_weddingSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +64,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE5CB6A09FD5D92F0F3F5E2D /* Pods_weddingSearch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		167BA4985F03439B05181C92 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0C1479D04B181DB1BB102CDF /* Pods-weddingSearch.debug.xcconfig */,
+				4DA5E8A715144A48BD9B2E8E /* Pods-weddingSearch.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		213D594F27AA29C500022EDD = {
 			isa = PBXGroup;
 			children = (
 				213D595A27AA29C500022EDD /* weddingSearch */,
 				213D595927AA29C500022EDD /* Products */,
+				167BA4985F03439B05181C92 /* Pods */,
+				9440CD101C5785A792AE4C44 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +101,54 @@
 		213D595A27AA29C500022EDD /* weddingSearch */ = {
 			isa = PBXGroup;
 			children = (
+				213D59EE27AF482D00022EDD /* weddingSearch.entitlements */,
 				213D595B27AA29C500022EDD /* AppDelegate.swift */,
 				213D595D27AA29C500022EDD /* SceneDelegate.swift */,
 				213D595F27AA29C500022EDD /* ViewController.swift */,
+				213D59EF27AF48D100022EDD /* Templates */,
 				213D596127AA29C500022EDD /* Main.storyboard */,
 				213D596427AA29C700022EDD /* Assets.xcassets */,
 				213D596627AA29C700022EDD /* LaunchScreen.storyboard */,
 				213D596927AA29C700022EDD /* Info.plist */,
+				213D59EC27AF459700022EDD /* GoogleService-Info.plist */,
 			);
 			path = weddingSearch;
+			sourceTree = "<group>";
+		};
+		213D59EF27AF48D100022EDD /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				213D59F027AF48D100022EDD /* Constants.swift */,
+				213D59F127AF48D100022EDD /* CameraBtn.swift */,
+				213D59F227AF48D100022EDD /* TextConverter.swift */,
+				213D59F427AF48D100022EDD /* InputViews.swift */,
+				213D59F627AF48D100022EDD /* Extensions.swift */,
+				213D59F727AF48D100022EDD /* CachedImages.swift */,
+				213D59F827AF48D100022EDD /* SearchFieldView.swift */,
+				213D59F927AF48D100022EDD /* Firebase */,
+				213D59FC27AF48D100022EDD /* LogInViewController.swift */,
+				213D59FD27AF48D100022EDD /* SwitchView.swift */,
+				213D59FE27AF48D100022EDD /* BasicViewController.swift */,
+				213D59FF27AF48D100022EDD /* Btns.swift */,
+			);
+			path = Templates;
+			sourceTree = "<group>";
+		};
+		213D59F927AF48D100022EDD /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				213D59FA27AF48D100022EDD /* Firebase.swift */,
+				213D59FB27AF48D100022EDD /* Models.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		9440CD101C5785A792AE4C44 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6114A2B338B67F18C21D05BF /* Pods_weddingSearch.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +158,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 213D596C27AA29C700022EDD /* Build configuration list for PBXNativeTarget "weddingSearch" */;
 			buildPhases = (
+				EB2D60A42A1E757B480DBA3C /* [CP] Check Pods Manifest.lock */,
 				213D595427AA29C500022EDD /* Sources */,
 				213D595527AA29C500022EDD /* Frameworks */,
 				213D595627AA29C500022EDD /* Resources */,
+				38B4E6528AA401B5DDCE5406 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -126,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				213D596827AA29C700022EDD /* LaunchScreen.storyboard in Resources */,
+				213D59ED27AF459700022EDD /* GoogleService-Info.plist in Resources */,
 				213D596527AA29C700022EDD /* Assets.xcassets in Resources */,
 				213D596327AA29C500022EDD /* Main.storyboard in Resources */,
 			);
@@ -133,14 +220,69 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		38B4E6528AA401B5DDCE5406 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-weddingSearch/Pods-weddingSearch-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-weddingSearch/Pods-weddingSearch-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-weddingSearch/Pods-weddingSearch-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB2D60A42A1E757B480DBA3C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-weddingSearch-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		213D595427AA29C500022EDD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				213D5A0D27AF48D200022EDD /* BasicViewController.swift in Sources */,
 				213D596027AA29C500022EDD /* ViewController.swift in Sources */,
+				213D5A0427AF48D200022EDD /* InputViews.swift in Sources */,
 				213D595C27AA29C500022EDD /* AppDelegate.swift in Sources */,
+				213D5A0927AF48D200022EDD /* Firebase.swift in Sources */,
 				213D595E27AA29C500022EDD /* SceneDelegate.swift in Sources */,
+				213D5A0827AF48D200022EDD /* SearchFieldView.swift in Sources */,
+				213D5A0627AF48D200022EDD /* Extensions.swift in Sources */,
+				213D5A0C27AF48D200022EDD /* SwitchView.swift in Sources */,
+				213D5A0B27AF48D200022EDD /* LogInViewController.swift in Sources */,
+				213D5A0127AF48D200022EDD /* CameraBtn.swift in Sources */,
+				213D5A0027AF48D200022EDD /* Constants.swift in Sources */,
+				213D5A0727AF48D200022EDD /* CachedImages.swift in Sources */,
+				213D5A0227AF48D200022EDD /* TextConverter.swift in Sources */,
+				213D5A0E27AF48D200022EDD /* Btns.swift in Sources */,
+				213D5A0A27AF48D200022EDD /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,7 +359,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -272,7 +414,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -284,19 +426,24 @@
 		};
 		213D596D27AA29C700022EDD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C1479D04B181DB1BB102CDF /* Pods-weddingSearch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = weddingSearch/weddingSearch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JP9XJC6239;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = weddingSearch/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "My Chape";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -306,25 +453,30 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		213D596E27AA29C700022EDD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4DA5E8A715144A48BD9B2E8E /* Pods-weddingSearch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = weddingSearch/weddingSearch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JP9XJC6239;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = weddingSearch/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "My Chape";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -334,7 +486,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
