@@ -147,8 +147,8 @@ class LogInView: UIScrollView {
         surnameKanaF = TextFieldAndTtl(textF_rect(y: &y), ttl: "セイ", to: base)
         nameKanaF = TextFieldAndTtl(textF_rect(y: &y), ttl: "メイ", to: base)
         birthDateF = BirthDateField.initMe(textF_rect(y: &y), user: User(), to: base)
-        genderF = TextFieldAndTtl(textF_rect(y: &y), ttl: "性別", to: base)
-        
+        genderF = TextFieldAndTtl(textF_rect(y: &y), ttl: "性別", placeholder: "性別を選択", to: base)
+        genderF.textField.addTap(self, action: #selector(selectGender))
         _ = UIButton.coloredBtn(.colorBtn(centerX: base.w/2, y: y), text: "内容を確認して登録", to: base) {
             var errors = [String]()
             if self.surnameKanjiF.empty { errors.append("姓を入力してください") }
@@ -156,7 +156,7 @@ class LogInView: UIScrollView {
             if self.surnameKanaF.empty { errors.append("セイを入力してください") }
             if self.nameKanaF.empty { errors.append("メイを入力してください") }
             if self.birthDateF.empty { errors.append("生年月日を入力してください") }
-            if self.genderF.empty { errors.append("性別を入力してください") }
+            if self.genderF.empty { errors.append("性別を選択してください") }
             if errors.count > 0 {
                 self.showAlert(title: "未入力の項目があります", message: errors.joined(separator: "\n"))
             } else {
@@ -171,9 +171,23 @@ class LogInView: UIScrollView {
                 }
             }
         }
-        contentSize.height = y+20
+        contentSize.height = y+100
     }
     
+    @objc func selectGender() {
+        let gray = UIView.grayBack(to: self)
+        let white = UIView(CGRect(x: self.w/2-150, y: self.h/2-70, w: 300, h: 140), color: .white, to: gray)
+        white.round(20)
+        let head = white.header("性別を選択")
+        
+        let check = CheckBtnView(CGRect(x: 20, y: head.maxY+30, w: white.w-40, h: 80),
+                                 to: white, allowMultipleSelection: false) { selected in
+            gray.closeSelf()
+            print("selected.string", selected.string)
+            self.genderF.textField.text = selected.string
+        }
+        check.setOptions([(str: "男", selected: false), (str: "女", selected: false), (str: "その他", selected: false)])
+    }
     func textF_rect(y: inout CGFloat, plusY: CGFloat = 10) -> CGRect {
         return .fill_rect(y: &y, h: 70, plusY: plusY, view: self)
     }

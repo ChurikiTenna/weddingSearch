@@ -44,6 +44,7 @@ extension UIView {
         CGRect(x: minX-5, y: minY-5, w: w+10, h: w+10)
     }
     func header(_ text: String, y: CGFloat = 0, h: CGFloat = 50) -> UILabel {
+        clipsToBounds = true
         let v = UIView(CGRect(w: w, h: y+h), color: .white, to: self)
         let header = UILabel(CGRect(x: 50, y: y, w: w-100, h: h-1),
                              color: .white,

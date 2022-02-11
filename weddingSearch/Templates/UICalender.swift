@@ -10,21 +10,21 @@ import UIKit
 struct YMD: Equatable {
     static func == (lhs: YMD, rhs: YMD) -> Bool {
         return (lhs.year==rhs.year && lhs.month==rhs.month && lhs.day==rhs.day
-                && lhs.start?.hour==rhs.start?.hour && lhs.start?.min==rhs.start?.min
+                && lhs.start.hour==rhs.start.hour && lhs.start.min==rhs.start.min
                 && lhs.end?.hour==rhs.end?.hour && lhs.end?.min==rhs.end?.min)
     }
     
     var year = 0
     var month = 0
     var day = 0
-    var start: Time!
+    var start = Time()
     var end: Time!
     
     func isSameDay(with date: YMD) -> Bool {
         return (date.year==year && date.month==month && date.day==day)
     }
     func isSameDayAndTime(with date: YMD) -> Bool {
-        return (date.year==year && date.month==month && date.day==day && date.start?.hour==start?.hour && date.start?.min==start?.min)
+        return (date.year==year && date.month==month && date.day==day && date.start.hour==start.hour && date.start.min==start.min)
     }
     func toDate() -> Date {
         let calendar = Calendar(identifier: .gregorian)
@@ -43,9 +43,9 @@ struct YMD: Equatable {
             date = "今日"
         }
         var dateText = "\(date)"
-        if start != nil, end != nil {
+        if end != nil {
             dateText += "\(start.hour.toTime):\(start.min.toTime)〜\(end.hour.toTime):\(end.min.toTime)"
-        } else if let start = start {
+        } else {
             dateText += "\(start.hour.toTime):\(start.min.toTime)"
         }
         return dateText
@@ -55,7 +55,7 @@ struct YMD: Equatable {
         return date.toString(format: format)
     }
     
-    init(year: Int, month: Int, day: Int, start: Time? = nil, end: Time? = nil) {
+    init(year: Int, month: Int, day: Int, start: Time = Time(), end: Time? = nil) {
         self.year = year
         self.month = month
         self.day = day
