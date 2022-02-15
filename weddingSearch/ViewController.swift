@@ -13,7 +13,7 @@ class ViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        SignIn.logout()
+        //SignIn.logout()
         overrideUserInterfaceStyle = .light
         
         NotificationCenter.addObserver(self, action: #selector(setUI), name: .logInStatusUpdated)
@@ -51,7 +51,7 @@ class ViewController: UITabBarController {
     }
     override func viewDidAppear(_ animated: Bool) {
         s = view.safeAreaLayoutGuide.layoutFrame
-        
+        view.backgroundColor = .white
         if SignIn.uid == nil {
             let vc = FirstController()
             vc.modalPresentationStyle = .fullScreen

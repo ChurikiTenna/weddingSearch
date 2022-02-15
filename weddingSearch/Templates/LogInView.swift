@@ -171,7 +171,7 @@ class LogInView: UIScrollView {
                 }
             }
         }
-        contentSize.height = y+100
+        contentSize.height = y+300
     }
     
     @objc func selectGender() {

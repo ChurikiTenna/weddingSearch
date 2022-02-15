@@ -15,7 +15,7 @@ class BasicViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         overrideUserInterfaceStyle = .light
-        view.backgroundColor = .white
+        if view.backgroundColor == nil { view.backgroundColor = .white }
     }
     /// table notfound
     func showNotFound(_ arry: [Any]?, text: String, y: CGFloat? = nil) -> Int {

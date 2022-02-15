@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2106605E27BB4B7E00217D55 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2106605D27BB4B7E00217D55 /* QuestionView.swift */; };
+		2106606027BB4C2100217D55 /* SelectVenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2106605F27BB4C2100217D55 /* SelectVenue.swift */; };
 		213D595C27AA29C500022EDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D595B27AA29C500022EDD /* AppDelegate.swift */; };
 		213D595E27AA29C500022EDD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D595D27AA29C500022EDD /* SceneDelegate.swift */; };
 		213D596027AA29C500022EDD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D595F27AA29C500022EDD /* ViewController.swift */; };
@@ -38,6 +40,8 @@
 
 /* Begin PBXFileReference section */
 		0C1479D04B181DB1BB102CDF /* Pods-weddingSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weddingSearch.debug.xcconfig"; path = "Target Support Files/Pods-weddingSearch/Pods-weddingSearch.debug.xcconfig"; sourceTree = "<group>"; };
+		2106605D27BB4B7E00217D55 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
+		2106605F27BB4C2100217D55 /* SelectVenue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectVenue.swift; sourceTree = "<group>"; };
 		213D595827AA29C500022EDD /* weddingSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weddingSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		213D595B27AA29C500022EDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		213D595D27AA29C500022EDD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +94,15 @@
 				4DA5E8A715144A48BD9B2E8E /* Pods-weddingSearch.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		2106605C27BB4B6800217D55 /* QuestionViews */ = {
+			isa = PBXGroup;
+			children = (
+				2106605D27BB4B7E00217D55 /* QuestionView.swift */,
+				2106605F27BB4C2100217D55 /* SelectVenue.swift */,
+			);
+			path = QuestionViews;
 			sourceTree = "<group>";
 		};
 		213D594F27AA29C500022EDD = {
@@ -164,6 +177,7 @@
 			children = (
 				213D5A1227AF51CB00022EDD /* HomeController.swift */,
 				213D5A1427AF522D00022EDD /* RequestEstimateController.swift */,
+				2106605C27BB4B6800217D55 /* QuestionViews */,
 				213D5A1627AF526600022EDD /* MyPageController.swift */,
 			);
 			path = MainControllers;
@@ -315,6 +329,8 @@
 				21AF76FD27B5FA840009814D /* CheckBtn.swift in Sources */,
 				213D5A0E27AF48D200022EDD /* Btns.swift in Sources */,
 				213D5A0A27AF48D200022EDD /* Models.swift in Sources */,
+				2106605E27BB4B7E00217D55 /* QuestionView.swift in Sources */,
+				2106606027BB4C2100217D55 /* SelectVenue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

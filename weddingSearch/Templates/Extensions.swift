@@ -275,7 +275,7 @@ extension UIButton {
         return btn
     }
     
-    //背景青ボタン
+    //背景colorボタン
     static func coloredBtn(_ f: CGRect, text: String, color: UIColor = .themeColor, to view: UIView,
                            action: @escaping () -> Void) -> UIButton {
         let btn = UIButton(f, text: text, font: .bold, textSize: 17, textColor: .white, color: color, to: view)
@@ -283,6 +283,18 @@ extension UIButton {
         btn.addAction {
             action()
         }
+        return btn
+    }
+    //dropdownボタン
+    static func dropBtn(_ f: CGRect, text: String, to view: UIView,
+                           action: @escaping () -> Void) -> UIButton {
+        let btn = UIButton(f, text: text, font: .bold, textSize: 17, textColor: .black, color: .white, to: view)
+        btn.round(0.2)
+        btn.addAction {
+            action()
+        }
+        _ = UIImageView(CGRect(x: btn.w-40, y: btn.h/2-10, w: 20, h: 20),
+                        name: ImageType.chevronD.rawValue, tint: .gray, to: btn)
         return btn
     }
     
