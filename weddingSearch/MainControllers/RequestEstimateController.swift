@@ -37,7 +37,7 @@ class RequestEstimateController: BasicViewController {
         }
         if let questionV = questionViews.first(where: { $0.type == type }) {
             print("have", type.rawValue)
-            view.addSubview(questionV)
+            questionV.slideIn(to: view)
             return
         }
         switch type {

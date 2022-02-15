@@ -34,7 +34,7 @@ class QuestionView: UIScrollView {
         self.onNext = onNext
         self.type = type
         super.init(frame: view.fitRect)
-        view.addSubview(self)
+        slideIn(to: view)
         backgroundColor = .superPaleBackGray
         alwaysBounceVertical = true
         
@@ -54,6 +54,12 @@ class QuestionView: UIScrollView {
     }
     func setUI(y: inout CGFloat) {
         
+    }
+    func slideIn(to view: UIView) {
+        view.addSubview(questionV)
+        UIView.animate(withDuration: 0.2) {
+            self.frame.origin.x = 0
+        }
     }
     func slideRemove() {
         UIView.animate(withDuration: 0.2) {
