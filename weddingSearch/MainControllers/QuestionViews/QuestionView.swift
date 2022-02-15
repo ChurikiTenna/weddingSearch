@@ -56,7 +56,7 @@ class QuestionView: UIScrollView {
         
     }
     func slideIn(to view: UIView) {
-        view.addSubview(questionV)
+        view.addSubview(self)
         UIView.animate(withDuration: 0.2) {
             self.frame.origin.x = 0
         }
