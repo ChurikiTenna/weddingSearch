@@ -95,8 +95,8 @@ class QuestionView: UIScrollView {
         contentSize.height = answerBtn.maxY+40
     }
     func setUI(y: inout CGFloat) { }
-    func slideIn(to view: UIView) {
-        frame.origin.x = view.w
+    func slideIn(to view: UIView, fromRight: Bool = true) {
+        frame.origin.x = fromRight ? view.w : -view.w
         view.addSubview(self)
         UIView.animate(withDuration: 0.2) {
             self.frame.origin.x = 0

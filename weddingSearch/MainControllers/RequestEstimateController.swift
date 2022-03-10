@@ -47,9 +47,14 @@ class RequestEstimateController: BasicViewController {
             //todo send to firebase
             return
         }
+        let lastType = currentType
         currentType = type
         if let questionV = questionViews.first(where: { $0.type == type }) {
-            questionV.slideIn(to: view)
+            if lastType.rawValue < currentType.rawValue {
+                questionV.slideIn(to: view, fromRight: true)
+            } else {
+                questionV.slideIn(to: view, fromRight: false)
+            }
         } else {
             questionViews.append(type.view(to: view, onBack: onBack, onNext: onNext))
         }
