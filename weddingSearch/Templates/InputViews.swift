@@ -89,84 +89,16 @@ class RangeSelectionField: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
-// ボタンタップ後の挙動が決められていないボタンセット
-class FreeSelectionField: UIView {
-    
-    var ttlLbl: UILabel!
-    var textBtn: UIButton!
-    
-    init(_ f: inout CGRect, ttl: String, btnTtl: String?, target: Any, action: Selector, to view: UIView) {
-        super.init(frame: f)
-        view.addSubview(self)
-        
-        ttlLbl = UILabel.grayTtl(CGRect(x: 10, y: 0, w: w, h: 20), ttl: ttl, to: self)
-        let btnF = CGRect(y: ttlLbl.frame.maxY+5, w: f.width, h: 42)
-        let btnT = btnTtl==nil ? "選択してください" : btnTtl!
-        textBtn = UIButton.selectionBtn(btnF, text: btnT, to: self)
-        textBtn.addTarget(target, action: action, for: .touchUpInside)
-        
-        frame.size.height = textBtn.maxY
-        f.origin.y = maxY+10
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-// ボタンタップで、決められたオプションを選択できるボタンセット
-class SelectionField: UIView {
-    
-    var ttlLbl: UILabel!
-    var textBtn: UIButton!
-    
-    let ttl: String
-    let options: [String]
-    var selectedIdx: Int?
-    
-    init(_ f: inout CGRect, ttl: String, options: [String], selectedIdx: Int? = nil, to view: UIView) {
-        self.ttl = ttl
-        self.options = options
-        self.selectedIdx = selectedIdx
-        super.init(frame: f)
-        view.addSubview(self)
-        
-        ttlLbl = UILabel.grayTtl(CGRect(x: 10, y: 0, w: w, h: 20), ttl: ttl, to: self)
-        let btnF = CGRect(y: ttlLbl.frame.maxY+5, w: f.width, h: 42)
-        let ttl = selectedIdx==nil ? "選択してください" : options[selectedIdx!]
-        textBtn = UIButton.selectionBtn(btnF, text: ttl, to: self)
-        textBtn.addTarget(self, action: #selector(showOptions), for: .touchUpInside)
-        
-        frame.size.height = textBtn.maxY
-        f.origin.y = maxY+10
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    @objc func showOptions() {
-        let vc = OptionViewController(ttl: ttl, options: options, selectedIdx: selectedIdx, delegate: self)
-        parentViewController.presentFull(vc)
-    }
-}
-extension SelectionField: OptionViewControllerDelegate {
-    func selected(idx: Int) {
-        selectedIdx = idx
-        textBtn.setTitle(options[idx], for: .normal)
-    }
-}
-protocol OptionViewControllerDelegate: AnyObject {
-    func selected(idx: Int)
-}
+
 class OptionViewController: BasicViewController {
     
     let selectedIdx: Int?
     let ttl: String
     let options: [String]
-    weak var delegate: OptionViewControllerDelegate?
+    let selected: (String) -> Void
     
-    init(ttl: String, options: [String], selectedIdx: Int?, delegate: OptionViewControllerDelegate) {
-        self.delegate = delegate
+    init(ttl: String, options: [String], selectedIdx: Int?, selected: @escaping (String) -> Void) {
+        self.selected = selected
         self.selectedIdx = selectedIdx
         self.ttl = ttl
         self.options = options
@@ -177,28 +109,78 @@ class OptionViewController: BasicViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidLoad() {
         if head != nil { return }
-        view.backgroundColor = .white
-        header(ttl, withClose: true)
+        view.backgroundColor = .superPaleBackGray
+        header(ttl, y: 0, withClose: true)
+        setScrollView(y: head.maxY)
         
-        var y = head.maxY+20
+        var y: CGFloat = 20
         for i in 0..<options.count {
             let btn = UIButton(CGRect(x: 40, y: y, w: view.w-80, h: 42),
                                text: options[i], font: .bold, textSize: 16,
                                textColor: i == selectedIdx ? .black : .gray,
-                               color: i == selectedIdx ? .themeColor : .superPaleGray,
-                               to: view)
+                               color: i == selectedIdx ? .themeColor : .white,
+                               to: scroll)
             btn.round(0.1)
             btn.tag = i
             btn.addTarget(self, action: #selector(optionSelected), for: .touchUpInside)
-            y = btn.maxY+10
+            y = btn.maxY+5
         }
+        scroll.contentSize.height = y+50
     }
     
     @objc func optionSelected(sender: UIButton) {
-        delegate?.selected(idx: sender.tag)
+        selected(options[sender.tag])
         dismissSelf()
+    }
+}
+class OptionWithHeadersViewController: BasicViewController {
+    
+    let ttl: String
+    let options: [(title: String, texts: [String])]
+    let selected: (String) -> Void
+    
+    init(ttl: String, options: [(title: String, texts: [String])], selected: @escaping (String) -> Void) {
+        self.selected = selected
+        self.ttl = ttl
+        self.options = options
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        if head != nil { return }
+        view.backgroundColor = .superPaleBackGray
+        header(ttl, y: 0, withClose: true)
+        setScrollView(y: head.maxY)
+        
+        var y: CGFloat = 20
+        for ttlIdx in 0..<options.count {
+            
+            let lbl = UILabel(CGRect(x: 30, y: y, w: view.w-80, h: 40),
+                              text: options[ttlIdx].title, font: .bold, textSize: 18, textColor: .darkGray, to: scroll)
+            y = lbl.maxY+5
+            
+            for text in options[ttlIdx].texts {
+                
+                let btn = UIButton(CGRect(x: 40, y: y, w: view.w-80, h: 42),
+                                   text: text, font: .bold, textSize: 16,
+                                   textColor: .gray,
+                                   color: .white,
+                                   to: scroll)
+                btn.round(0.1)
+                btn.addAction(action: {
+                    self.selected(text)
+                    self.dismissSelf()
+                })
+                y = btn.maxY+5
+            }
+        }
+        scroll.contentSize.height = y+50
     }
 }
 

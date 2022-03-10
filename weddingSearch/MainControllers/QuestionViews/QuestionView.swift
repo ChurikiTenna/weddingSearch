@@ -60,8 +60,8 @@ class QuestionView: UIScrollView {
     
     init(to view: UIView, onBack: @escaping () -> Void, onNext: @escaping () -> Void) {
         self.onNext = onNext
-        super.init(frame: view.fitRect)
-        view.addSubview(self)
+        super.init(frame: CGRect(x: view.w, y: 0, w: view.w, h: view.h))
+        slideIn(to: view)
         backgroundColor = .superPaleBackGray
         alwaysBounceVertical = true
         
@@ -80,6 +80,12 @@ class QuestionView: UIScrollView {
         contentSize.height = answerBtn.maxY+40
     }
     func setUI(y: inout CGFloat) { }
+    func slideIn(to view: UIView) {
+        view.addSubview(self)
+        UIView.animate(withDuration: 0.2) {
+            self.frame.origin.x = 0
+        }
+    }
     
     enum BtnTitleType: String {
         case selectAnswer = "回答を選択"
@@ -90,14 +96,26 @@ class QuestionView: UIScrollView {
         case selectVenueName = "式場名を選択"
         case selectSeason = "時期を選択"
     }
-    func selectionField(y: inout CGFloat, title: String, btnTitle: BtnTitleType = .selectAnswer, onTap: @escaping () -> Void) {
+    func selectionField(y: inout CGFloat, title: String, btnTitle: BtnTitleType = .selectAnswer,
+                        options: [String]?, onSelect: ((String) -> Void)? = nil) -> UIButton {
         let lbl = UILabel.grayTtl(.colorBtn(centerX: w/2, y: y), ttl: title, to: self)
         y = lbl.maxY
-        selectionField(y: &y, btnTitle: btnTitle, onTap: onTap)
+        return selectionField(y: &y, btnTitle: btnTitle, options: options, onSelect: onSelect)
     }
-    func selectionField(y: inout CGFloat, btnTitle: BtnTitleType = .selectAnswer, onTap: @escaping () -> Void) {
-        let field = UIButton.dropBtn(.colorBtn(centerX: w/2, y: y), text: btnTitle.rawValue, to: self, action: onTap)
+    func selectionField(y: inout CGFloat, btnTitle: BtnTitleType = .selectAnswer,
+                        options: [String]?, onSelect: ((String) -> Void)? = nil) -> UIButton {
+        let field = UIButton.dropBtn(.colorBtn(centerX: w/2, y: y), text: btnTitle.rawValue, to: self, action: nil)
         y = field.maxY+10
+        if let options = options {
+            field.addAction(action: {
+                let vc = OptionViewController(ttl: btnTitle.rawValue, options: options, selectedIdx: nil, selected: { str in
+                    onSelect!(str)
+                })
+                self.parentViewController.present(vc, animated: true)
+            })
+        }
+        
+        return field
     }
     func halfImage(imageName: String) -> CGFloat {
         let imgV = UIImageView(CGRect(x: 0, y: 0, w: w, h: 400), name: imageName, mode: .scaleAspectFill, to: self)

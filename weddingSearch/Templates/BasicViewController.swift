@@ -62,10 +62,10 @@ class BasicViewController: UIViewController {
         y = v.maxY
         return v
     }
-    func header(_ ttl: String, withClose: Bool) {
-        head = view.header(ttl, y: s.minY)
+    func header(_ ttl: String, y: CGFloat = s.minY, withClose: Bool) {
+        head = view.header(ttl, y: y)
         if withClose {
-            _=UIButton.closeBtn(to: view, y: s.minY+10, action: dismissSelf)
+            _=UIButton.closeBtn(to: view, y: y+10, action: dismissSelf)
         }
     }
     // 待ってる途中

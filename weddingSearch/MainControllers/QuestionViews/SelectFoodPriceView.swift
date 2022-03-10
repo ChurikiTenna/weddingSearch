@@ -11,10 +11,15 @@ class SelectFoodPriceView: QuestionView {
     
     override var type: QuestionType { .foodPrice }
     
+    var foodPrice = ""
+    
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page21")
-        selectionField(y: &y, btnTitle: .selectPrice, onTap: {
-            
+        
+        let budgetRange = RangeHelper.shared.rangeFrom([1,1.5,2,2.5,3,4,5,8], min: 0.5)
+        let budgets = RangeHelper.shared.toText(from: budgetRange, unit: "万円")
+        _ = selectionField(y: &y, btnTitle: .selectPrice, options: budgets, onSelect: { str in
+            self.foodPrice = str
         })
         let texts = ["・コース料理の品数は7~9品が目安で、前菜、スープ・パン、肉魚、デザート等で構成されます",
                      "・フレンチや折衷料理が主流です",

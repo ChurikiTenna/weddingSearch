@@ -13,13 +13,13 @@ class SelectPhoto: QuestionView {
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page28")
-        selectionField(y: &y, title: "スナップアルバムは必要ですか？", onTap: {
+        _=selectionField(y: &y, title: "スナップアルバムは必要ですか？", options: ["必要","不要"], onSelect: { str in
             
         })
-        selectionField(y: &y, title: "型物写真は必要ですか？", onTap: {
+        _=selectionField(y: &y, title: "型物写真は必要ですか？", options: ["必要","不要"], onSelect: { str in
             
         })
-        selectionField(y: &y, title: "式場で前撮り撮影を行いますか？", onTap: {
+        _=selectionField(y: &y, title: "式場で前撮り撮影を行いますか？", options: ["行う","行わない"], onSelect: { str in
             
         })
         let texts = ["・スナップアルバムとは式の写真を製本したもので、200~300カットが一般的です",

@@ -287,12 +287,10 @@ extension UIButton {
     }
     //dropdownボタン
     static func dropBtn(_ f: CGRect, text: String, to view: UIView,
-                           action: @escaping () -> Void) -> UIButton {
+                        action: (() -> Void)?) -> UIButton {
         let btn = UIButton(f, text: text, font: .bold, textSize: 17, textColor: .black, color: .white, to: view)
         btn.round(0.2)
-        btn.addAction {
-            action()
-        }
+        if let action = action { btn.addAction(action: action) }
         _ = UIImageView(CGRect(x: btn.w-40, y: btn.h/2-10, w: 20, h: 20),
                         name: ImageType.chevronD.rawValue, tint: .gray, to: btn)
         return btn

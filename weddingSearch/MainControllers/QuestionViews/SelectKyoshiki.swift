@@ -11,10 +11,12 @@ class SelectKyoshiki: QuestionView {
     
     override var type: QuestionType { .knoshiki }
     
+    var kyoshiki = ""
+    
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page23")
-        selectionField(y: &y, onTap: {
-            
+        _ = selectionField(y: &y, options: ["行う","行わない"], onSelect: { str in
+            self.kyoshiki = str
         })
         let texts = ["・教会式は、チャペルで神に愛を誓う挙式形式です",
                      "・人前式は、宗教や格式を気にせず、ゲストの前で愛を誓う挙式形式です",
