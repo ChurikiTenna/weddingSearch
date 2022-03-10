@@ -9,6 +9,9 @@ import UIKit
 
 class SelectVenueView: QuestionView {
     
+    init(to view: UIView, onNext: @escaping () -> Void) {
+        super.init(type: .selectVenue, to: view, onNext: onNext)
+    }
     override func setUI(y: inout CGFloat) {
         venueSet(idx: 1, y: &y)
         venueSet(idx: 2, y: &y)

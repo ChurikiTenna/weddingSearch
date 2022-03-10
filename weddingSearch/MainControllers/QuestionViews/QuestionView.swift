@@ -19,6 +19,13 @@ enum QuestionType: Int {
         case .foodPrice: return "Q3. 披露宴で出す\nコース料理の料金は?"
         }
     }
+    func view(to v: UIView, onNextPage: @escaping () -> Void) -> QuestionView {
+        switch self {
+        case .selectVenue: return SelectVenueView(to: v, onNext: onNextPage)
+        case .basicInfo: return SelectBasicInfo(to: v, onNext: onNextPage)
+        case .foodPrice: return SelectFoodPriceView(to: v, onNext: onNextPage)
+        }
+    }
 }
 
 class QuestionView: UIScrollView {
