@@ -86,6 +86,13 @@ class QuestionView: UIScrollView {
             self.frame.origin.x = 0
         }
     }
+    func slideOut() {
+        UIView.animate(withDuration: 0.2) {
+            self.frame.origin.x = -self.w
+        } completion: { Bool in
+            self.removeFromSuperview()
+        }
+    }
     
     enum BtnTitleType: String {
         case selectAnswer = "回答を選択"
@@ -110,6 +117,7 @@ class QuestionView: UIScrollView {
             field.addAction(action: {
                 let vc = OptionViewController(ttl: btnTitle.rawValue, options: options, selectedIdx: nil, selected: { str in
                     onSelect!(str)
+                    field.setTitle(str, for: .normal)
                 })
                 self.parentViewController.present(vc, animated: true)
             })

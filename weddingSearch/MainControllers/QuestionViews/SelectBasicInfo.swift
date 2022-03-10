@@ -27,7 +27,7 @@ class SelectBasicInfo: QuestionView {
     
     override func setUI(y: inout CGFloat) {
         // ppls
-        let pplRange = RangeHelper.shared.rangeFrom([10,30,60,100,101])
+        let pplRange = RangeHelper.shared.rangeFrom([10,30,60,100,200])
         let ppls = RangeHelper.shared.toText(from: pplRange, unit: "人")
         pplBtn = selectionField(y: &y, title: "パーティーの招待人数は？", btnTitle: .selectPpl, options: ppls) { str in
             self.basicInfoData.pplToInvite = str

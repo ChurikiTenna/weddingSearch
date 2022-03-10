@@ -45,14 +45,13 @@ class RequestEstimateController: BasicViewController {
             //todo send to firebase
             return
         }
-        if let questionV = questionViews.first(where: { $0.type == currentType }) {
-            questionV.removeFromSuperview()
-        }
         currentType = type
         if let questionV = questionViews.first(where: { $0.type == type }) {
             view.addSubview(questionV)
+        } else {
+            questionViews.append(type.view(to: view, onBack: onBack, onNext: onNext))
         }
-        questionViews.append(type.view(to: view, onBack: onBack, onNext: onNext))
+        
     }
     func onNext() {
         showNewQuestion(currentType.rawValue+1)
