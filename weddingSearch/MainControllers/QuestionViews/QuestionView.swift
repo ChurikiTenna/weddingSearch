@@ -60,7 +60,7 @@ class QuestionView: UIScrollView {
     
     init(to view: UIView, onBack: @escaping () -> Void, onNext: @escaping () -> Void) {
         self.onNext = onNext
-        super.init(frame: CGRect(x: view.w, y: 0, w: view.w, h: view.h))
+        super.init(frame: view.fitRect)
         slideIn(to: view)
         backgroundColor = .superPaleBackGray
         alwaysBounceVertical = true
@@ -81,6 +81,7 @@ class QuestionView: UIScrollView {
     }
     func setUI(y: inout CGFloat) { }
     func slideIn(to view: UIView) {
+        frame.origin.x = view.w
         view.addSubview(self)
         UIView.animate(withDuration: 0.2) {
             self.frame.origin.x = 0

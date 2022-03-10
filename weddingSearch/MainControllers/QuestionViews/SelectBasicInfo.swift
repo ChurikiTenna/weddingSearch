@@ -58,6 +58,30 @@ class RangeHelper {
     
     let rangeMax = 99999999999999.0
     
+    func rangeFrom(_ array: [Int], min: Int = 0) -> [Range<Int>] {
+        var range = [Range<Int>]()
+        var last = min
+        for value in array {
+            range.append(last..<value)
+            last = value
+        }
+        range.append(last..<Int(rangeMax))
+        return range
+    }
+    func toText(from ranges: [Range<Int>], unit: String) -> [String] {
+        var texts = [String]()
+        for range in ranges {
+            let lower = "\(range.lowerBound)"
+            let upper = "\(range.upperBound-1)"
+            if range.upperBound == Int(rangeMax) {
+                texts.append("\(lower)\(unit)以上")
+            } else {
+                texts.append("\(lower)〜\(upper)\(unit)")
+            }
+        }
+        return texts
+    }
+    
     func rangeFrom(_ array: [Double], min: Double = 0) -> [Range<Double>] {
         var range = [Range<Double>]()
         var last = min
@@ -70,9 +94,12 @@ class RangeHelper {
     }
     func toText(from ranges: [Range<Double>], unit: String) -> [String] {
         var texts = [String]()
+        let minus = ranges.first?.lowerBound ?? 0 <= 2 ? 0.1 : 1
         for range in ranges {
-            let lower = Double(Int(range.lowerBound))==range.lowerBound ? "\(Int(range.lowerBound))" : "\(range.lowerBound)"
-            let upper = Double(Int(range.upperBound))==range.upperBound ? "\(Int(range.upperBound-1))" : "\(range.upperBound-1)"
+            let lowerV = range.lowerBound
+            let lower = Double(Int(lowerV))==lowerV ? "\(Int(lowerV))" : "\(lowerV)"
+            let upperV = range.upperBound-minus
+            let upper = Double(Int(upperV))==upperV ? "\(Int(upperV))" : "\(upperV)"
             if range.upperBound == rangeMax {
                 texts.append("\(lower)\(unit)以上")
             } else {
