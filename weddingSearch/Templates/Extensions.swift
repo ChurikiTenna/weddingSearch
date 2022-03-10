@@ -372,9 +372,10 @@ extension UILabel {
         frame.size.height = ht
         frame.size.width += wdPlus
     }
-    func fitHeight(maxH: CGFloat = 800) {
+    func fitHeight(maxH: CGFloat = 800, plusH: CGFloat = 0) {
         let wd = w
         frame.size = sizeThatFits(CGSize(width: w, height: maxH))
+        frame.size.height += plusH
         frame.size.width = wd
     }
     func flexibleFontSize() {

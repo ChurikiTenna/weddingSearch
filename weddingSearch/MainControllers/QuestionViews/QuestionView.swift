@@ -11,12 +11,26 @@ enum QuestionType: Int {
     case selectVenue
     case basicInfo
     case foodPrice
+    case needDrinkQ
+    case knoshiki
+    case flowerPrice
+    case otherFlower
+    case otherItems
+    case hikidemono
+    case photoToTake
     
     var question: String {
         switch self {
         case .selectVenue: return "Q1. 金額を見積もりたい式場を\nお選びください(最大3式場まで)"
         case .basicInfo: return "Q2. 以下の基本情報について\n教えてください"
         case .foodPrice: return "Q3. 披露宴で出す\nコース料理の料金は?"
+        case .needDrinkQ: return "Q4. 以下の飲み物は必要ですか?"
+        case .knoshiki: return "Q5. 挙式は行いますか?"
+        case .flowerPrice: return "Q6. 必要な装花とそれぞれの予算を教えてください"
+        case .otherFlower: return "Q7. 以下のお花は必要ですか?予算と合わせて教えてください"
+        case .otherItems: return "Q8. 次のアイテムはどのように手配しますか?"
+        case .hikidemono: return "Q9. 引出物と引菓子の予算を教えてください"
+        case .photoToTake: return "Q10. 撮影する写真について教えてください"
         }
     }
     func view(to v: UIView, onNextPage: @escaping () -> Void) -> QuestionView {
@@ -24,6 +38,13 @@ enum QuestionType: Int {
         case .selectVenue: return SelectVenueView(to: v, onNext: onNextPage)
         case .basicInfo: return SelectBasicInfo(to: v, onNext: onNextPage)
         case .foodPrice: return SelectFoodPriceView(to: v, onNext: onNextPage)
+        case .needDrinkQ: return SelectDrink(to: v, onNext: onNextPage)
+        case .flowerPrice: return SelectFlower(to: v, onNext: onNextPage)
+        case .otherFlower: return SelectOtherFlower(to: v, onNext: onNextPage)
+        case .knoshiki: return SelectKyoshiki(to: v, onNext: onNextPage)
+        case .otherItems: return SelectItems(to: v, onNext: onNextPage)
+        case .hikidemono: return SelectHikidemono(to: v, onNext: onNextPage)
+        case .photoToTake: return SelectPhoto(to: v, onNext: onNextPage)
         }
     }
 }
@@ -47,11 +68,11 @@ class QuestionView: UIScrollView {
         
         _=UIButton.closeBtn(to: self, x: 10, y: 10, theme: .clearBlack, type: .chevronL, action: slideRemove)
         
-        questionLbl = UILabel(CGRect(x: 50, y: 30, w: w-100, h: 0),
+        questionLbl = UILabel(CGRect(x: 50, y: 10, w: w-100, h: 0), color: UIColor(white: 1, alpha: 0.6),
                               text: type.question, font: .bold, textSize: 20, lines: -1, align: .center, to: self)
-        questionLbl.fitHeight()
+        questionLbl.fitHeight(plusH: 20)
         
-        var y = questionLbl.maxY+20
+        var y = questionLbl.maxY+40
         setUI(y: &y)
         
         answerBtn = UIButton.coloredBtn(.colorBtn(centerX: w/2, y: y+20), text: "回答する", to: self, action: {
@@ -74,6 +95,36 @@ class QuestionView: UIScrollView {
         } completion: { Bool in
             self.removeFromSuperview()
         }
+    }
+    
+    enum BtnTitleType: String {
+        case selectAnswer = "回答を選択"
+        case selectPrice = "金額を選択"
+        case selectPpl = "人数を選択"
+        case selectPrefecture = "都道府県を選択"
+        case selectVenueHeadC = "式場の頭文字を選択"
+        case selectVenueName = "式場名を選択"
+        case selectSeason = "時期を選択"
+    }
+    func selectionField(y: inout CGFloat, title: String, btnTitle: BtnTitleType = .selectAnswer, onTap: @escaping () -> Void) {
+        let lbl = UILabel.grayTtl(.colorBtn(centerX: w/2, y: y), ttl: title, to: self)
+        y = lbl.maxY
+        selectionField(y: &y, btnTitle: btnTitle, onTap: onTap)
+    }
+    func selectionField(y: inout CGFloat, btnTitle: BtnTitleType = .selectAnswer, onTap: @escaping () -> Void) {
+        let field = UIButton.dropBtn(.colorBtn(centerX: w/2, y: y), text: btnTitle.rawValue, to: self, action: onTap)
+        y = field.maxY+10
+    }
+    func halfImage(imageName: String) -> CGFloat {
+        let imgV = UIImageView(CGRect(x: 0, y: 0, w: w, h: 400), name: imageName, mode: .scaleAspectFill, to: self)
+        insertSubview(imgV, at: 0)
+        return imgV.maxY+10
+    }
+    func bottomTexts(y: inout CGFloat, text: String) {
+        let lbl = UILabel(CGRect(x: 40, y: y, w: w-80),
+                          text: text, textSize: 15, textColor: .gray, lines: -1, to: self)
+        lbl.fitHeight()
+        y = lbl.maxY+10
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

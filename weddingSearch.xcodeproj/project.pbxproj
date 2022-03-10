@@ -11,6 +11,13 @@
 		2106606027BB4C2100217D55 /* SelectVenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2106605F27BB4C2100217D55 /* SelectVenue.swift */; };
 		2131705D27D9AF8300004E11 /* SelectBasicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131705C27D9AF8300004E11 /* SelectBasicInfo.swift */; };
 		2131705F27D9B18D00004E11 /* SelectFoodPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131705E27D9B18D00004E11 /* SelectFoodPriceView.swift */; };
+		2131706127D9BA7900004E11 /* SelectDrink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131706027D9BA7900004E11 /* SelectDrink.swift */; };
+		2131706327D9BAEA00004E11 /* SelectKyoshiki.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131706227D9BAEA00004E11 /* SelectKyoshiki.swift */; };
+		2131706527D9BC2100004E11 /* SelectFlower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131706427D9BC2100004E11 /* SelectFlower.swift */; };
+		2131706727D9BCB500004E11 /* SelectOtherFlower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131706627D9BCB500004E11 /* SelectOtherFlower.swift */; };
+		2131706927D9BD6700004E11 /* SelectItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131706827D9BD6700004E11 /* SelectItems.swift */; };
+		2131706B27D9BE2000004E11 /* SelectHikidemono.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131706A27D9BE1F00004E11 /* SelectHikidemono.swift */; };
+		2131706D27D9BE9D00004E11 /* SelectPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131706C27D9BE9D00004E11 /* SelectPhoto.swift */; };
 		213D595C27AA29C500022EDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D595B27AA29C500022EDD /* AppDelegate.swift */; };
 		213D595E27AA29C500022EDD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D595D27AA29C500022EDD /* SceneDelegate.swift */; };
 		213D596027AA29C500022EDD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D595F27AA29C500022EDD /* ViewController.swift */; };
@@ -46,6 +53,13 @@
 		2106605F27BB4C2100217D55 /* SelectVenue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectVenue.swift; sourceTree = "<group>"; };
 		2131705C27D9AF8300004E11 /* SelectBasicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBasicInfo.swift; sourceTree = "<group>"; };
 		2131705E27D9B18D00004E11 /* SelectFoodPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFoodPriceView.swift; sourceTree = "<group>"; };
+		2131706027D9BA7900004E11 /* SelectDrink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDrink.swift; sourceTree = "<group>"; };
+		2131706227D9BAEA00004E11 /* SelectKyoshiki.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectKyoshiki.swift; sourceTree = "<group>"; };
+		2131706427D9BC2100004E11 /* SelectFlower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFlower.swift; sourceTree = "<group>"; };
+		2131706627D9BCB500004E11 /* SelectOtherFlower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOtherFlower.swift; sourceTree = "<group>"; };
+		2131706827D9BD6700004E11 /* SelectItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectItems.swift; sourceTree = "<group>"; };
+		2131706A27D9BE1F00004E11 /* SelectHikidemono.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectHikidemono.swift; sourceTree = "<group>"; };
+		2131706C27D9BE9D00004E11 /* SelectPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhoto.swift; sourceTree = "<group>"; };
 		213D595827AA29C500022EDD /* weddingSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weddingSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		213D595B27AA29C500022EDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		213D595D27AA29C500022EDD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +121,13 @@
 				2106605F27BB4C2100217D55 /* SelectVenue.swift */,
 				2131705C27D9AF8300004E11 /* SelectBasicInfo.swift */,
 				2131705E27D9B18D00004E11 /* SelectFoodPriceView.swift */,
+				2131706027D9BA7900004E11 /* SelectDrink.swift */,
+				2131706227D9BAEA00004E11 /* SelectKyoshiki.swift */,
+				2131706427D9BC2100004E11 /* SelectFlower.swift */,
+				2131706627D9BCB500004E11 /* SelectOtherFlower.swift */,
+				2131706827D9BD6700004E11 /* SelectItems.swift */,
+				2131706A27D9BE1F00004E11 /* SelectHikidemono.swift */,
+				2131706C27D9BE9D00004E11 /* SelectPhoto.swift */,
 			);
 			path = QuestionViews;
 			sourceTree = "<group>";
@@ -313,8 +334,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2131706927D9BD6700004E11 /* SelectItems.swift in Sources */,
 				213D5A0D27AF48D200022EDD /* BasicViewController.swift in Sources */,
 				213D596027AA29C500022EDD /* ViewController.swift in Sources */,
+				2131706527D9BC2100004E11 /* SelectFlower.swift in Sources */,
 				21AF769727AFD35E0009814D /* UICalender.swift in Sources */,
 				213D5A0427AF48D200022EDD /* InputViews.swift in Sources */,
 				213D595C27AA29C500022EDD /* AppDelegate.swift in Sources */,
@@ -323,9 +346,11 @@
 				213D5A1527AF522D00022EDD /* RequestEstimateController.swift in Sources */,
 				213D595E27AA29C500022EDD /* SceneDelegate.swift in Sources */,
 				213D5A0827AF48D200022EDD /* SearchFieldView.swift in Sources */,
+				2131706127D9BA7900004E11 /* SelectDrink.swift in Sources */,
 				21AF769527AFD1500009814D /* DateField.swift in Sources */,
 				213D5A0627AF48D200022EDD /* Extensions.swift in Sources */,
 				213D5A1327AF51CB00022EDD /* HomeController.swift in Sources */,
+				2131706727D9BCB500004E11 /* SelectOtherFlower.swift in Sources */,
 				213D5A0C27AF48D200022EDD /* SwitchView.swift in Sources */,
 				213D5A0B27AF48D200022EDD /* LogInView.swift in Sources */,
 				213D5A0127AF48D200022EDD /* CameraBtn.swift in Sources */,
@@ -333,10 +358,13 @@
 				213D5A0727AF48D200022EDD /* CachedImages.swift in Sources */,
 				213D5A1727AF526600022EDD /* MyPageController.swift in Sources */,
 				213D5A0227AF48D200022EDD /* TextConverter.swift in Sources */,
+				2131706B27D9BE2000004E11 /* SelectHikidemono.swift in Sources */,
 				2131705F27D9B18D00004E11 /* SelectFoodPriceView.swift in Sources */,
+				2131706327D9BAEA00004E11 /* SelectKyoshiki.swift in Sources */,
 				21AF76FD27B5FA840009814D /* CheckBtn.swift in Sources */,
 				213D5A0E27AF48D200022EDD /* Btns.swift in Sources */,
 				213D5A0A27AF48D200022EDD /* Models.swift in Sources */,
+				2131706D27D9BE9D00004E11 /* SelectPhoto.swift in Sources */,
 				2106605E27BB4B7E00217D55 /* QuestionView.swift in Sources */,
 				2106606027BB4C2100217D55 /* SelectVenue.swift in Sources */,
 			);
