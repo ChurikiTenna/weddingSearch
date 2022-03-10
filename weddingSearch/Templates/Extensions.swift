@@ -387,12 +387,13 @@ extension UITextView {
     
     convenience init(_ f: CGRect, textSize: CGFloat = 15, to v: UIView) {
         self.init(frame: f)
-        backgroundColor = .superPaleGray
+        backgroundColor = .white
         round(8)
         font = Font.normal.with(textSize)
         textColor = .black
         v.addSubview(self)
         contentInset = UIEdgeInsets(top: 6, left: 6, bottom: 6, right: 6)
+        border(.superPaleGray, width: 1)
         addDoneToolbar("Done")
     }
     

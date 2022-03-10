@@ -17,7 +17,7 @@ struct BrideClothingData: Codable {
 
 class SelectBrideClothing: QuestionView {
     
-    override var type: QuestionType { .typeOfVideo }
+    override var type: QuestionType { .brideClothing }
     
     var clothingData = BrideClothingData()
     

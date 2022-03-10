@@ -55,16 +55,11 @@ enum QuestionType: Int, CaseIterable {
         case .otherItems: return SelectItems(to: v, onBack: onBack, onNext: onNext)
         case .hikidemono: return SelectHikidemono(to: v, onBack: onBack, onNext: onNext)
         case .photoToTake: return SelectPhoto(to: v, onBack: onBack, onNext: onNext)
-        case .typeOfVideo:
-            <#code#>
-        case .brideClothing:
-            <#code#>
-        case .groomClothing:
-            <#code#>
-        case .parentClothing:
-            <#code#>
-        case .otherInfo:
-            <#code#>
+        case .typeOfVideo: return SelectTypeOfVideo(to: v, onBack: onBack, onNext: onNext)
+        case .brideClothing: return SelectBrideClothing(to: v, onBack: onBack, onNext: onNext)
+        case .groomClothing: return SelectGroomClothing(to: v, onBack: onBack, onNext: onNext)
+        case .parentClothing: return SelectParentClothing(to: v, onBack: onBack, onNext: onNext)
+        case .otherInfo: return EnterOtherInfo(to: v, onBack: onBack, onNext: onNext)
         }
     }
 }
