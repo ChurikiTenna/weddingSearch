@@ -9,7 +9,7 @@ import UIKit
 
 class SelectHikidemono: QuestionView {
     
-    var type: QuestionType { .hikidemono }
+    override var type: QuestionType { .hikidemono }
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page27")

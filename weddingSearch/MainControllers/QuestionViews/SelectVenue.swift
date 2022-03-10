@@ -9,7 +9,7 @@ import UIKit
 
 class SelectVenueView: QuestionView {
     
-    var type: QuestionType { .selectVenue }
+    override var type: QuestionType { .selectVenue }
     
     override func setUI(y: inout CGFloat) {
         venueSet(idx: 1, y: &y)

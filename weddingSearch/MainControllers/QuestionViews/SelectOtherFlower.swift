@@ -5,12 +5,11 @@
 //  Created by 中力天和 on 2022/03/10.
 //
 
-
 import UIKit
 
 class SelectOtherFlower: QuestionView {
     
-    var type: QuestionType { .otherFlower }
+    override var type: QuestionType { .otherFlower }
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page25")

@@ -9,7 +9,7 @@ import UIKit
 
 class SelectKyoshiki: QuestionView {
     
-    var type: QuestionType { .knoshiki }
+    override var type: QuestionType { .knoshiki }
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page23")

@@ -5,12 +5,11 @@
 //  Created by 中力天和 on 2022/03/10.
 //
 
-
 import UIKit
 
 class SelectFlower: QuestionView {
     
-    var type: QuestionType { .flowerPrice }
+    override var type: QuestionType { .flowerPrice }
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page24")

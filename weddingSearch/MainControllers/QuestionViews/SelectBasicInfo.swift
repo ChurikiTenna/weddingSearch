@@ -9,7 +9,7 @@ import UIKit
 
 class SelectBasicInfo: QuestionView {
     
-    var type: QuestionType { .basicInfo }
+    override var type: QuestionType { .basicInfo }
     
     override func setUI(y: inout CGFloat) {
         selectionField(y: &y, title: "パーティーの招待人数は？", btnTitle: .selectPpl) {

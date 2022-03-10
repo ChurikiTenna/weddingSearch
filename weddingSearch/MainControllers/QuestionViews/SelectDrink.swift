@@ -9,7 +9,7 @@ import UIKit
 
 class SelectDrink: QuestionView {
     
-    var type: QuestionType { .needDrinkQ }
+    override var type: QuestionType { .needDrinkQ }
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page22")
