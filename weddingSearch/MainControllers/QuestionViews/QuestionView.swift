@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum QuestionType: Int {
+enum QuestionType: Int, CaseIterable {
     case selectVenue
     case basicInfo
     case foodPrice
@@ -33,40 +33,39 @@ enum QuestionType: Int {
         case .photoToTake: return "Q10. 撮影する写真について教えてください"
         }
     }
-    func view(to v: UIView, onNextPage: @escaping () -> Void) -> QuestionView {
+    func view(to v: UIView, onBack: @escaping () -> Void, onNext: @escaping () -> Void) -> QuestionView {
         switch self {
-        case .selectVenue: return SelectVenueView(to: v, onNext: onNextPage)
-        case .basicInfo: return SelectBasicInfo(to: v, onNext: onNextPage)
-        case .foodPrice: return SelectFoodPriceView(to: v, onNext: onNextPage)
-        case .needDrinkQ: return SelectDrink(to: v, onNext: onNextPage)
-        case .flowerPrice: return SelectFlower(to: v, onNext: onNextPage)
-        case .otherFlower: return SelectOtherFlower(to: v, onNext: onNextPage)
-        case .knoshiki: return SelectKyoshiki(to: v, onNext: onNextPage)
-        case .otherItems: return SelectItems(to: v, onNext: onNextPage)
-        case .hikidemono: return SelectHikidemono(to: v, onNext: onNextPage)
-        case .photoToTake: return SelectPhoto(to: v, onNext: onNextPage)
+        case .selectVenue: return SelectVenueView(to: v, onBack: onBack, onNext: onNext)
+        case .basicInfo: return SelectBasicInfo(to: v, onBack: onBack, onNext: onNext)
+        case .foodPrice: return SelectFoodPriceView(to: v, onBack: onBack, onNext: onNext)
+        case .needDrinkQ: return SelectDrink(to: v, onBack: onBack, onNext: onNext)
+        case .flowerPrice: return SelectFlower(to: v, onBack: onBack, onNext: onNext)
+        case .otherFlower: return SelectOtherFlower(to: v, onBack: onBack, onNext: onNext)
+        case .knoshiki: return SelectKyoshiki(to: v, onBack: onBack, onNext: onNext)
+        case .otherItems: return SelectItems(to: v, onBack: onBack, onNext: onNext)
+        case .hikidemono: return SelectHikidemono(to: v, onBack: onBack, onNext: onNext)
+        case .photoToTake: return SelectPhoto(to: v, onBack: onBack, onNext: onNext)
         }
     }
 }
 
 class QuestionView: UIScrollView {
     
-    var type: QuestionType
+    var type: QuestionType { fatalError() }
     
     var questionLbl: UILabel!
     var answerBtn: UIButton!
     
     let onNext: () -> Void
     
-    init(type: QuestionType, to view: UIView, onNext: @escaping () -> Void) {
+    init(to view: UIView, onBack: @escaping () -> Void, onNext: @escaping () -> Void) {
         self.onNext = onNext
-        self.type = type
         super.init(frame: view.fitRect)
-        slideIn(to: view)
+        view.addSubview(self)
         backgroundColor = .superPaleBackGray
         alwaysBounceVertical = true
         
-        _=UIButton.closeBtn(to: self, x: 10, y: 10, theme: .clearBlack, type: .chevronL, action: slideRemove)
+        _=UIButton.closeBtn(to: self, x: 10, y: 10, theme: .clearBlack, type: .chevronL, action: onBack)
         
         questionLbl = UILabel(CGRect(x: 50, y: 10, w: w-100, h: 0), color: UIColor(white: 1, alpha: 0.6),
                               text: type.question, font: .bold, textSize: 20, lines: -1, align: .center, to: self)
@@ -80,22 +79,7 @@ class QuestionView: UIScrollView {
         })
         contentSize.height = answerBtn.maxY+40
     }
-    func setUI(y: inout CGFloat) {
-        
-    }
-    func slideIn(to view: UIView) {
-        view.addSubview(self)
-        UIView.animate(withDuration: 0.2) {
-            self.frame.origin.x = 0
-        }
-    }
-    func slideRemove() {
-        UIView.animate(withDuration: 0.2) {
-            self.frame.origin.x = self.w
-        } completion: { Bool in
-            self.removeFromSuperview()
-        }
-    }
+    func setUI(y: inout CGFloat) { }
     
     enum BtnTitleType: String {
         case selectAnswer = "回答を選択"

@@ -9,12 +9,7 @@ import UIKit
 
 class SelectFoodPriceView: QuestionView {
     
-    init(to view: UIView, onNext: @escaping () -> Void) {
-        super.init(type: .foodPrice, to: view, onNext: onNext)
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var type: QuestionType { .foodPrice }
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page21")

@@ -10,12 +10,7 @@ import UIKit
 
 class SelectOtherFlower: QuestionView {
     
-    init(to view: UIView, onNext: @escaping () -> Void) {
-        super.init(type: .otherFlower, to: view, onNext: onNext)
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var type: QuestionType { .otherFlower }
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page25")

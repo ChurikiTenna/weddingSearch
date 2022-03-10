@@ -9,12 +9,7 @@ import UIKit
 
 class SelectVenueView: QuestionView {
     
-    init(to view: UIView, onNext: @escaping () -> Void) {
-        super.init(type: .selectVenue, to: view, onNext: onNext)
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var type: QuestionType { .selectVenue }
     
     override func setUI(y: inout CGFloat) {
         venueSet(idx: 1, y: &y)

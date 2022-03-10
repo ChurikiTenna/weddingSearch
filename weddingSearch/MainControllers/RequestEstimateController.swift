@@ -32,16 +32,27 @@ class RequestEstimateController: BasicViewController {
             self.showNewQuestion(0)
         }
     }
+    override func dismissSelf() {
+        print("currentType", currentType.rawValue)
+        if currentType == QuestionType.allCases.first {
+            super.dismissSelf()
+        } else {
+            // back page
+            showNewQuestion(currentType.rawValue-1)
+        }
+    }
     
     func showNewQuestion(_ idx: Int) {
+        print("showNewQuestion", idx, currentType.rawValue)
         guard let type = QuestionType(rawValue: idx) else {
             return
         }
+        if let questionV = questionViews.first(where: { $0.type == currentType }) {
+            questionV.removeFromSuperview()
+        }
         currentType = type
         if let questionV = questionViews.first(where: { $0.type == type }) {
-            print("have", type.rawValue)
-            questionV.slideIn(to: view)
-            return
+            view.addSubview(questionV)
         }
         questionViews.append(type.view(to: view, onNextPage: onNextPage))
     }

@@ -9,12 +9,7 @@ import UIKit
 
 class SelectBasicInfo: QuestionView {
     
-    init(to view: UIView, onNext: @escaping () -> Void) {
-        super.init(type: .selectVenue, to: view, onNext: onNext)
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var type: QuestionType { .basicInfo }
     
     override func setUI(y: inout CGFloat) {
         selectionField(y: &y, title: "パーティーの招待人数は？", btnTitle: .selectPpl) {
