@@ -18,6 +18,8 @@
 		2131706927D9BD6700004E11 /* SelectItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131706827D9BD6700004E11 /* SelectItems.swift */; };
 		2131706B27D9BE2000004E11 /* SelectHikidemono.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131706A27D9BE1F00004E11 /* SelectHikidemono.swift */; };
 		2131706D27D9BE9D00004E11 /* SelectPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131706C27D9BE9D00004E11 /* SelectPhoto.swift */; };
+		2131706F27D9FA0500004E11 /* SelectTypeOfVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131706E27D9FA0400004E11 /* SelectTypeOfVideo.swift */; };
+		2131707127D9FB3700004E11 /* SelectBrideClothing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131707027D9FB3600004E11 /* SelectBrideClothing.swift */; };
 		213D595C27AA29C500022EDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D595B27AA29C500022EDD /* AppDelegate.swift */; };
 		213D595E27AA29C500022EDD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D595D27AA29C500022EDD /* SceneDelegate.swift */; };
 		213D596027AA29C500022EDD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D595F27AA29C500022EDD /* ViewController.swift */; };
@@ -60,6 +62,8 @@
 		2131706827D9BD6700004E11 /* SelectItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectItems.swift; sourceTree = "<group>"; };
 		2131706A27D9BE1F00004E11 /* SelectHikidemono.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectHikidemono.swift; sourceTree = "<group>"; };
 		2131706C27D9BE9D00004E11 /* SelectPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPhoto.swift; sourceTree = "<group>"; };
+		2131706E27D9FA0400004E11 /* SelectTypeOfVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypeOfVideo.swift; sourceTree = "<group>"; };
+		2131707027D9FB3600004E11 /* SelectBrideClothing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBrideClothing.swift; sourceTree = "<group>"; };
 		213D595827AA29C500022EDD /* weddingSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weddingSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		213D595B27AA29C500022EDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		213D595D27AA29C500022EDD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +132,8 @@
 				2131706827D9BD6700004E11 /* SelectItems.swift */,
 				2131706A27D9BE1F00004E11 /* SelectHikidemono.swift */,
 				2131706C27D9BE9D00004E11 /* SelectPhoto.swift */,
+				2131706E27D9FA0400004E11 /* SelectTypeOfVideo.swift */,
+				2131707027D9FB3600004E11 /* SelectBrideClothing.swift */,
 			);
 			path = QuestionViews;
 			sourceTree = "<group>";
@@ -340,6 +346,7 @@
 				2131706527D9BC2100004E11 /* SelectFlower.swift in Sources */,
 				21AF769727AFD35E0009814D /* UICalender.swift in Sources */,
 				213D5A0427AF48D200022EDD /* InputViews.swift in Sources */,
+				2131706F27D9FA0500004E11 /* SelectTypeOfVideo.swift in Sources */,
 				213D595C27AA29C500022EDD /* AppDelegate.swift in Sources */,
 				2131705D27D9AF8300004E11 /* SelectBasicInfo.swift in Sources */,
 				213D5A0927AF48D200022EDD /* Firebase.swift in Sources */,
@@ -358,6 +365,7 @@
 				213D5A0727AF48D200022EDD /* CachedImages.swift in Sources */,
 				213D5A1727AF526600022EDD /* MyPageController.swift in Sources */,
 				213D5A0227AF48D200022EDD /* TextConverter.swift in Sources */,
+				2131707127D9FB3700004E11 /* SelectBrideClothing.swift in Sources */,
 				2131706B27D9BE2000004E11 /* SelectHikidemono.swift in Sources */,
 				2131705F27D9B18D00004E11 /* SelectFoodPriceView.swift in Sources */,
 				2131706327D9BAEA00004E11 /* SelectKyoshiki.swift in Sources */,

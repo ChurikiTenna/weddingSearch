@@ -18,6 +18,11 @@ enum QuestionType: Int, CaseIterable {
     case otherItems
     case hikidemono
     case photoToTake
+    case typeOfVideo
+    case brideClothing
+    case groomClothing
+    case parentClothing
+    case otherInfo
     
     var question: String {
         switch self {
@@ -31,6 +36,11 @@ enum QuestionType: Int, CaseIterable {
         case .otherItems: return "Q8. 次のアイテムはどのように手配しますか?"
         case .hikidemono: return "Q9. 引出物と引菓子の予算を教えてください"
         case .photoToTake: return "Q10. 撮影する写真について教えてください"
+        case .typeOfVideo: return "Q11. 撮影するビデオについて教えてください"
+        case .brideClothing: return "Q12. 新婦衣装の手配方法を教えてください"
+        case .groomClothing: return "Q13. 新郎衣装の手配方法を教えてください"
+        case .parentClothing: return "Q14. ご両親の衣装と数量を教えてください"
+        case .otherInfo: return "Q15.その他にマイチャペに伝えたいことがあれば教えてください\n (例: 見積を知りたい式場がなかったなど、何でも大丈夫です)"
         }
     }
     func view(to v: UIView, onBack: @escaping () -> Void, onNext: @escaping () -> Void) -> QuestionView {
@@ -45,6 +55,16 @@ enum QuestionType: Int, CaseIterable {
         case .otherItems: return SelectItems(to: v, onBack: onBack, onNext: onNext)
         case .hikidemono: return SelectHikidemono(to: v, onBack: onBack, onNext: onNext)
         case .photoToTake: return SelectPhoto(to: v, onBack: onBack, onNext: onNext)
+        case .typeOfVideo:
+            <#code#>
+        case .brideClothing:
+            <#code#>
+        case .groomClothing:
+            <#code#>
+        case .parentClothing:
+            <#code#>
+        case .otherInfo:
+            <#code#>
         }
     }
 }
