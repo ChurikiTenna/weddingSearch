@@ -16,7 +16,16 @@ class SelectOtherFlower: QuestionView {
     
     override var type: QuestionType { .otherFlower }
     
-    var otherFlowerData = OtherFlowerData()
+    var otherFlowerData = OtherFlowerData() {
+        didSet {
+            checkDone(check: {
+                if otherFlowerData.bouket.isEmpty { return false }
+                if otherFlowerData.onaoshi.isEmpty { return false }
+                if otherFlowerData.forParent.isEmpty { return false }
+                return true
+            })
+        }
+    }
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page25")

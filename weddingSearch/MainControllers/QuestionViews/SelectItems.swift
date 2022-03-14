@@ -18,7 +18,17 @@ class SelectItems: QuestionView {
     
     override var type: QuestionType { .otherItems }
     
-    var itemData = ItemsData()
+    var itemData = ItemsData() {
+        didSet {
+            checkDone(check: {
+                if itemData.invitation.isEmpty { return false }
+                if itemData.seatList.isEmpty { return false }
+                if itemData.seatName.isEmpty { return false }
+                if itemData.menuList.isEmpty { return false }
+                return true
+            })
+        }
+    }
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page26")

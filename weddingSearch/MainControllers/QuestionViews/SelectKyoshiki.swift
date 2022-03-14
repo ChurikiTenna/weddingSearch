@@ -11,7 +11,14 @@ class SelectKyoshiki: QuestionView {
     
     override var type: QuestionType { .knoshiki }
     
-    var kyoshiki = ""
+    var kyoshiki = "" {
+        didSet {
+            checkDone(check: {
+                if kyoshiki.isEmpty { return false }
+                return true
+            })
+        }
+    }
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page23")

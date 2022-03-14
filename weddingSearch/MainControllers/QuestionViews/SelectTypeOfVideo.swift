@@ -16,7 +16,15 @@ class SelectTypeOfVideo: QuestionView {
     
     override var type: QuestionType { .typeOfVideo }
     
-    var movieData = MovieData()
+    var movieData = MovieData() {
+        didSet {
+            checkDone(check: {
+                if movieData.photoMovie.isEmpty { return false }
+                if movieData.endroll.isEmpty { return false }
+                return true
+            })
+        }
+    }
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page29")

@@ -17,7 +17,17 @@ class SelectVenueView: QuestionView {
     
     override var type: QuestionType { .selectVenue }
     
-    var venueInfos = [VenueInfo(),VenueInfo(),VenueInfo()]
+    var venueInfos = [VenueInfo(),VenueInfo(),VenueInfo()] {
+        didSet {
+            checkDone(check: {
+                // at least one name
+                for venue in venueInfos {
+                    if !venue.name.isEmpty { return true }
+                }
+                return false
+            })
+        }
+    }
     
     var prefBtns = [UIButton]()
     var nameHBtns = [UIButton]()
@@ -41,9 +51,9 @@ class SelectVenueView: QuestionView {
         prefBtns.append(selectionField(y: &y, title: "式場\(idx+1)", btnTitle: .selectPrefecture, options: nil))
         prefBtns[idx].addAction(action: {
             let vc = OptionWithHeadersViewController(ttl: "都道府県を選択", options: Prefecture.jp) { str in
-                print("OptionWithHeadersViewController")
                 self.venueInfos[idx].prefecture = str
                 self.prefBtns[idx].setTitle(str, for: .normal)
+                self.didResetHeadOrPref(idx)
             }
             self.parentViewController.present(vc, animated: true)
             //self.parentViewController.presentFull(vc) nazeka questionViewが閉じる
@@ -57,13 +67,7 @@ class SelectVenueView: QuestionView {
                 self.venueInfos[idx].head = str
                 self.nameHBtns[idx].setTitle(str, for: .normal)
                 //print("venues(idx).count", self.venues(idx).count, self.venueInfos[idx].head, self.venueInfos[idx].prefecture)
-                if self.venues(idx).count == 0 {
-                    self.nameBtns[idx].setTitle("式場がありません", for: .normal)
-                    self.nameBtns[idx].setTitleColor(.gray, for: .normal)
-                } else {
-                    self.nameBtns[idx].setTitle(BtnTitleType.selectVenueName.rawValue, for: .normal)
-                    self.nameBtns[idx].setTitleColor(.black, for: .normal)
-                }
+                self.didResetHeadOrPref(idx)
             })
             self.parentViewController.present(vc, animated: true)
         })
@@ -78,6 +82,16 @@ class SelectVenueView: QuestionView {
             })
             self.parentViewController.present(vc, animated: true)
         })
+    }
+    func didResetHeadOrPref(_ idx: Int) {
+        if self.venues(idx).count == 0 {
+            self.nameBtns[idx].setTitle("式場がありません", for: .normal)
+            self.nameBtns[idx].setTitleColor(.gray, for: .normal)
+        } else {
+            self.nameBtns[idx].setTitle(BtnTitleType.selectVenueName.rawValue, for: .normal)
+            self.nameBtns[idx].setTitleColor(.black, for: .normal)
+        }
+        self.venueInfos[idx].name = ""
     }
 }
 

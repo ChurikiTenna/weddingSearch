@@ -17,7 +17,16 @@ class SelectPhoto: QuestionView {
     
     override var type: QuestionType { .photoToTake }
     
-    var photoData = PhotoData()
+    var photoData = PhotoData() {
+        didSet {
+            checkDone(check: {
+                if photoData.snapAlbum.isEmpty { return false }
+                if photoData.katabutsuPhoto.isEmpty { return false }
+                if photoData.maedori.isEmpty { return false }
+                return true
+            })
+        }
+    }
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page28")

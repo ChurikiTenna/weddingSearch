@@ -16,7 +16,15 @@ class SelectHikidemono: QuestionView {
     
     override var type: QuestionType { .hikidemono }
     
-    var hikidemonoData = HikidemonoData()
+    var hikidemonoData = HikidemonoData() {
+        didSet {
+            checkDone(check: {
+                if hikidemonoData.hikidemono.isEmpty { return false }
+                if hikidemonoData.hikigashi.isEmpty { return false }
+                return true
+            })
+        }
+    }
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page27")

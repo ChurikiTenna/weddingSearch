@@ -16,7 +16,15 @@ class SelectParentClothing: QuestionView {
     
     override var type: QuestionType { .parentClothing }
     
-    var clothingData = ParentClothingData()
+    var clothingData = ParentClothingData() {
+        didSet {
+            checkDone(check: {
+                if clothingData.dad.isEmpty { return false }
+                if clothingData.mom.isEmpty { return false }
+                return true
+            })
+        }
+    }
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page32")

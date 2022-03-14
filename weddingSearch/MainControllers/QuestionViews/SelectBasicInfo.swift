@@ -18,7 +18,17 @@ class SelectBasicInfo: QuestionView {
     
     override var type: QuestionType { .basicInfo }
     
-    var basicInfoData = BasicInfoData()
+    var basicInfoData = BasicInfoData() {
+        didSet {
+            checkDone(check: {
+                if basicInfoData.pplToInvite.isEmpty { return false }
+                if basicInfoData.childToInvite.isEmpty { return false }
+                if basicInfoData.season.isEmpty { return false }
+                if basicInfoData.budget.isEmpty { return false }
+                return true
+            })
+        }
+    }
     
     var pplBtn: UIButton!
     var childBtn: UIButton!

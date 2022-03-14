@@ -16,7 +16,15 @@ class SelectDrink: QuestionView {
     
     override var type: QuestionType { .needDrinkQ }
     
-    var drinkData = DrinkData()
+    var drinkData = DrinkData() {
+        didSet {
+            checkDone(check: {
+                if drinkData.welcome.isEmpty { return false }
+                if drinkData.champain.isEmpty { return false }
+                return true
+            })
+        }
+    }
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page22")

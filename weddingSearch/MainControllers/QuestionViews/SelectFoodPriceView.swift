@@ -11,7 +11,14 @@ class SelectFoodPriceView: QuestionView {
     
     override var type: QuestionType { .foodPrice }
     
-    var foodPrice = ""
+    var foodPrice = "" {
+        didSet {
+            checkDone(check: {
+                if foodPrice.isEmpty { return false }
+                return true
+            })
+        }
+    }
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page21")

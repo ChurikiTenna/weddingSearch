@@ -17,7 +17,16 @@ class SelectGroomClothing: QuestionView {
     
     override var type: QuestionType { .groomClothing }
     
-    var clothingData = GroomClothingData()
+    var clothingData = GroomClothingData() {
+        didSet {
+            checkDone(check: {
+                if clothingData.western_tax.isEmpty { return false }
+                if clothingData.western_casual.isEmpty { return false }
+                if clothingData.japanese.isEmpty { return false }
+                return true
+            })
+        }
+    }
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page31")

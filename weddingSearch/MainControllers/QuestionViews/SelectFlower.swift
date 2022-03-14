@@ -16,7 +16,16 @@ class SelectFlower: QuestionView {
     
     override var type: QuestionType { .flowerPrice }
     
-    var flowerData = FlowerData()
+    var flowerData = FlowerData() {
+        didSet {
+            checkDone(check: {
+                if flowerData.mainTable.isEmpty { return false }
+                if flowerData.guestTable.isEmpty { return false }
+                if flowerData.cakeTable.isEmpty { return false }
+                return true
+            })
+        }
+    }
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page24")

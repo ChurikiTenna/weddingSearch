@@ -93,6 +93,8 @@ class QuestionView: UIScrollView {
             self.onNext()
         })
         contentSize.height = answerBtn.maxY+40
+        
+        checkDone(check: { return false })
     }
     func setUI(y: inout CGFloat) { }
     func slideIn(to view: UIView, fromRight: Bool = true) {
@@ -108,6 +110,11 @@ class QuestionView: UIScrollView {
         } completion: { Bool in
             self.removeFromSuperview()
         }
+    }
+    func checkDone(check: () -> Bool) {
+        let check = check()
+        answerBtn.isUserInteractionEnabled = check
+        answerBtn.backgroundColor = check ? .themeColor : .superPaleGray
     }
     
     enum BtnTitleType: String {
