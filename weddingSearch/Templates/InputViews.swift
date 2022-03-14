@@ -41,13 +41,13 @@ class RangeSelectionField: UIView {
         minimumThumb = UIButton(CGRect(w: 40, h: 20), textColor: .gray, color: .white, to: self)
         minimumThumb.center = CGPoint(x: minX+grayBar.minX, y: grayBar.center.y)
         minimumThumb.roundShadow()
-        minimumThumb.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: 3)
+        //minimumThumb.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: 3)
         minimumThumb.addTarget(self, action: #selector(allTap), for: .allTouchEvents)
         
         maximumThumb = UIButton(CGRect(w: 40, h: 20), textColor: .gray, color: .white, to: self)
         maximumThumb.center = CGPoint(x: maxX+grayBar.minX, y: grayBar.center.y)
         maximumThumb.roundShadow()
-        maximumThumb.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: 3)
+        //maximumThumb.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: 3)
         maximumThumb.addTarget(self, action: #selector(allTap), for: .allTouchEvents)
         
         moveColoredBar()
@@ -117,7 +117,7 @@ class OptionViewController: BasicViewController {
         
         var y: CGFloat = 20
         for i in 0..<options.count {
-            let btn = UIButton(CGRect(x: 40, y: y, w: view.w-80, h: 42),
+            let btn = UIButton(CGRect(x: 40, y: y, w: view.w-80, h: 48),
                                text: options[i], font: .bold, textSize: 16,
                                textColor: i == selectedIdx ? .black : .gray,
                                color: i == selectedIdx ? .themeColor : .white,
@@ -161,13 +161,13 @@ class OptionWithHeadersViewController: BasicViewController {
         var y: CGFloat = 20
         for ttlIdx in 0..<options.count {
             
-            let lbl = UILabel(CGRect(x: 30, y: y, w: view.w-80, h: 40),
+            let lbl = UILabel(CGRect(x: 30, y: y, w: view.w-80, h: 48),
                               text: options[ttlIdx].title, font: .bold, textSize: 18, textColor: .darkGray, to: scroll)
             y = lbl.maxY+5
             
             for text in options[ttlIdx].texts {
                 
-                let btn = UIButton(CGRect(x: 40, y: y, w: view.w-80, h: 42),
+                let btn = UIButton(CGRect(x: 30, y: y, w: view.w-60, h: 48),
                                    text: text, font: .bold, textSize: 16,
                                    textColor: .gray,
                                    color: .white,
@@ -179,6 +179,63 @@ class OptionWithHeadersViewController: BasicViewController {
                 })
                 y = btn.maxY+5
             }
+        }
+        scroll.contentSize.height = y+50
+    }
+}
+class GridOptionController: BasicViewController {
+    
+    let selectedBef: String?
+    let ttl: String
+    let options: [[String]]
+    let selected: (String) -> Void
+    var btns = [[UIButton]]()
+    
+    init(ttl: String, options: [[String]], selectedBef: String?, selected: @escaping (String) -> Void) {
+        self.selected = selected
+        self.selectedBef = selectedBef
+        self.ttl = ttl
+        self.options = options
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        if head != nil { return }
+        view.backgroundColor = .superPaleBackGray
+        header(ttl, y: 0, withClose: true)
+        setScrollView(y: head.maxY)
+        
+        var maxCount = 0
+        options.forEach({
+            if $0.count > maxCount { maxCount = $0.count }
+        })
+        
+        var y: CGFloat = 20
+        let wd = (view.w - CGFloat(maxCount-1)*10 - 40)/CGFloat(maxCount)
+        var x: CGFloat = 20
+        for idx1 in 0..<options.count {
+            for idx2 in 0..<options[idx1].count {
+                
+                let btn = UIButton(CGRect(x: x, y: y, w: wd, h: 40),
+                                   text: options[idx1][idx2], font: .bold, textSize: 16,
+                                   textColor: .black, color: .white,
+                                   to: scroll)
+                btn.round(0.5)
+                btn.addAction(action: {
+                    self.selected(self.options[idx1][idx2])
+                    self.dismissSelf()
+                })
+                if selectedBef == btn.title(for: .normal) {
+                    btn.backgroundColor = .themePale
+                }
+                x = btn.maxX+10
+            }
+            y += 60
+            x = 20
         }
         scroll.contentSize.height = y+50
     }

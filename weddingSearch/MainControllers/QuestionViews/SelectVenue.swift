@@ -9,6 +9,7 @@ import UIKit
 
 struct VenueInfo: Codable {
     var prefecture = ""
+    var head = ""
     var name = ""
 }
 
@@ -21,6 +22,15 @@ class SelectVenueView: QuestionView {
     var prefBtns = [UIButton]()
     var nameHBtns = [UIButton]()
     var nameBtns = [UIButton]()
+    
+    
+    let venueSearch = VenueSearch()
+    func venues(_ idx: Int) -> [String] {
+        return venueSearch.venues
+        .filter({ $0.head == self.venueInfos[idx].head })
+        .filter({ $0.prefecture == self.venueInfos[idx].prefecture })
+        .map({ $0.name })
+    }
     
     override func setUI(y: inout CGFloat) {
         venueSet(idx: 0, y: &y)
@@ -38,12 +48,36 @@ class SelectVenueView: QuestionView {
             self.parentViewController.present(vc, animated: true)
             //self.parentViewController.presentFull(vc) nazeka questionViewが閉じる
         })
-        nameHBtns.append(selectionField(y: &y, btnTitle: .selectVenueHeadC, options: [], onSelect: { str in
-            
-        }))
-        nameBtns.append(selectionField(y: &y, btnTitle: .selectVenueName, options: [], onSelect: { str in
-            
-        }))
+        nameHBtns.append(selectionField(y: &y, btnTitle: .selectVenueHeadC, options: nil))
+        nameHBtns[idx].addAction(action: {
+            let vc = GridOptionController(ttl: "頭文字を選択",
+                                          options: Katakana().kanas,
+                                          selectedBef: self.venueInfos[idx].head,
+                                          selected: { str in
+                self.venueInfos[idx].head = str
+                self.nameHBtns[idx].setTitle(str, for: .normal)
+                //print("venues(idx).count", self.venues(idx).count, self.venueInfos[idx].head, self.venueInfos[idx].prefecture)
+                if self.venues(idx).count == 0 {
+                    self.nameBtns[idx].setTitle("式場がありません", for: .normal)
+                    self.nameBtns[idx].setTitleColor(.gray, for: .normal)
+                } else {
+                    self.nameBtns[idx].setTitle(BtnTitleType.selectVenueName.rawValue, for: .normal)
+                    self.nameBtns[idx].setTitleColor(.black, for: .normal)
+                }
+            })
+            self.parentViewController.present(vc, animated: true)
+        })
+        nameBtns.append(selectionField(y: &y, btnTitle: .selectVenueName, options: nil))
+        nameBtns[idx].addAction(action: {
+            let vc = OptionViewController(ttl: "式場名を選択",
+                                          options: self.venues(idx),
+                                          selectedIdx: nil,
+                                          selected: { str in
+                self.venueInfos[idx].name = str
+                self.nameBtns[idx].setTitle(str, for: .normal)
+            })
+            self.parentViewController.present(vc, animated: true)
+        })
     }
 }
 
@@ -64,4 +98,40 @@ class Prefecture {
                              (title: "近畿", texts: kinki),
                              (title: "中国・四国", texts: chugoku_shikoku),
                              (title: "九州・沖縄", texts: kyushu_okinawa)]
+}
+class Katakana {
+    let kanas = [["ア","イ","ウ","エ","オ"],
+                        ["カ","キ","ク","ケ","コ"],
+                        ["サ","シ","ス","セ","ソ"],
+                        ["タ","チ","ツ","テ","ト"],
+                        ["ナ","ニ","ヌ","ネ","ノ"],
+                        ["ハ","ヒ","フ","ヘ","ホ"],
+                        ["マ","ミ","ム","メ","モ"],
+                        ["ヤ","ユ","ヨ"],
+                        ["ラ","リ","ル","レ","ロ"],
+                        ["ワ","ヲ","ン"]]
+}
+class VenueSearch {
+    
+    var venues = [(prefecture: String, head: String, name: String)]()
+    
+    init() {
+        
+        guard let path = Bundle.main.path(forResource:"venues", ofType:"csv") else {
+            print("csvファイルがないよ")
+            return
+        }
+        do {
+            let csvString = try String(contentsOfFile: path, encoding: String.Encoding.utf8)
+            let csvLines = csvString.components(separatedBy: .newlines)
+            for data in csvLines {
+                let venue = data.components(separatedBy: ",")
+                if venue.count < 3 { continue }
+                venues.append((prefecture: venue[0], head: venue[1], name: venue[2]))
+            }
+        } catch let error as NSError {
+            print("エラー: \(error)")
+            return
+        }
+    }
 }

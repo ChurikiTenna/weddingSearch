@@ -46,6 +46,7 @@
 		21AD6C7227D9FDDF008A0083 /* SelectGrromClothing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AD6C7127D9FDDF008A0083 /* SelectGrromClothing.swift */; };
 		21AD6C7427D9FE81008A0083 /* SelectParentClothing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AD6C7327D9FE81008A0083 /* SelectParentClothing.swift */; };
 		21AD6C7627D9FF0C008A0083 /* EnterOtherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AD6C7527D9FF0C008A0083 /* EnterOtherInfo.swift */; };
+		21AD6C8127DEC32C008A0083 /* venues.csv in Resources */ = {isa = PBXBuildFile; fileRef = 21AD6C8027DEC32C008A0083 /* venues.csv */; };
 		21AF769527AFD1500009814D /* DateField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AF769427AFD1500009814D /* DateField.swift */; };
 		21AF769727AFD35E0009814D /* UICalender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AF769627AFD35E0009814D /* UICalender.swift */; };
 		21AF76FD27B5FA840009814D /* CheckBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AF76FC27B5FA840009814D /* CheckBtn.swift */; };
@@ -96,6 +97,7 @@
 		21AD6C7127D9FDDF008A0083 /* SelectGrromClothing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGrromClothing.swift; sourceTree = "<group>"; };
 		21AD6C7327D9FE81008A0083 /* SelectParentClothing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectParentClothing.swift; sourceTree = "<group>"; };
 		21AD6C7527D9FF0C008A0083 /* EnterOtherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterOtherInfo.swift; sourceTree = "<group>"; };
+		21AD6C8027DEC32C008A0083 /* venues.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = venues.csv; sourceTree = "<group>"; };
 		21AF769427AFD1500009814D /* DateField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateField.swift; sourceTree = "<group>"; };
 		21AF769627AFD35E0009814D /* UICalender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICalender.swift; sourceTree = "<group>"; };
 		21AF76FC27B5FA840009814D /* CheckBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBtn.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				213D59EE27AF482D00022EDD /* weddingSearch.entitlements */,
+				21AD6C8027DEC32C008A0083 /* venues.csv */,
 				213D595B27AA29C500022EDD /* AppDelegate.swift */,
 				213D595D27AA29C500022EDD /* SceneDelegate.swift */,
 				213D595F27AA29C500022EDD /* ViewController.swift */,
@@ -296,6 +299,7 @@
 				213D596827AA29C700022EDD /* LaunchScreen.storyboard in Resources */,
 				213D5A1027AF4FD300022EDD /* GoogleService-Info.plist in Resources */,
 				213D596527AA29C700022EDD /* Assets.xcassets in Resources */,
+				21AD6C8127DEC32C008A0083 /* venues.csv in Resources */,
 				213D596327AA29C500022EDD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
