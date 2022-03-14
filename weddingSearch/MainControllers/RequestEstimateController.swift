@@ -11,6 +11,15 @@ class RequestEstimateController: BasicViewController {
     
     var currentType = QuestionType.selectVenue
     var questionViews = [QuestionView]()
+    func getView(type: QuestionType) -> QuestionView? {
+        return questionViews.first(where: { $0.type == type })
+    }
+    func getV<T: QuestionView>(_: T.Type) -> T? {
+        for questionView in questionViews {
+            if let questionView = questionView as? T { return questionView }
+        }
+        return nil
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +44,7 @@ class RequestEstimateController: BasicViewController {
     func showNewQuestion(_ idx: Int) {
         print("showNewQuestion", idx, currentType.rawValue)
         guard let type = QuestionType(rawValue: idx) else {
+            view.endEditing(true)
             _ = DetailEnterDoneView(to: view, onDone: {
                 print("remove allquestionViews")
                 DispatchQueue.main.async {
@@ -44,13 +54,36 @@ class RequestEstimateController: BasicViewController {
                     }
                 }
             })
-            Ref.quizs
-            //todo send to firebase
+            for venueInfo in self.getV(SelectVenueView.self)?.venueInfos ?? [] {
+                
+                let data = RequestData(userId: SignIn.uid!,
+                                       venueInfo: venueInfo,
+                                       basicInfo: self.getV(SelectBasicInfo.self)?.basicInfoData,
+                                       foodPrice: self.getV(SelectFoodPriceView.self)?.foodPrice,
+                                       drinkData: self.getV(SelectDrink.self)?.drinkData,
+                                       kyoshiki: self.getV(SelectKyoshiki.self)?.kyoshiki,
+                                       flowerData: self.getV(SelectFlower.self)?.flowerData,
+                                       otherFlowerData: self.getV(SelectOtherFlower.self)?.otherFlowerData,
+                                       itemData: self.getV(SelectItems.self)?.itemData,
+                                       hikidemonoData: self.getV(SelectHikidemono.self)?.hikidemonoData,
+                                       photoData: self.getV(SelectPhoto.self)?.photoData,
+                                       movieData: self.getV(SelectTypeOfVideo.self)?.movieData,
+                                       brideClothingData: self.getV(SelectBrideClothing.self)?.clothingData,
+                                       groomClothingData: self.getV(SelectGroomClothing.self)?.clothingData,
+                                       parentClothingData: self.getV(SelectParentClothing.self)?.clothingData,
+                                       other: self.getV(EnterOtherInfo.self)?.textV.text)
+                
+                Ref.sendRequest(data) { e in
+                    if let e = e {
+                        self.showAlert(title: "データの送信に失敗しました", message: e.localizedDescription)
+                    }
+                }
+            }
             return
         }
         let lastType = currentType
         currentType = type
-        if let questionV = questionViews.first(where: { $0.type == type }) {
+        if let questionV = getView(type: type) {
             if lastType.rawValue < currentType.rawValue {
                 questionV.slideIn(to: view, fromRight: true)
             } else {

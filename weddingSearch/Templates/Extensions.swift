@@ -290,6 +290,9 @@ extension UIButton {
                         action: (() -> Void)?) -> UIButton {
         let btn = UIButton(f, text: text, font: .bold, textSize: 17, textColor: .black, color: .white, to: view)
         btn.round(0.2)
+        btn.titleEdgeInsets.left = 40
+        btn.titleEdgeInsets.right = 40
+        btn.titleLabel?.adjustsFontSizeToFitWidth = false
         if let action = action { btn.addAction(action: action) }
         _ = UIImageView(CGRect(x: btn.w-40, y: btn.h/2-10, w: 20, h: 20),
                         name: ImageType.chevronD.rawValue, tint: .gray, to: btn)

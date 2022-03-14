@@ -117,11 +117,13 @@ class OptionViewController: BasicViewController {
         
         var y: CGFloat = 20
         for i in 0..<options.count {
-            let btn = UIButton(CGRect(x: 40, y: y, w: view.w-80, h: 48),
+            let btn = UIButton(CGRect(x: 20, y: y, w: view.w-40, h: 48),
                                text: options[i], font: .bold, textSize: 16,
                                textColor: i == selectedIdx ? .black : .gray,
                                color: i == selectedIdx ? .themeColor : .white,
                                to: scroll)
+            btn.titleLabel?.numberOfLines = 2
+            btn.titleEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
             btn.round(0.1)
             btn.tag = i
             btn.addTarget(self, action: #selector(optionSelected), for: .touchUpInside)

@@ -28,6 +28,11 @@ class SelectVenueView: QuestionView {
             })
         }
     }
+    var possibles = [[String](),[String](),[String]()] {
+        didSet {
+            print("possibles", possibles)
+        }
+    }
     
     var prefBtns = [UIButton]()
     var nameHBtns = [UIButton]()
@@ -36,9 +41,13 @@ class SelectVenueView: QuestionView {
     
     let venueSearch = VenueSearch()
     func venues(_ idx: Int) -> [String] {
+        print("self.venueInfos[idx].head", self.venueInfos[idx].head, self.venueInfos[idx].prefecture)
+        var pref = self.venueInfos[idx].prefecture
+        if pref.isEmpty { pref = "no" }
+        pref.removeLast()
         return venueSearch.venues
         .filter({ $0.head == self.venueInfos[idx].head })
-        .filter({ $0.prefecture == self.venueInfos[idx].prefecture })
+        .filter({ $0.prefecture.contains(pref) }) // 「県」は入っていないけど「道」は入ってるので
         .map({ $0.name })
     }
     
@@ -66,15 +75,15 @@ class SelectVenueView: QuestionView {
                                           selected: { str in
                 self.venueInfos[idx].head = str
                 self.nameHBtns[idx].setTitle(str, for: .normal)
-                //print("venues(idx).count", self.venues(idx).count, self.venueInfos[idx].head, self.venueInfos[idx].prefecture)
                 self.didResetHeadOrPref(idx)
             })
             self.parentViewController.present(vc, animated: true)
         })
         nameBtns.append(selectionField(y: &y, btnTitle: .selectVenueName, options: nil))
         nameBtns[idx].addAction(action: {
+            print("possibles", self.possibles)
             let vc = OptionViewController(ttl: "式場名を選択",
-                                          options: self.venues(idx),
+                                          options: self.possibles[idx],
                                           selectedIdx: nil,
                                           selected: { str in
                 self.venueInfos[idx].name = str
@@ -84,7 +93,8 @@ class SelectVenueView: QuestionView {
         })
     }
     func didResetHeadOrPref(_ idx: Int) {
-        if self.venues(idx).count == 0 {
+        possibles[idx] = self.venues(idx)
+        if possibles[idx].count == 0 {
             self.nameBtns[idx].setTitle("式場がありません", for: .normal)
             self.nameBtns[idx].setTitleColor(.gray, for: .normal)
         } else {
@@ -140,6 +150,7 @@ class VenueSearch {
             let csvLines = csvString.components(separatedBy: .newlines)
             for data in csvLines {
                 let venue = data.components(separatedBy: ",")
+                //print("venue", venue)
                 if venue.count < 3 { continue }
                 venues.append((prefecture: venue[0], head: venue[1], name: venue[2]))
             }

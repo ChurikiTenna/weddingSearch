@@ -18,7 +18,7 @@ class EnterOtherInfo: QuestionView {
         textV = UITextView(.full_rect(y: &y, h: 200, view: self), textSize: 16, to: self)
         
         DispatchQueue.main.async {
-            checkDone(check: { return true })
+            self.checkDone(check: { return true })
         }
     }
 }

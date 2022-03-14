@@ -12,6 +12,7 @@ class HomeController: BasicViewController {
     var kindlbls = ["見積もり完了", "見積もり作成中"]
     var kindLbl: UILabel!
     var pankuzuBtns = [UIButton_round]()
+    var pages = [RequestTableView]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +38,7 @@ class HomeController: BasicViewController {
             pankuzuBtns.append(btn)
             x = btn.maxX
         }
+        pages.append(RequestTableView_new(CGRect(x: 0, y: kindLbl.maxY+10, w: view.w, h: view.h-kindLbl.maxY), to: view))
         
         pageSelected(0)
     }
@@ -44,6 +46,9 @@ class HomeController: BasicViewController {
         kindLbl.text = kindlbls[idx]
         for i in 0..<pankuzuBtns.count {
             pankuzuBtns[i].selected(i==idx)
+        }
+        for i in 0..<pages.count {
+            pages[i].isHidden = idx != i
         }
     }
 }
@@ -64,5 +69,93 @@ class UIButton_round: UIButton {
     
     func selected(_ bool: Bool) {
         roundV.backgroundColor = bool ? .themeColor : .superPaleGray
+    }
+}
+
+class RequestTableView_new: RequestTableView {
+    
+    @objc override func refresh() {
+        guard let uid = SignIn.uid else { return }
+        Ref.requests.whereField("userId", isEqualTo:  uid).getDocuments(RequestData.self) { snap, requests in
+            self.requests = requests
+            self.reloadData()
+        }
+    }
+}
+class RequestTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
+    
+    var requests = [(objc: RequestData, id: String)]()
+    
+    init(_ f: CGRect, to view: UIView) {
+        super.init(frame: f, style: .plain)
+        view.addSubview(self)
+        dataSource = self
+        delegate = self
+        separatorStyle = .none
+        sectionHeaderTopPadding = 0
+        contentInset.top = 10
+        contentInset.bottom = 100
+        register(EstimateCell.self)
+        addRefreshControll(target: self, action: #selector(refresh))
+        refresh()
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // for override
+    @objc func refresh() { fatalError() }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return requests.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueCell(EstimateCell.self, indexPath: indexPath)
+        cell.setUI(request: requests[indexPath.row], w: w)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 180
+    }
+}
+class EstimateCell: UITableViewCell {
+    
+    var base: UIView!
+    var weddingNameLbl: UILabel!
+    var deleteBtn: UIButton!
+    var seeResultLbl: UIButton!
+    var yoyakuLbl: UIButton!
+    
+    func setUI(request: (objc: RequestData, id: String), w: CGFloat) {
+        
+        if base == nil {
+            base = UIView(CGRect(x: 30, y: 5, w: w-60, h: 150), color: .white, to: contentView)
+            base.round(16, clip: true)
+            base.border(.superPaleGray, width: 2)
+            
+            let head = UIView(CGRect(w: base.w, h: 60), color: .themePale, to: base)
+            
+            weddingNameLbl = UILabel(CGRect(x: 20, y: 0, w: head.w-80, h: head.h), font: .bold, textColor: .darkText, to: head)
+            deleteBtn = ImageBtn(CGPoint(x: head.w, y: 10), image: .multiply, width: 40, theme: .clearTheme, to: head)
+            
+            let y = head.maxY+20
+            let wd = (base.w-50)/2
+            seeResultLbl = UIButton.coloredBtn(CGRect(x: 20, y: y, w: wd, h: 50), text: "結果を見る", to: base, action: {
+                
+            })
+            yoyakuLbl = UIButton.coloredBtn(CGRect(x: base.w/2+5, y: y, w: wd, h: 50), text: "見学予約する", to: base, action: {
+                
+            })
+        }
+        weddingNameLbl.text = request.objc.venueInfo?.name
+        if request.objc.done == RequestState.requested.rawValue {
+            self.seeResultLbl.backgroundColor = .superPaleGray
+            self.yoyakuLbl.backgroundColor = .superPaleGray
+        } else {
+            self.seeResultLbl.backgroundColor = .themeColor
+            self.yoyakuLbl.backgroundColor = .themeColor
+        }
     }
 }

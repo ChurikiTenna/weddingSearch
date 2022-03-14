@@ -30,7 +30,7 @@ class SignIn {
 
 enum FavoriteType: String {
     case users
-    case post
+    case requests
 }
 
 struct OnlyDate: Codable {
@@ -42,18 +42,15 @@ class Ref {
     // collection
     static var users: CollectionReference
     { store.collection("users") }
-    static var quizs: CollectionReference
-    { store.collection("quizs") }
-    static var quizs_byUsers: CollectionReference
-    { store.collection("quizs_byUsers") }
-    static var reviews: CollectionReference
-    { store.collection("reviews") }
-    
-    static var report: CollectionReference
-    { return store.collection("reports") }
+    static var requests: CollectionReference
+    { store.collection("requests") }
     
     static var now: Timestamp { return Timestamp(date: Date()) }
     static var onlyDate: [String : Any] { return try! Firestore.Encoder().encode(OnlyDate(date: now)) }
+    
+    static func sendRequest(_ data: RequestData, onDone: @escaping (Error?) -> Void) {
+        _ = try! Ref.requests.addDocument(from: data, completion: onDone)
+    }
     
     // ユーザ取得
     static func user(uid: String?, onSuccess: @escaping (User) -> Void) {
