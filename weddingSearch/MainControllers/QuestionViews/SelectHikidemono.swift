@@ -28,13 +28,12 @@ class SelectHikidemono: QuestionView {
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page27")
-        let budgetRange = RangeHelper.shared.rangeFrom([1,2,2.5,3,3.5,4,5,8,10], min: 0.5)
-        let budgets = RangeHelper.shared.toText(from: budgetRange, unit: "万円")
-        
-        _=selectionField(y: &y, title: "引出物", btnTitle: .selectPrice, options: budgets, onSelect: { str in
+        let budgets1 = [3,5,7,10].map({ "\($0.comma())円/人" }) + ["不要"]
+        _=selectionField(y: &y, title: "引出物", btnTitle: .selectPrice, options: budgets1, onSelect: { str in
             self.hikidemonoData.hikidemono = str
         })
-        _=selectionField(y: &y, title: "引菓子", btnTitle: .selectPrice, options: budgets, onSelect: { str in
+        let budgets2 = [1,2,3].map({ "\($0.comma())円/人" }) + ["不要"]
+        _=selectionField(y: &y, title: "引菓子", btnTitle: .selectPrice, options: budgets2, onSelect: { str in
             self.hikidemonoData.hikigashi = str
         })
         let texts = ["・引出物はゲストに配られる贈呈品のことで、カタログギフトや食器等が一般的です",

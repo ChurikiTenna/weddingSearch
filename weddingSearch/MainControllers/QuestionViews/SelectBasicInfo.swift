@@ -30,32 +30,38 @@ class SelectBasicInfo: QuestionView {
         }
     }
     
-    var pplBtn: UIButton!
-    var childBtn: UIButton!
+    var pplBtn: Drum3View!
+    var childBtn: Drum3View!
     var seasonBtn: UIButton!
     var budgetBtn: UIButton!
     
     override func setUI(y: inout CGFloat) {
         // ppls
-        let pplRange = RangeHelper.shared.rangeFrom([10,30,60,100,200])
-        let ppls = RangeHelper.shared.toText(from: pplRange, unit: "人")
-        pplBtn = selectionField(y: &y, title: "パーティーの招待人数は？", btnTitle: .selectPpl, options: ppls) { str in
-            self.basicInfoData.pplToInvite = str
-        }
-        childBtn = selectionField(y: &y, title: "うち、子供の数は？", btnTitle: .selectPpl, options: ppls) { str in
-            self.basicInfoData.childToInvite = str
-        }
+        
+        let lbl = UILabel.grayTtl(.colorBtn(centerX: w/2, y: y), ttl: "パーティーの招待人数は？", to: self)
+        y = lbl.maxY
+        pplBtn = Drum3View(.colorBtn(centerX: w/2, y: y), to: self, didBPMchanged: {
+            self.basicInfoData.pplToInvite = "\(self.pplBtn.bgm)"
+        })
+        y = pplBtn.maxY
+        let lbl2 = UILabel.grayTtl(.colorBtn(centerX: w/2, y: y), ttl: "うち、子供の数は？", to: self)
+        y = lbl2.maxY
+        childBtn = Drum3View(.colorBtn(centerX: w/2, y: y), to: self, didBPMchanged: {
+            self.basicInfoData.childToInvite = "\(self.childBtn.bgm)"
+        })
+        y = childBtn.maxY
         // season
         var seasons = [String]()
         for i in 1...12 {
             seasons.append("\(i)月")
         }
-        seasonBtn = selectionField(y: &y, title: "結婚式の時期は？", btnTitle: .selectSeason, options: seasons) { str in
+        seasonBtn = selectionField(y: &y, title: "結婚式の時期は？", btnTitle: .selectSeason,
+                                   options: ["3ヵ月以内","半年以内","半年～1年後","1年以上先","未定"]) { str in
             self.basicInfoData.season = str
         }
         // budget
-        let budgetRange = RangeHelper.shared.rangeFrom([200,250,300,350,400,500,600,800], min: 100)
-        let budgets = RangeHelper.shared.toText(from: budgetRange, unit: "万円")
+        let budgetRange = RangeHelper.shared.rangeFrom([150,200,250,300,350,400,450,500], min: 100)
+        let budgets = RangeHelper.shared.toText(from: budgetRange, unit: "万円") + ["未定"]
         budgetBtn = selectionField(y: &y, title: "結婚式のご予算は？（式場に支払う総額）", btnTitle: .selectPrice, options: budgets) { str in
             self.basicInfoData.budget = str
         }

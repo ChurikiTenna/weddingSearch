@@ -34,7 +34,7 @@ class SelectBrideClothing: QuestionView {
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page30")
-        let options = ["自分で手配する","レンタルする","購入する"]
+        let options = ["はい（式場で選ぶ）","はい（持ち込む）","いいえ"]
         _=selectionField(y: &y, title: "洋装(WD)※1着目", options: options, onSelect: { str in
             self.clothingData.western_wd_1 = str
         })

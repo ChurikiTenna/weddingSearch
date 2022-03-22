@@ -28,10 +28,10 @@ class SelectTypeOfVideo: QuestionView {
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page29")
-        _=selectionField(y: &y, title: "フォトムービーは必要ですか？", options: ["必要","不要"], onSelect: { str in
+        _=selectionField(y: &y, title: "フォトムービーは必要ですか？", options: yes_no_j, onSelect: { str in
             self.movieData.photoMovie = str
         })
-        _=selectionField(y: &y, title: "撮って出しエンドロールは必要ですか？", options: ["必要","不要"], onSelect: { str in
+        _=selectionField(y: &y, title: "撮って出しエンドロールは必要ですか？", options: yes_no_j, onSelect: { str in
             self.movieData.endroll = str
         })
         let texts = ["・フォトムービーとは、オープニングや新郎新婦の紹介で使われる演出ムービーです",

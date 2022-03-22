@@ -28,7 +28,7 @@ class SelectParentClothing: QuestionView {
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page32")
-        let options = ["自分で手配する","レンタルする","購入する"]
+        let options = ["１着","２着","不要"]
         _=selectionField(y: &y, title: "モーニングコート(お父様用)", options: options, onSelect: { str in
             self.clothingData.dad = str
         })

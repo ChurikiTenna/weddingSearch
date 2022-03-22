@@ -32,7 +32,7 @@ class SelectItems: QuestionView {
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page26")
-        let options = ["式場にお願いする", "自分で準備する"]
+        let options = ["式場に準備してもらう", "自分で持ち込む"]
         _=selectionField(y: &y, title: "招待状", options: options, onSelect: { str in
             self.itemData.invitation = str
         })

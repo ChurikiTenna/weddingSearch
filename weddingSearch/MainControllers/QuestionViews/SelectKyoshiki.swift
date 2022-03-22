@@ -22,7 +22,7 @@ class SelectKyoshiki: QuestionView {
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page23")
-        _ = selectionField(y: &y, options: ["行う","行わない"], onSelect: { str in
+        _ = selectionField(y: &y, options: ["教会式（キリスト式）","人前式","神前式","その他","行わない"], onSelect: { str in
             self.kyoshiki = str
         })
         let texts = ["・教会式は、チャペルで神に愛を誓う挙式形式です",

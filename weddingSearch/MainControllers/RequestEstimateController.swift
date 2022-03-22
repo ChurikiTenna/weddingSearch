@@ -55,7 +55,7 @@ class RequestEstimateController: BasicViewController {
                 }
             })
             for venueInfo in self.getV(SelectVenueView.self)?.venueInfos ?? [] {
-                
+                if venueInfo.name.isEmpty { continue }
                 let data = RequestData(userId: SignIn.uid!,
                                        venueInfo: venueInfo,
                                        basicInfo: self.getV(SelectBasicInfo.self)?.basicInfoData,
@@ -76,6 +76,8 @@ class RequestEstimateController: BasicViewController {
                 Ref.sendRequest(data) { e in
                     if let e = e {
                         self.showAlert(title: "データの送信に失敗しました", message: e.localizedDescription)
+                    } else {
+                        NotificationCenter.default.post(name: .didPostRequest, object: nil)
                     }
                 }
             }
@@ -112,9 +114,6 @@ class DetailEnterDoneView: UIView {
         let lbl = UILabel(CGRect(x: 40, y: 60, w: view.w-80, h: 300), textSize: 20, lines: -1, to: self)
         let attr = NSMutableAttributedString(string: "ご回答ありがとうございました。\n見積が届くまで、お待ちください。\n",
                                              attributes: [.foregroundColor : UIColor.black])
-        attr.append(NSAttributedString(string: "(プッシュ通知をONにしていただくと、\n更新時にすぐ気づくことができます)",
-                                       attributes: [.foregroundColor : UIColor.themeColor,
-                                                        .font: Font.normal.with(15)]))
         attr.appendParaStyle(align: .center, lineSpacing: 4)
         lbl.attributedText = attr
         
@@ -128,6 +127,13 @@ class DetailEnterDoneView: UIView {
                             onDone()
                         }
                     }
+                    let attr = NSMutableAttributedString(string: "ご回答ありがとうございました。\n見積が届くまで、お待ちください。\n",
+                                                         attributes: [.foregroundColor : UIColor.black])
+                    attr.append(NSAttributedString(string: "(プッシュ通知をONにしていただくと、\n更新時にすぐ気づくことができます)",
+                                                   attributes: [.foregroundColor : UIColor.themeColor,
+                                                                    .font: Font.normal.with(15)]))
+                    attr.appendParaStyle(align: .center, lineSpacing: 4)
+                    lbl.attributedText = attr
                 }
                 
             }

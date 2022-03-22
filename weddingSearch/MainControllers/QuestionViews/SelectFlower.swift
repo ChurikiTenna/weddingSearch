@@ -29,16 +29,19 @@ class SelectFlower: QuestionView {
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page24")
-        let budgetRange = RangeHelper.shared.rangeFrom([2,2.5,3,3.5,4,4.5,5,8,10], min: 1)
-        let budgets = RangeHelper.shared.toText(from: budgetRange, unit: "万円")
-        
-        _ = selectionField(y: &y, title: "メインテーブル", btnTitle: .selectPrice, options: budgets, onSelect: { str in
+        let budgets = [100,125,150,175,200]
+        _ = selectionField(y: &y, title: "メインテーブル", btnTitle: .selectPrice,
+                           options: budgets.map({ "\(($0*1000).comma())円" }) + ["不要"], onSelect: { str in
             self.flowerData.mainTable = str
         })
-        _ = selectionField(y: &y, title: "ゲストテーブル", btnTitle: .selectPrice, options: budgets, onSelect: { str in
+        
+        _ = selectionField(y: &y, title: "ゲストテーブル", btnTitle: .selectPrice,
+                           options: budgets.map({ "\(($0*100).comma())円/テーブル" }) + ["不要"], onSelect: { str in
             self.flowerData.guestTable = str
         })
-        _ = selectionField(y: &y, title: "ケーキテーブル", btnTitle: .selectPrice, options: budgets, onSelect: { str in
+        let budgets2 = [10000,12500,15000]
+        _ = selectionField(y: &y, title: "ケーキテーブル", btnTitle: .selectPrice,
+                           options: budgets2.map({ "\($0.comma())円" }) + ["不要"], onSelect: { str in
             self.flowerData.cakeTable = str
         })
         let texts = ["・高砂の他にも、ゲストテーブルやケーキテーブルをお花で飾ります",

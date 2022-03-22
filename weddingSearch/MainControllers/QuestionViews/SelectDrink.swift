@@ -28,10 +28,10 @@ class SelectDrink: QuestionView {
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page22")
-        _ = selectionField(y: &y, title: "ウェルカムドリンク", options: ["必要","不要"], onSelect: { str in
+        _ = selectionField(y: &y, title: "ウェルカムドリンク", options: yes_no, onSelect: { str in
             self.drinkData.welcome = str
         })
-        _ = selectionField(y: &y, title: "乾杯用シャンパン", options: ["必要","不要"], onSelect: { str in
+        _ = selectionField(y: &y, title: "乾杯用シャンパン", options: yes_no, onSelect: { str in
             self.drinkData.champain = str
         })
         let texts = ["・ウェルカムドリンクは、披露宴の前の待ち時間にゲストに提供されるドリンクです"]

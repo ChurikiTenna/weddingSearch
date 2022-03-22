@@ -27,7 +27,7 @@ class HomeController: BasicViewController {
         attr.append(NSAttributedString(string: "0件", attributes: [.foregroundColor : UIColor.themeColor]))
         stateLbl.attributedText = attr
         
-        kindLbl = UILabel(CGRect(x: 20, y: statusV.maxY, w: view.w-100, h: 60),
+        kindLbl = UILabel(CGRect(x: 30, y: statusV.maxY+10, w: view.w-100, h: 60),
                           text: "", font: .bold, textSize: 24, to: view)
         var x = view.w-100
         for i in 0..<kindlbls.count {
@@ -38,7 +38,9 @@ class HomeController: BasicViewController {
             pankuzuBtns.append(btn)
             x = btn.maxX
         }
-        pages.append(RequestTableView_new(CGRect(x: 0, y: kindLbl.maxY+10, w: view.w, h: view.h-kindLbl.maxY), to: view))
+        let rect = CGRect(x: 0, y: kindLbl.maxY+10, w: view.w, h: view.h-kindLbl.maxY)
+        pages.append(RequestTableView_new(rect, to: view))
+        pages.append(RequestTableView_done(rect, to: view))
         
         pageSelected(0)
     }
@@ -75,8 +77,26 @@ class UIButton_round: UIButton {
 class RequestTableView_new: RequestTableView {
     
     @objc override func refresh() {
+        super.refresh()
         guard let uid = SignIn.uid else { return }
-        Ref.requests.whereField("userId", isEqualTo:  uid).getDocuments(RequestData.self) { snap, requests in
+        Ref.requests
+            .whereField("userId", isEqualTo: uid)
+            .whereField("done", isEqualTo: RequestState.resulted.rawValue)
+            .getDocuments(RequestData.self) { snap, requests in
+            self.requests = requests
+            self.reloadData()
+        }
+    }
+}
+class RequestTableView_done: RequestTableView {
+    
+    @objc override func refresh() {
+        super.refresh()
+        guard let uid = SignIn.uid else { return }
+        Ref.requests
+            .whereField("userId", isEqualTo: uid)
+            .whereField("done", isEqualTo: RequestState.requested.rawValue)
+            .getDocuments(RequestData.self) { snap, requests in
             self.requests = requests
             self.reloadData()
         }
@@ -85,6 +105,7 @@ class RequestTableView_new: RequestTableView {
 class RequestTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
     var requests = [(objc: RequestData, id: String)]()
+    var notFoundLbl: UILabel!
     
     init(_ f: CGRect, to view: UIView) {
         super.init(frame: f, style: .plain)
@@ -98,21 +119,36 @@ class RequestTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
         register(EstimateCell.self)
         addRefreshControll(target: self, action: #selector(refresh))
         refresh()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: .didPostRequest, object: nil)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     // for override
-    @objc func refresh() { fatalError() }
+    @objc func refresh() {
+        refreshControl?.endRefreshing()
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        notFoundLbl?.removeFromSuperview()
+        if requests.count == 0 {
+            notFoundLbl = UILabel(CGRect(w: w, h: 60), text: "※まだ案件が登録されておりません",
+                                  textSize: 15, textColor: .lightGray, lines: 2, align: .center, to: self)
+        }
         return requests.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(EstimateCell.self, indexPath: indexPath)
-        cell.setUI(request: requests[indexPath.row], w: w)
+        cell.setUI(request: requests[indexPath.row], w: w, onDelete: {
+            self.showAlert(title: "この見積もり依頼を消去しますか？", message: "", btnTitle: "消去", cancelBtnTitle: "キャンセル") {
+                Ref.requests.document(self.requests[indexPath.row].id).delete(completion: {_ in 
+                    self.refresh()
+                })
+            }
+        })
         return cell
     }
     
@@ -128,7 +164,10 @@ class EstimateCell: UITableViewCell {
     var seeResultLbl: UIButton!
     var yoyakuLbl: UIButton!
     
-    func setUI(request: (objc: RequestData, id: String), w: CGFloat) {
+    var onDelete: (() -> Void)!
+    
+    func setUI(request: (objc: RequestData, id: String), w: CGFloat, onDelete: @escaping () -> Void) {
+        self.onDelete = onDelete
         
         if base == nil {
             base = UIView(CGRect(x: 30, y: 5, w: w-60, h: 150), color: .white, to: contentView)
@@ -138,7 +177,10 @@ class EstimateCell: UITableViewCell {
             let head = UIView(CGRect(w: base.w, h: 60), color: .themePale, to: base)
             
             weddingNameLbl = UILabel(CGRect(x: 20, y: 0, w: head.w-80, h: head.h), font: .bold, textColor: .darkText, to: head)
-            deleteBtn = ImageBtn(CGPoint(x: head.w, y: 10), image: .multiply, width: 40, theme: .clearTheme, to: head)
+            deleteBtn = ImageBtn(CGPoint(x: head.w-50, y: 10), image: .multiply, width: 40, theme: .clearTheme, to: head)
+            deleteBtn.addAction(action: {
+                self.onDelete()
+            })
             
             let y = head.maxY+20
             let wd = (base.w-50)/2
@@ -158,4 +200,7 @@ class EstimateCell: UITableViewCell {
             self.yoyakuLbl.backgroundColor = .themeColor
         }
     }
+}
+extension NSNotification.Name {
+    static let didPostRequest = NSNotification.Name("didPostRequest")
 }
