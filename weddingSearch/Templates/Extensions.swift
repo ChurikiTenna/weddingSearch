@@ -579,6 +579,10 @@ extension UIViewController {
                    btnTitle: String = "OK",
                    cancelBtnTitle: String? = nil,
                    completion: (() -> Void)? = nil) {
+        if let vc = self as? BasicViewController {
+            vc.waiting = false
+        }
+        
         let v = UIView.grayBack(to: view)
         let white = UIView(CGRect(x: v.w/2-150, y: v.h/2-200, w: 300, h: 300), color: .white, to: v)
         white.round(20)

@@ -133,13 +133,14 @@ class Ref {
             onSuccess()
         }
     }
-    internal static func uploadPDF(_ path: String, url: URL,
+    internal static func uploadPDF(_ path: String, data: Data,
                                      onSuccess: @escaping () -> Void,
-                                     onError: (() -> Void)? = nil) {
-        print("uploadPDF to", path)
-        storage(path).putFile(from: url, metadata: nil) { (_, e) in
+                                     onError: ((String) -> Void)? = nil) {
+        print("uploadPDF to", path, data)
+        storage(path).putData(data, metadata: nil) { (_, e) in
             if let e = e {
-                onError?()
+                print("eeeeee", e)
+                onError?(e.localizedDescription)
                 return
             }
             onSuccess()

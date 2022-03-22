@@ -63,7 +63,7 @@ class RequestTableView_admin: UITableView, UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         notFoundLbl?.removeFromSuperview()
         if requests.count == 0 {
-            notFoundLbl = UILabel(CGRect(w: w, h: 60), text: "※まだ案件が登録されておりません",
+            notFoundLbl = UILabel(CGRect(w: w, h: 60), text: "※見積もり待ちの依頼がありません",
                                   textSize: 15, textColor: .lightGray, lines: 2, align: .center, to: self)
         }
         return requests.count
@@ -95,6 +95,7 @@ class EdtimateCell_admin: UITableViewCell {
     func setUI(request: (objc: RequestData, id: String), w: CGFloat) {
         
         if base == nil {
+            selectionStyle = .none
             
             base = UIView(CGRect(x: 30, y: 5, w: w-60, h: 100), color: .white, to: self)
             base.round(16, clip: true)
@@ -104,6 +105,7 @@ class EdtimateCell_admin: UITableViewCell {
             requestAtLbl = UILabel(CGRect(x: 30, y: userNameLbl.maxY, w: base.w-150, h: 30), textColor: .gray, to: base)
             
             okBtn = UIButton.coloredBtn(CGRect(x: base.w-120, y: base.h/2-20, w: 100, h: 40), text: "詳細を見る", to: base, action: {})
+            okBtn.isUserInteractionEnabled = false
         }
         Ref.user(uid: request.objc.userId) { user in
             self.userNameLbl.text = user.surnameKanji + " " + user.nameKanji
@@ -166,17 +168,22 @@ extension EstimateDetailController_admin: UIDocumentPickerDelegate {
                 grey.removeFromSuperview()
                 self.waiting = true
                 let path = "estimates/\(self.request.id)/\(Date().toFullString())"
-                Ref.uploadPDF(path, url: url) {
-                    self.request.objc.done = RequestState.resulted.rawValue
-                    self.request.objc.estimatePDFPath = path
-                    try! Ref.requests.document(self.request.id).setData(from: self.request.objc, completion: {_ in
-                        self.showAlert(title: "お見積もりをアップロードしました", completion: {
-                            self.onDone()
-                            self.dismissSelf()
+                do {
+                    let data = try Data(contentsOf: url)
+                    Ref.uploadPDF(path, data: data) {
+                        self.request.objc.done = RequestState.resulted.rawValue
+                        self.request.objc.estimatePDFPath = path
+                        try! Ref.requests.document(self.request.id).setData(from: self.request.objc, completion: {_ in
+                            self.showAlert(title: "お見積もりをアップロードしました", completion: {
+                                self.onDone()
+                                self.dismissSelf()
+                            })
                         })
-                    })
-                } onError: {
-                    self.showAlert(title: "PDFのアップロードに失敗しました")
+                    } onError: { e in
+                        self.showAlert(title: "PDFのアップロードに失敗しました", message: e)
+                    }
+                } catch {
+                    self.showAlert(title: "PDFデータを取得できません", message: error.localizedDescription)
                 }
 
             }
