@@ -22,6 +22,7 @@ class MyPageController: BasicViewController {
         case questions
         case evaluateApp
         case inquiry
+        case logout
         
         var title: String {
             switch self {
@@ -30,6 +31,7 @@ class MyPageController: BasicViewController {
             case .questions: return "よくある質問"
             case .evaluateApp: return "アプリを評価する"
             case .inquiry: return "お問い合わせ（LINE）"
+            case .logout: return "ログアウト"
             }
         }
         var image: String {
@@ -39,6 +41,7 @@ class MyPageController: BasicViewController {
             case .questions: return "questionmark.app"
             case .evaluateApp: return "star.fill"
             case .inquiry: return "line"
+            case .logout: return ""
             }
         }
     }
@@ -57,6 +60,22 @@ class MyPageController: BasicViewController {
             _ = UILabel(CGRect(x: icon.maxX+20, w: 200, h: btn.h),
                         text: row.title, textSize: 17, to: btn)
             btn.underBar()
+            btn.addAction {
+                switch row {
+                case .logout:
+                    SignIn.logout()
+                case .term:
+                    break
+                case .privacy:
+                    break
+                case .questions:
+                    break
+                case .evaluateApp:
+                    break
+                case .inquiry:
+                    break
+                }
+            }
             y = btn.maxY
         }
         scroll.contentSize.height = y+70

@@ -9,26 +9,26 @@ import UIKit
 
 class ViewController: UITabBarController {
     
+    var adminData: AdminData?
     var vcs = [UIViewController]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //SignIn.logout()
+        view.backgroundColor = .white
         overrideUserInterfaceStyle = .light
         
-        NotificationCenter.addObserver(self, action: #selector(setUI), name: .logInStatusUpdated)
+        NotificationCenter.addObserver(self, action: #selector(checkSignIn), name: .logInStatusUpdated)
         
         tabBar.tintColor = .black
         tabBar.layer.borderWidth = 0
         tabBar.clipsToBounds = true
-        //UITabBar.appearance().barTintColor = .white
         let appearance = UITabBarAppearance()
         appearance.backgroundColor = .white
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = appearance
         
     }
-    @objc func setUI() {
+    func setUI() {
         vcs = []
         
         let vc0 = HomeController()
@@ -45,19 +45,31 @@ class ViewController: UITabBarController {
         vc2.tabBarItem = UITabBarItem(title: "マイページ", image: UIImage(systemName: "person"), tag: 1)
         //vc2.tabBarItem.selectedImage = UIImage(named: "myPage_s")
         vcs.append(vc2)
-
+        
+        if adminData?.emails.contains(SignIn.email ?? "") ?? false {
+            let vc2 = AdminMenuController()
+            vc2.tabBarItem = UITabBarItem(title: "管理者メニュー", image: UIImage(systemName: "lock.shield"), tag: 1)
+            vcs.append(vc1)
+        }
+        
         self.viewControllers = vcs.map { UINavigationController(rootViewController: $0) }
         self.setViewControllers(vcs, animated: false)
     }
     override func viewDidAppear(_ animated: Bool) {
         s = view.safeAreaLayoutGuide.layoutFrame
-        view.backgroundColor = .white
+        checkSignIn()
+    }
+    @objc func checkSignIn() {
+        print("SignIn.uid", SignIn.uid)
         if SignIn.uid == nil {
             let vc = FirstController()
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: false)
         } else {
-            setUI()
+            Ref.admins.document("admins").getDocument(AdminData.self) { adminData in
+                self.adminData = adminData
+                self.setUI()
+            }
         }
     }
 }

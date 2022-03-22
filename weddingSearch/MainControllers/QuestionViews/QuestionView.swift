@@ -195,8 +195,8 @@ class Drum3View: UIView {
             self.didBPMchanged()
         }
         hundredL.max = 4
-        tenL = DrumView(CGRect(x: hundredL.maxX+5, w: wd, h: f.height), value: 6, to: self) { _ in self.didBPMchanged() }
-        oneL = DrumView(CGRect(x: tenL.maxX+5, w: wd, h: f.height), value: 4, to: self) { _ in self.didBPMchanged() }
+        tenL = DrumView(CGRect(x: hundredL.maxX+5, w: wd, h: f.height), value: 0, to: self) { _ in self.didBPMchanged() }
+        oneL = DrumView(CGRect(x: tenL.maxX+5, w: wd, h: f.height), value: 0, to: self) { _ in self.didBPMchanged() }
         bpmL = UILabel(CGRect(x: oneL.maxX+5, w: 60, h: h), text: "人", font: .bold, textSize: 22, textColor: .darkGray, to: self)
     }
     
@@ -224,7 +224,7 @@ class DrumView: UIButton {
         super.init(frame: f)
         view.addSubview(self)
         backgroundColor = .superPaleGray
-        round(10)
+        round(10, clip: true)
         setValue(value)
         
         addTarget(self, action: #selector(drugged), for: .allTouchEvents)

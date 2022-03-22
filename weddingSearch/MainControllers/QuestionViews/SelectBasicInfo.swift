@@ -37,16 +37,19 @@ class SelectBasicInfo: QuestionView {
     
     override func setUI(y: inout CGFloat) {
         // ppls
-        
+        DispatchQueue.main.asyncAfter(deadline: .now()+1, execute: {
+            self.isScrollEnabled = false
+            self.contentInset.top = s.minY
+        })
         let lbl = UILabel.grayTtl(.colorBtn(centerX: w/2, y: y), ttl: "パーティーの招待人数は？", to: self)
         y = lbl.maxY
-        pplBtn = Drum3View(.colorBtn(centerX: w/2, y: y), to: self, didBPMchanged: {
+        pplBtn = Drum3View(.drumBtn(centerX: w/2, y: y), to: self, didBPMchanged: {
             self.basicInfoData.pplToInvite = "\(self.pplBtn.bgm)"
         })
         y = pplBtn.maxY
         let lbl2 = UILabel.grayTtl(.colorBtn(centerX: w/2, y: y), ttl: "うち、子供の数は？", to: self)
         y = lbl2.maxY
-        childBtn = Drum3View(.colorBtn(centerX: w/2, y: y), to: self, didBPMchanged: {
+        childBtn = Drum3View(.drumBtn(centerX: w/2, y: y), to: self, didBPMchanged: {
             self.basicInfoData.childToInvite = "\(self.childBtn.bgm)"
         })
         y = childBtn.maxY

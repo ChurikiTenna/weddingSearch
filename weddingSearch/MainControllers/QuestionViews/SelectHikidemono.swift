@@ -28,11 +28,11 @@ class SelectHikidemono: QuestionView {
     
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page27")
-        let budgets1 = [3,5,7,10].map({ "\($0.comma())円/人" }) + ["不要"]
+        let budgets1 = [3,5,7,10].map({ "\(($0*1000).comma())円/人" }) + ["不要"]
         _=selectionField(y: &y, title: "引出物", btnTitle: .selectPrice, options: budgets1, onSelect: { str in
             self.hikidemonoData.hikidemono = str
         })
-        let budgets2 = [1,2,3].map({ "\($0.comma())円/人" }) + ["不要"]
+        let budgets2 = [1,2,3].map({ "\(($0*1000).comma())円/人" }) + ["不要"]
         _=selectionField(y: &y, title: "引菓子", btnTitle: .selectPrice, options: budgets2, onSelect: { str in
             self.hikidemonoData.hikigashi = str
         })

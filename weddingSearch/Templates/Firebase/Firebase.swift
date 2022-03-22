@@ -17,6 +17,9 @@ class SignIn {
     internal static var uid: String? {
         return Auth.auth().currentUser?.uid
     }
+    internal static var email: String? {
+        return Auth.auth().currentUser?.email
+    }
     /// ログアウト処理
     internal static func logout() {
         do {
@@ -36,6 +39,9 @@ enum FavoriteType: String {
 struct OnlyDate: Codable {
     var date: Timestamp!
 }
+struct AdminData: Codable {
+    var emails = [String]()
+}
 class Ref {
     // Firestore 用
     static var store: Firestore { return Firestore.firestore() }
@@ -44,6 +50,8 @@ class Ref {
     { store.collection("users") }
     static var requests: CollectionReference
     { store.collection("requests") }
+    static var admins: CollectionReference
+    { store.collection("admins") }
     
     static var now: Timestamp { return Timestamp(date: Date()) }
     static var onlyDate: [String : Any] { return try! Firestore.Encoder().encode(OnlyDate(date: now)) }

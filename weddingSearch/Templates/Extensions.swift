@@ -427,6 +427,9 @@ extension CGRect {
     init(x: CGFloat = 0, y: CGFloat = 0, w: CGFloat = UIScreen.main.bounds.width, h: CGFloat = 0) {
         self.init(x: x, y: y, width: w, height: h)
     }
+    static func drumBtn(centerX: CGFloat, y: CGFloat) -> CGRect {
+        return CGRect(x: centerX-130, y: y, w: 260, h: 100)
+    }
     static func colorBtn(centerX: CGFloat, y: CGFloat) -> CGRect {
         return CGRect(x: centerX-150, y: y, w: 300, h: 50)
     }

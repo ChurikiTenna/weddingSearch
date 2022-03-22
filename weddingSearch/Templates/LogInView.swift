@@ -315,6 +315,21 @@ class LogInView: UIScrollView {
         }
     }
     @objc func registerWithPassword() {
+        
+        var number = emailInputF.text
+        if !number.contains("+") {
+            number = "+81" + emailInputF.text
+        }
+        
+        PhoneAuthProvider.provider()
+            .verifyPhoneNumber(number, uiDelegate: nil) { verificationID, error in
+              if let error = error {
+                  self.showAlert(title: "電話番号の認証に失敗しました", message: error.localizedDescription)
+                  return
+              }
+                print("verificationID", verificationID)
+                //self.registerUser(verificationID)
+          }
         //todo with phoneNumber https://firebase.google.com/docs/auth/ios/phone-auth?authuser=0
         /*waitingController.waiting = true
         let email = emailInputF.text
@@ -363,9 +378,9 @@ extension LogInView: ASAuthorizationControllerPresentationContextProviding {
 
 extension LogInView {
     
-    func registerUser(_ result: AuthDataResult) {
+    func registerUser(_ uid: String) {
         
-        Ref.users.document(result.user.uid).getDocument { (snapshot, error) in
+        Ref.users.document(uid).getDocument { (snapshot, error) in
             if let error = error {
                 print(error.localizedDescription)
                 self.noticeFailDelegate(cause: "ユーザー情報の取得に失敗しました")
@@ -419,7 +434,7 @@ extension LogInView: ASAuthorizationControllerDelegate {
                 self.noticeFailDelegate(cause: "Appleのデータを取得できませんでした")
                 return
             }
-            self.registerUser(result)
+            self.registerUser(result.user.uid)
         }
     }
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
