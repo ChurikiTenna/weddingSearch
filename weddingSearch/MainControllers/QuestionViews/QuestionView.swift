@@ -40,7 +40,7 @@ enum QuestionType: Int, CaseIterable {
         case .brideClothing: return "Q12. 新婦衣装の手配方法を教えてください"
         case .groomClothing: return "Q13. 新郎衣装の手配方法を教えてください"
         case .parentClothing: return "Q14. ご両親の衣装と数量を教えてください"
-        case .otherInfo: return "Q15.その他にマイチャペに伝えたいことがあれば教えてください\n (例: 見積を知りたい式場がなかったなど、何でも大丈夫です)"
+        case .otherInfo: return "Q15.その他にマイチャペに伝えたいことがあれば教えてください"
         }
     }
     func view(to v: UIView, onBack: @escaping () -> Void, onNext: @escaping () -> Void) -> QuestionView {

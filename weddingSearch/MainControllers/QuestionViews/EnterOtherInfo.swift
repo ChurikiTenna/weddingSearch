@@ -11,11 +11,12 @@ class EnterOtherInfo: QuestionView {
     
     override var type: QuestionType { .otherInfo }
     
-    var textV: UITextView!
+    var textV: TextView!
     
     override func setUI(y: inout CGFloat) {
         
-        textV = UITextView(.full_rect(y: &y, h: 200, view: self), textSize: 16, to: self)
+        textV = TextView(.full_rect(y: &y, h: 200, view: self),
+                         placeholder: "(例: 見積を知りたい式場がなかったなど、何でも大丈夫です)", text: "", to: self)
         
         DispatchQueue.main.async {
             self.checkDone(check: { return true })

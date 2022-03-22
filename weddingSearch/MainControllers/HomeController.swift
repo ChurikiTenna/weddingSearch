@@ -141,6 +141,8 @@ class RequestTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
                 return self.requests[idx]
             }
             self.parentViewController.presentFull(vc)
+        }, onUpdate: {
+            self.refresh()
         })
         return cell
     }
@@ -152,6 +154,7 @@ class RequestTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
 class EstimateCell: UITableViewCell {
     
     var base: UIView!
+    var head: UIView!
     var weddingNameLbl: UILabel!
     var deleteBtn: UIButton!
     var seeResultLbl: UIButton!
@@ -161,7 +164,8 @@ class EstimateCell: UITableViewCell {
     
     func setUI(request: (objc: RequestData, id: String), w: CGFloat,
                onDelete: @escaping () -> Void,
-               onSeeResult: @escaping () -> Void) {
+               onSeeResult: @escaping () -> Void,
+               onUpdate: @escaping () -> Void) {
         self.onDelete = onDelete
         
         if base == nil {
@@ -169,7 +173,7 @@ class EstimateCell: UITableViewCell {
             base.round(16, clip: true)
             base.border(.superPaleGray, width: 2)
             
-            let head = UIView(CGRect(w: base.w, h: 60), color: .themePale, to: base)
+            head = UIView(CGRect(w: base.w, h: 60), color: .themePale, to: base)
             
             weddingNameLbl = UILabel(CGRect(x: 20, y: 0, w: head.w-80, h: head.h), font: .bold, textColor: .darkText, to: head)
             deleteBtn = ImageBtn(CGPoint(x: head.w-50, y: 10), image: .multiply, width: 40, theme: .clearTheme, to: head)
@@ -177,23 +181,35 @@ class EstimateCell: UITableViewCell {
                 self.onDelete()
             })
             
-            let y = head.maxY+20
-            let wd = (base.w-50)/2
-            seeResultLbl = UIButton.coloredBtn(CGRect(x: 20, y: y, w: wd, h: 50), text: "結果を見る", to: base, action: {
-                onSeeResult()
-            })
-            yoyakuLbl = UIButton.coloredBtn(CGRect(x: base.w/2+5, y: y, w: wd, h: 50), text: "見学予約する", to: base, action: {
-                let vc = ReserveInspectionController()
-                self.parentViewController.presentFull(vc)
-            })
         }
         weddingNameLbl.text = request.objc.venueInfo?.name
-        if request.objc.done == RequestState.requested.rawValue {
-            self.seeResultLbl.backgroundColor = .superPaleGray
-            self.yoyakuLbl.backgroundColor = .superPaleGray
+        
+        yoyakuLbl?.removeFromSuperview()
+        seeResultLbl?.removeFromSuperview()
+        
+        let y = head.maxY+20
+        let wd = (base.w-50)/2
+        seeResultLbl = UIButton.coloredBtn(CGRect(x: 20, y: y, w: wd, h: 50), text: "結果を見る", to: base, action: {
+            onSeeResult()
+        })
+        if request.objc.reserveKibou == nil {
+            yoyakuLbl = UIButton.coloredBtn(CGRect(x: base.w/2+5, y: y, w: wd, h: 50), text: "見学予約する", to: base, action: {
+                let vc = ReserveInspectionController(request: request, onDone: {
+                    onUpdate()
+                })
+                self.parentViewController.presentFull(vc)
+            })
+            if request.objc.done == RequestState.requested.rawValue {
+                self.seeResultLbl.backgroundColor = .superPaleGray
+                self.yoyakuLbl.backgroundColor = .superPaleGray
+                self.seeResultLbl.isUserInteractionEnabled = false
+                self.yoyakuLbl.isUserInteractionEnabled = false
+            }
         } else {
-            self.seeResultLbl.backgroundColor = .themeColor
-            self.yoyakuLbl.backgroundColor = .themeColor
+            yoyakuLbl = UIButton.coloredBtn(CGRect(x: base.w/2+5, y: y, w: wd, h: 50), text: "見学日程", color: .brown, to: base, action: {
+                let vc = CheckInspecitionController(request: request)
+                self.parentViewController.presentFull(vc)
+            })
         }
     }
 }

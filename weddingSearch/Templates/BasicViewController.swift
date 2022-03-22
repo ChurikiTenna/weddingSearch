@@ -19,9 +19,14 @@ class BasicViewController: UIViewController {
     var kindLbl: UILabel!
     var pankuzuBtns = [UIButton_round]()
     
-    func subHeader() {
+    func subHeader(text: String?) {
         subHeadV = UIView(CGRect(y: head.maxY, w: view.w, h: 50), color: .themePale, to: view)
         subHead = UILabel(CGRect(x: 20, w: view.w-120, h: subHeadV.h), textSize: 16, to: subHeadV)
+        if let text = text {
+            subHead.attributedText = NSAttributedString(string: text,
+                                                        attributes: [.font : Font.bold.with(16),
+                                                                    .foregroundColor: UIColor.themeColor])
+        }
     }
     func headBtns(kindlbls: [String], selected: @escaping (Int) -> Void) {
         self.kindlbls = kindlbls

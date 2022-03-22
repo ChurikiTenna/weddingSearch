@@ -298,7 +298,11 @@ extension UIButton {
                         action: (() -> Void)?) -> UIButton {
         let btn = UIButton(f, text: text, font: .bold, textSize: 17, textColor: .black, color: .white, to: view)
         btn.round(0.2)
-        btn.titleEdgeInsets.left = 40
+        if f.width < 200 {
+            btn.titleEdgeInsets.left = 10
+        } else {
+            btn.titleEdgeInsets.left = 40
+        }
         btn.titleEdgeInsets.right = 40
         btn.titleLabel?.adjustsFontSizeToFitWidth = false
         if let action = action { btn.addAction(action: action) }
@@ -779,7 +783,7 @@ enum DateFormat: String {
     case monthDate = "MM月dd日"
     case MDE = "MM月dd日 (E)"
     case ymd = "yyyy/MM/dd/HH/mm" // do not change this format!!
-    case HHmm = "HH時mm分"
+    case HHmm = "HH:mm"
 }
 
 extension Date {

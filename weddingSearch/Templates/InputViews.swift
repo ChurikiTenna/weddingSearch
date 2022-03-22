@@ -243,43 +243,43 @@ class GridOptionController: BasicViewController {
     }
 }
 
-class TextViewAndTtl: UIView {
+class TextView: UITextView {
     
-    var ttlLbl: UILabel!
     var placeholderL: UILabel!
-    var textView: UITextView!
+    var didBeginEdit: (() -> Void)?
     
-    init(_ f: inout CGRect, ttl: String, placeholder: String? = nil, text: String?, to view: UIView) {
-        super.init(frame: f)
+    init(_ f: CGRect, placeholder: String, text: String?, to view: UIView) {
+        super.init(frame: f, textContainer: nil)
         view.addSubview(self)
-        
-        ttlLbl = UILabel.grayTtl(CGRect(x: 10, y: 0, w: w, h: 20), ttl: ttl, to: self)
-        textView = UITextView(CGRect(y: ttlLbl.maxY+8, w: w, h: 180), to: self)
-        textView.delegate = self
-        if let text = text {
-            textView.text = text
-        }
+        delegate = self
+        backgroundColor = .white
+        textColor = .black
+        font = Font.normal.with(16)
+        round(10, clip: true)
+        border(.superPaleGray, width: 1)
+        self.text = text
         placeholderL = UILabel(CGRect(x: 12, y: 6, w: w-24),
-                               text: placeholder == nil ? "\(ttl)を入力してください" : placeholder!,
-                               textSize: textView.font?.pointSize ?? 15, textColor: .gray, lines: -1, to: textView)
+                               text: placeholder,
+                               textSize: font?.pointSize ?? 15, textColor: .gray, lines: -1, to: self)
         placeholderL.fitHeight()
-        textViewDidChange(textView)
-        
-        frame.size.height = textView.maxY
-        f.origin.y = maxY+10
+        addDoneToolbar("OK")
+        textViewDidChange(self)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-extension TextViewAndTtl: UITextViewDelegate {
+extension TextView: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-        if textView.text.isEmpty {
-            textView.addSubview(placeholderL)
+        if text.isEmpty {
+            self.addSubview(placeholderL)
         } else {
             placeholderL.removeFromSuperview()
         }
+    }
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        didBeginEdit?()
     }
 }
 

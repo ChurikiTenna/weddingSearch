@@ -26,6 +26,10 @@ struct RequestData: Codable {
     var done = RequestState.requested.rawValue
     var estimatePDFPath: String?
     
+    var reserveKibou: [Timestamp]?
+    var reserveComment: String?
+    var reserveDone: Timestamp?
+    
     var venueInfo : VenueInfo?
     var basicInfo : BasicInfoData?
     var foodPrice : String?
