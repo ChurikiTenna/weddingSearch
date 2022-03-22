@@ -285,6 +285,14 @@ extension UIButton {
         }
         return btn
     }
+    static func lineInquiry(y: CGFloat, to view: UIView) -> UIButton {
+        let lineInquiry = UIButton(CGRect(x: view.w/2-141, y: y, w: 282, h: 50), to: view)
+        lineInquiry.setImage(UIImage(named: "lineInquiry"), for: .normal)
+        lineInquiry.addAction {
+            //todo to line
+        }
+        return lineInquiry
+    }
     //dropdownボタン
     static func dropBtn(_ f: CGRect, text: String, to view: UIView,
                         action: (() -> Void)?) -> UIButton {

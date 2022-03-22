@@ -9,31 +9,15 @@ import UIKit
 
 class HomeController: BasicViewController {
     
-    var kindlbls = ["見積もり完了", "見積もり作成中"]
-    var kindLbl: UILabel!
-    var pankuzuBtns = [UIButton_round]()
     var pages = [RequestTableView]()
-    var stateLbl: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         header("ホーム", withClose: false)
+        subHeader()
+        headBtns(kindlbls: ["見積もり完了", "見積もり作成中"], selected: pageSelected)
         
-        let statusV = UIView(CGRect(y: head.maxY, w: view.w, h: 50), color: .themePale, to: view)
-        stateLbl = UILabel(CGRect(x: 20, w: view.w-40, h: statusV.h), textSize: 16, to: statusV)
-        
-        kindLbl = UILabel(CGRect(x: 30, y: statusV.maxY+10, w: view.w-100, h: 60),
-                          text: "", font: .bold, textSize: 24, to: view)
-        var x = view.w-100
-        for i in 0..<kindlbls.count {
-            let btn = UIButton_round(CGRect(x: x, y: kindLbl.center.y-20, w: 40, h: 40), to: view)
-            btn.addAction {
-                self.pageSelected(i)
-            }
-            pankuzuBtns.append(btn)
-            x = btn.maxX
-        }
         let rect = CGRect(x: 0, y: kindLbl.maxY+10, w: view.w, h: view.h-kindLbl.maxY)
         pages.append(RequestTableView_new(rect, to: view, onGet: onGet))
         pages.append(RequestTableView_done(rect, to: view, onGet: onGet))
@@ -46,15 +30,11 @@ class HomeController: BasicViewController {
         attr.append(NSAttributedString(string: "\(pages[0].requests.count)件", attributes: [.foregroundColor : UIColor.themeColor]))
         attr.append(NSAttributedString(string: "、見積り中：", attributes: [.foregroundColor : UIColor.black]))
         attr.append(NSAttributedString(string: "\(pages[1].requests.count)件", attributes: [.foregroundColor : UIColor.themeColor]))
-        stateLbl.attributedText = attr
+        subHead.attributedText = attr
     }
     func pageSelected(_ idx: Int) {
-        kindLbl.text = kindlbls[idx]
-        for i in 0..<pankuzuBtns.count {
-            pankuzuBtns[i].selected(i==idx)
-        }
-        for i in 0..<pages.count {
-            pages[i].isHidden = idx != i
+        for i in 0..<self.pages.count {
+            self.pages[i].isHidden = idx != i
         }
     }
 }
@@ -156,6 +136,11 @@ class RequestTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
                     self.refresh()
                 })
             }
+        }, onSeeResult: {
+            let vc = EstimateResultController(idx: indexPath.row, maxIdx: self.requests.count-1) { idx in
+                return self.requests[idx]
+            }
+            self.parentViewController.presentFull(vc)
         })
         return cell
     }
@@ -174,7 +159,9 @@ class EstimateCell: UITableViewCell {
     
     var onDelete: (() -> Void)!
     
-    func setUI(request: (objc: RequestData, id: String), w: CGFloat, onDelete: @escaping () -> Void) {
+    func setUI(request: (objc: RequestData, id: String), w: CGFloat,
+               onDelete: @escaping () -> Void,
+               onSeeResult: @escaping () -> Void) {
         self.onDelete = onDelete
         
         if base == nil {
@@ -193,10 +180,11 @@ class EstimateCell: UITableViewCell {
             let y = head.maxY+20
             let wd = (base.w-50)/2
             seeResultLbl = UIButton.coloredBtn(CGRect(x: 20, y: y, w: wd, h: 50), text: "結果を見る", to: base, action: {
-                
+                onSeeResult()
             })
             yoyakuLbl = UIButton.coloredBtn(CGRect(x: base.w/2+5, y: y, w: wd, h: 50), text: "見学予約する", to: base, action: {
-                
+                let vc = ReserveInspectionController()
+                self.parentViewController.presentFull(vc)
             })
         }
         weddingNameLbl.text = request.objc.venueInfo?.name

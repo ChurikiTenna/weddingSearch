@@ -10,6 +10,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import CoreLocation
 import UIKit
+import PDFKit
 
 
 class SignIn {
@@ -152,7 +153,7 @@ class Ref {
     // 画像ゲット
     internal static func getImage(_ ref: StorageReference,
                                   onDone: @escaping (_ image: UIImage) -> Void) {
-        ref.getData(maxSize: 1024*1024) { (data, e) in
+        ref.getData(maxSize: 1024*1024*3) { (data, e) in
             
             guard let data = data else { return }
             guard let image = UIImage(data: data) else {
@@ -161,6 +162,14 @@ class Ref {
                 return
             }
             onDone(image)
+        }
+    }
+    internal static func getPDF(_ path: String,
+                                  onDone: @escaping (PDFDocument) -> Void) {
+        storage(path).getData(maxSize: 1024*1024*30) { (data, e) in
+            
+            guard let data = data, let doc = PDFDocument(data: data) else { return }
+            onDone(doc)
         }
     }
     

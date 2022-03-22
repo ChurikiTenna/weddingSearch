@@ -12,7 +12,6 @@ import UniformTypeIdentifiers
 class AdminMenuController: BasicViewController {
     
     var tableView: RequestTableView_admin!
-    var kindLbl: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -216,7 +215,7 @@ class EstimateRequestDetailView: UIScrollView {
         super.init(frame: f)
         view.addSubview(self)
         
-        detailLbl = UILabel(CGRect(x: 30, y: 10, w: w-60, h: h-60), lines: -1, to: self)
+        detailLbl = UILabel(CGRect(x: 30, y: 0, w: w-60, h: h-60), lines: -1, to: self)
         
         var attr = NSMutableAttributedString()
         addHead(to: &attr, type: .selectVenue)

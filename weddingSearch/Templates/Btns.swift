@@ -24,6 +24,7 @@ enum ImageType: String {
     case chevronL2 = "chevron.left.2"
     case chevronR2 = "chevron.right.2"
     case chevronD = "chevron.down"
+    case chevronU = "chevron.up"
     case magnifyingglass
     case plus
     case q = "questionmark.circle.fill"

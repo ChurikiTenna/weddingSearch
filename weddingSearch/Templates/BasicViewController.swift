@@ -12,7 +12,38 @@ class BasicViewController: UIViewController {
     var headerGrad: UIView?
     var notFoundLbl: UILabel?
     var head: UILabel!
+    var subHeadV: UIView!
+    var subHead: UILabel!
     
+    var kindlbls = [String]()
+    var kindLbl: UILabel!
+    var pankuzuBtns = [UIButton_round]()
+    
+    func subHeader() {
+        subHeadV = UIView(CGRect(y: head.maxY, w: view.w, h: 50), color: .themePale, to: view)
+        subHead = UILabel(CGRect(x: 20, w: view.w-120, h: subHeadV.h), textSize: 16, to: subHeadV)
+    }
+    func headBtns(kindlbls: [String], selected: @escaping (Int) -> Void) {
+        self.kindlbls = kindlbls
+        kindLbl = UILabel(CGRect(x: 30, y: subHeadV.maxY+10, w: view.w-100, h: 60),
+                          text: kindlbls[0], font: .bold, textSize: 24, to: view)
+        var x = view.w-100
+        for i in 0..<kindlbls.count {
+            let btn = UIButton_round(CGRect(x: x, y: kindLbl.center.y-20, w: 40, h: 40), to: view)
+            btn.addAction {
+                self.kindLbl.text = kindlbls[i]
+                for idx in 0..<self.pankuzuBtns.count {
+                    self.pankuzuBtns[idx].selected(i==idx)
+                }
+                selected(i)
+            }
+            pankuzuBtns.append(btn)
+            x = btn.maxX
+        }
+        for idx in 0..<self.pankuzuBtns.count {
+            self.pankuzuBtns[idx].selected(0==idx)
+        }
+    }
     override func viewWillAppear(_ animated: Bool) {
         overrideUserInterfaceStyle = .light
         if view.backgroundColor == nil { view.backgroundColor = .white }
