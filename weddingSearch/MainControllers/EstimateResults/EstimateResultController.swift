@@ -42,7 +42,7 @@ class EstimateResultController: BasicViewController {
         super.viewDidLoad()
         
         header("結果を見る", withClose: true)
-        subHeader()
+        subHeader(text: nil)
         upBtn = ImageBtn(CGPoint(x: view.w-90, y: subHeadV.center.y-20), image: .chevronU, to: view)
         upBtn.addAction {
             self.didChangeIdx(self.idx-1)

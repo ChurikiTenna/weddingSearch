@@ -15,7 +15,7 @@ class HomeController: BasicViewController {
         super.viewDidLoad()
         
         header("ホーム", withClose: false)
-        subHeader()
+        subHeader(text: nil)
         headBtns(kindlbls: ["見積もり完了", "見積もり作成中"], selected: pageSelected)
         
         let rect = CGRect(x: 0, y: kindLbl.maxY+10, w: view.w, h: view.h-kindLbl.maxY)

@@ -36,10 +36,7 @@ class ReserveInspectionController: BasicViewController {
         super.viewDidLoad()
         
         header("見学予約する", withClose: true)
-        subHeader()
-        subHead.attributedText = NSAttributedString(string: request.objc.venueInfo?.name ?? "nil",
-                                                    attributes: [.font : Font.bold.with(16),
-                                                                .foregroundColor: UIColor.themeColor])
+        subHeader(text: request.objc.venueInfo?.name)
         
         setScrollView(y: subHeadV.maxY)
         

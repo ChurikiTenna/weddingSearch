@@ -317,13 +317,21 @@ class LogInView: UIScrollView {
     @objc func registerWithPassword() {
         
         var number = emailInputF.text
-        if !number.contains("+") {
-            number = "+81" + emailInputF.text
+        if !number.contains("+"), !emailInputF.text.isEmpty {
+            let planeNum = number
+            number = "+81"
+            var idx = 0
+            for num in planeNum {
+                if idx != 0 { number += "\(num)" }
+                idx += 1
+            }
         }
-        
+        //number = "+81 80 8812 2126"
+        print("number", number)
         PhoneAuthProvider.provider()
             .verifyPhoneNumber(number, uiDelegate: nil) { verificationID, error in
                 if let error = error {
+                    print("error", error)
                   self.showAlert(title: "電話番号の認証に失敗しました", message: error.localizedDescription)
                   return
                 }
