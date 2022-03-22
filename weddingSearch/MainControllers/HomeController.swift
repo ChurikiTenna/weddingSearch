@@ -13,6 +13,7 @@ class HomeController: BasicViewController {
     var kindLbl: UILabel!
     var pankuzuBtns = [UIButton_round]()
     var pages = [RequestTableView]()
+    var stateLbl: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,12 +21,7 @@ class HomeController: BasicViewController {
         header("ホーム", withClose: false)
         
         let statusV = UIView(CGRect(y: head.maxY, w: view.w, h: 50), color: .themePale, to: view)
-        let stateLbl = UILabel(CGRect(x: 20, w: view.w-40, h: statusV.h), textSize: 16, to: statusV)
-        let attr = NSMutableAttributedString(string: "見積り完了：", attributes: [.foregroundColor : UIColor.black])
-        attr.append(NSAttributedString(string: "0件", attributes: [.foregroundColor : UIColor.themeColor]))
-        attr.append(NSAttributedString(string: "、見積り中：", attributes: [.foregroundColor : UIColor.black]))
-        attr.append(NSAttributedString(string: "0件", attributes: [.foregroundColor : UIColor.themeColor]))
-        stateLbl.attributedText = attr
+        stateLbl = UILabel(CGRect(x: 20, w: view.w-40, h: statusV.h), textSize: 16, to: statusV)
         
         kindLbl = UILabel(CGRect(x: 30, y: statusV.maxY+10, w: view.w-100, h: 60),
                           text: "", font: .bold, textSize: 24, to: view)
@@ -39,10 +35,18 @@ class HomeController: BasicViewController {
             x = btn.maxX
         }
         let rect = CGRect(x: 0, y: kindLbl.maxY+10, w: view.w, h: view.h-kindLbl.maxY)
-        pages.append(RequestTableView_new(rect, to: view))
-        pages.append(RequestTableView_done(rect, to: view))
+        pages.append(RequestTableView_new(rect, to: view, onGet: onGet))
+        pages.append(RequestTableView_done(rect, to: view, onGet: onGet))
         
+        onGet()
         pageSelected(0)
+    }
+    @objc func onGet() {
+        let attr = NSMutableAttributedString(string: "見積り完了：", attributes: [.foregroundColor : UIColor.black])
+        attr.append(NSAttributedString(string: "\(pages[0].requests.count)件", attributes: [.foregroundColor : UIColor.themeColor]))
+        attr.append(NSAttributedString(string: "、見積り中：", attributes: [.foregroundColor : UIColor.black]))
+        attr.append(NSAttributedString(string: "\(pages[1].requests.count)件", attributes: [.foregroundColor : UIColor.themeColor]))
+        stateLbl.attributedText = attr
     }
     func pageSelected(_ idx: Int) {
         kindLbl.text = kindlbls[idx]
@@ -84,6 +88,7 @@ class RequestTableView_new: RequestTableView {
             .whereField("done", isEqualTo: RequestState.resulted.rawValue)
             .getDocuments(RequestData.self) { snap, requests in
             self.requests = requests
+                self.onGet()
             self.reloadData()
         }
     }
@@ -98,6 +103,7 @@ class RequestTableView_done: RequestTableView {
             .whereField("done", isEqualTo: RequestState.requested.rawValue)
             .getDocuments(RequestData.self) { snap, requests in
             self.requests = requests
+                self.onGet()
             self.reloadData()
         }
     }
@@ -105,9 +111,11 @@ class RequestTableView_done: RequestTableView {
 class RequestTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
     var requests = [(objc: RequestData, id: String)]()
+    let onGet: () -> Void
     var notFoundLbl: UILabel!
     
-    init(_ f: CGRect, to view: UIView) {
+    init(_ f: CGRect, to view: UIView, onGet: @escaping () -> Void) {
+        self.onGet = onGet
         super.init(frame: f, style: .plain)
         view.addSubview(self)
         dataSource = self

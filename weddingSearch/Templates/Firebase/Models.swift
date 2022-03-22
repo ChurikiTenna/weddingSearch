@@ -24,6 +24,7 @@ struct RequestData: Codable {
     let userId: String
     let requestedAt: Timestamp
     var done = RequestState.requested.rawValue
+    var estimatePDFPath: String?
     
     var venueInfo : VenueInfo?
     var basicInfo : BasicInfoData?

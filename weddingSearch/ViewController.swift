@@ -46,10 +46,11 @@ class ViewController: UITabBarController {
         //vc2.tabBarItem.selectedImage = UIImage(named: "myPage_s")
         vcs.append(vc2)
         
-        if adminData?.emails.contains(SignIn.email ?? "") ?? false {
+        if adminData?.emails.contains(SignIn.email ?? "") ?? false
+        || adminData?.emails.contains(SignIn.phone ?? "") ?? false {
             let vc2 = AdminMenuController()
             vc2.tabBarItem = UITabBarItem(title: "管理者メニュー", image: UIImage(systemName: "lock.shield"), tag: 1)
-            vcs.append(vc1)
+            vcs.append(vc2)
         }
         
         self.viewControllers = vcs.map { UINavigationController(rootViewController: $0) }

@@ -323,43 +323,13 @@ class LogInView: UIScrollView {
         
         PhoneAuthProvider.provider()
             .verifyPhoneNumber(number, uiDelegate: nil) { verificationID, error in
-              if let error = error {
+                if let error = error {
                   self.showAlert(title: "電話番号の認証に失敗しました", message: error.localizedDescription)
                   return
-              }
+                }
                 print("verificationID", verificationID)
                 //self.registerUser(verificationID)
-          }
-        //todo with phoneNumber https://firebase.google.com/docs/auth/ios/phone-auth?authuser=0
-        /*waitingController.waiting = true
-        let email = emailInputF.text
-        let password = passwordF.text
-        guard email.isValidEmail else {
-            noticeFailDelegate(cause: "正しいメールアドレスを入力してください")
-            return
         }
-        guard password.count >= 8 else {
-            noticeFailDelegate(cause: "パスワードは８文字以上で入力してください")
-            return
-        }
-        Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            if let error = error {
-                print("already have account?", error)
-                Auth.auth().signIn(withEmail: email, password: password) { result, error in
-                    guard let result = result, error == nil else {
-                        self.noticeFailDelegate(cause: error?.localizedDescription ?? "no result")
-                        return
-                    }
-                    self.registerUser(result)
-                }
-            } else {
-                guard let result = result else {
-                    self.noticeFailDelegate(cause: "結果がありません")
-                    return
-                }
-                self.registerUser(result)
-            }
-        }*/
     }
     private func sha256(_ input: String) -> String {
         let inputData = Data(input.utf8)

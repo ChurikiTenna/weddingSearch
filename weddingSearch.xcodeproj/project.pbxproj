@@ -10,6 +10,7 @@
 		2106605E27BB4B7E00217D55 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2106605D27BB4B7E00217D55 /* QuestionView.swift */; };
 		2106606027BB4C2100217D55 /* SelectVenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2106605F27BB4C2100217D55 /* SelectVenue.swift */; };
 		212EF87E27E98DFB00F5C89D /* AdminMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EF87D27E98DFB00F5C89D /* AdminMenuController.swift */; };
+		212EF88027E9932000F5C89D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 212EF87F27E9932000F5C89D /* GoogleService-Info.plist */; };
 		2131705D27D9AF8300004E11 /* SelectBasicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131705C27D9AF8300004E11 /* SelectBasicInfo.swift */; };
 		2131705F27D9B18D00004E11 /* SelectFoodPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131705E27D9B18D00004E11 /* SelectFoodPriceView.swift */; };
 		2131706127D9BA7900004E11 /* SelectDrink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131706027D9BA7900004E11 /* SelectDrink.swift */; };
@@ -40,7 +41,6 @@
 		213D5A0C27AF48D200022EDD /* SwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D59FD27AF48D100022EDD /* SwitchView.swift */; };
 		213D5A0D27AF48D200022EDD /* BasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D59FE27AF48D100022EDD /* BasicViewController.swift */; };
 		213D5A0E27AF48D200022EDD /* Btns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D59FF27AF48D100022EDD /* Btns.swift */; };
-		213D5A1027AF4FD300022EDD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 213D5A0F27AF4FD300022EDD /* GoogleService-Info.plist */; };
 		213D5A1327AF51CB00022EDD /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D5A1227AF51CB00022EDD /* HomeController.swift */; };
 		213D5A1527AF522D00022EDD /* RequestEstimateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D5A1427AF522D00022EDD /* RequestEstimateController.swift */; };
 		213D5A1727AF526600022EDD /* MyPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213D5A1627AF526600022EDD /* MyPageController.swift */; };
@@ -59,6 +59,7 @@
 		2106605D27BB4B7E00217D55 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		2106605F27BB4C2100217D55 /* SelectVenue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectVenue.swift; sourceTree = "<group>"; };
 		212EF87D27E98DFB00F5C89D /* AdminMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMenuController.swift; sourceTree = "<group>"; };
+		212EF87F27E9932000F5C89D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		2131705C27D9AF8300004E11 /* SelectBasicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBasicInfo.swift; sourceTree = "<group>"; };
 		2131705E27D9B18D00004E11 /* SelectFoodPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFoodPriceView.swift; sourceTree = "<group>"; };
 		2131706027D9BA7900004E11 /* SelectDrink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDrink.swift; sourceTree = "<group>"; };
@@ -92,7 +93,6 @@
 		213D59FD27AF48D100022EDD /* SwitchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchView.swift; sourceTree = "<group>"; };
 		213D59FE27AF48D100022EDD /* BasicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicViewController.swift; sourceTree = "<group>"; };
 		213D59FF27AF48D100022EDD /* Btns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Btns.swift; sourceTree = "<group>"; };
-		213D5A0F27AF4FD300022EDD /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		213D5A1227AF51CB00022EDD /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		213D5A1427AF522D00022EDD /* RequestEstimateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestEstimateController.swift; sourceTree = "<group>"; };
 		213D5A1627AF526600022EDD /* MyPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageController.swift; sourceTree = "<group>"; };
@@ -180,8 +180,8 @@
 				213D5A1127AF51AD00022EDD /* MainControllers */,
 				213D59EF27AF48D100022EDD /* Templates */,
 				213D596127AA29C500022EDD /* Main.storyboard */,
+				212EF87F27E9932000F5C89D /* GoogleService-Info.plist */,
 				213D596427AA29C700022EDD /* Assets.xcassets */,
-				213D5A0F27AF4FD300022EDD /* GoogleService-Info.plist */,
 				213D596627AA29C700022EDD /* LaunchScreen.storyboard */,
 				213D596927AA29C700022EDD /* Info.plist */,
 			);
@@ -300,8 +300,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				213D596827AA29C700022EDD /* LaunchScreen.storyboard in Resources */,
-				213D5A1027AF4FD300022EDD /* GoogleService-Info.plist in Resources */,
 				213D596527AA29C700022EDD /* Assets.xcassets in Resources */,
+				212EF88027E9932000F5C89D /* GoogleService-Info.plist in Resources */,
 				21AD6C8127DEC32C008A0083 /* venues.csv in Resources */,
 				213D596327AA29C500022EDD /* Main.storyboard in Resources */,
 			);

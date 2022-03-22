@@ -20,6 +20,9 @@ class SignIn {
     internal static var email: String? {
         return Auth.auth().currentUser?.email
     }
+    internal static var phone: String? {
+        return Auth.auth().currentUser?.phoneNumber
+    }
     /// ログアウト処理
     internal static func logout() {
         do {
@@ -127,6 +130,18 @@ class Ref {
         print(imageData)
         storage(path).putData(imageData, metadata: metaData) { (_, e) in
             if let e = e { onError(e); return }
+            onSuccess()
+        }
+    }
+    internal static func uploadPDF(_ path: String, url: URL,
+                                     onSuccess: @escaping () -> Void,
+                                     onError: (() -> Void)? = nil) {
+        print("uploadPDF to", path)
+        storage(path).putFile(from: url, metadata: nil) { (_, e) in
+            if let e = e {
+                onError?()
+                return
+            }
             onSuccess()
         }
     }

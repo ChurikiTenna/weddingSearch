@@ -312,7 +312,7 @@ extension UIButton {
     
     internal static func closeBtn(to view: UIView,
                                   x: CGFloat = 10, y: CGFloat = 0, theme: ImageBtn.ColorType = .clearBlack,
-                                  type: ImageType = .closeBtn, action: @escaping () -> Void) -> UIButton {
+                                  type: ImageType = .multiply, action: @escaping () -> Void) -> UIButton {
         let b = ImageBtn(CGPoint(x: x, y: y), image: type, theme: theme, to: view)
         b.round(clip: true)
         b.addAction(UIAction(handler: { UIAction in
