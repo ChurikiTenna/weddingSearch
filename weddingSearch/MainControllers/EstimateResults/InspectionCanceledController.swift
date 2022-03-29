@@ -26,7 +26,7 @@ class InspectionCanceledController: BasicViewController {
         subHeader(text: request.objc.venueInfo?.name ?? "nil")
         setKindLbl("見学日程")
         
-        _ = UILabel(CGRect(x: 30, y: head.maxY+30, w: view.w-60, h: 200),
+        _ = UILabel(CGRect(x: 30, y: kindLbl.maxY+30, w: view.w-60, h: 200),
                   text: "日程調整の結果、ご希望の時間帯で\n予約することができませんでした。\nお手数ですが、下記の問合せから\n再度、希望日を教えてくださいませ。",
                   textSize: 20, lines: -1, to: view)
         
@@ -59,13 +59,13 @@ class InspectionDecidedController: BasicViewController {
         greyBtn.setTitleColor(.themeColor, for: .normal)
         greyBtn.isUserInteractionEnabled = false
         
-        _ = UILabel(CGRect(x: 30, y: greyBtn.maxY+30, h: 40),
+        _ = UILabel(.colorBtn(centerX: view.w/2, y: greyBtn.maxY+20),
                     text: request.objc.reserveDate?.toFullString() ?? "", font: .bold, textSize: 20, align: .center, to: view)
         
         
-        _ = UILabel(CGRect(x: 30, y: s.maxY-80, h: 80),
-                    text: "日程変更や見学キャンセル等は以下よりお願いいたします",
+        _ = UILabel(.colorBtn(centerX: view.w/2, y: s.maxY+120),
+                    text: "日程変更や見学キャンセル等は\n以下よりお願いいたします",
                     textSize: 16, textColor: .gray, lines: 2, to: view)
-        let btn = UIButton.lineInquiry(y: s.maxY-60, to: view)
+        _ = UIButton.lineInquiry(y: s.maxY-60, to: view)
     }
 }

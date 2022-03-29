@@ -289,7 +289,15 @@ extension UIButton {
         let lineInquiry = UIButton(CGRect(x: view.w/2-141, y: y, w: 282, h: 50), to: view)
         lineInquiry.setImage(UIImage(named: "lineInquiry"), for: .normal)
         lineInquiry.addAction {
-            //todo to line
+            //todo https://www.linebiz.com/jp/service/line-official-account/
+            guard let url = URL(string: "https://line.me/R/ti/p/@266amezn")
+            else {
+                lineInquiry.parentViewController.showAlert(title: "URLを開けません")
+                return
+            }
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            }
         }
         return lineInquiry
     }

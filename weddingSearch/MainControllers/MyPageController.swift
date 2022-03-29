@@ -9,10 +9,6 @@
 import UIKit
 /*
  todo 番号認証機能を反映
- todo カバーする地域は13都道府県だけでOK
- todo 人数情報（成人/こども）の入力方法変更
- todo 見積もり完了以降の流れを今後Update
- todo No.1から通しで確認できるようにしていただく
  */
 class MyPageController: BasicViewController {
     

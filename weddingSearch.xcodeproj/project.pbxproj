@@ -68,6 +68,7 @@
 		21094A7C27F2982F005497D8 /* RequestTableView_admin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTableView_admin.swift; sourceTree = "<group>"; };
 		21094A7E27F298AD005497D8 /* ReserveRequestTableView_admin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveRequestTableView_admin.swift; sourceTree = "<group>"; };
 		21094A8027F2A083005497D8 /* InspectionCanceledController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionCanceledController.swift; sourceTree = "<group>"; };
+		21094A8227F2BD40005497D8 /* weddingSearchRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = weddingSearchRelease.entitlements; sourceTree = "<group>"; };
 		212EF87D27E98DFB00F5C89D /* AdminMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMenuController.swift; sourceTree = "<group>"; };
 		212EF87F27E9932000F5C89D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		212EF88227E9B17400F5C89D /* EstimateResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateResultController.swift; sourceTree = "<group>"; };
@@ -206,6 +207,7 @@
 		213D595A27AA29C500022EDD /* weddingSearch */ = {
 			isa = PBXGroup;
 			children = (
+				21094A8227F2BD40005497D8 /* weddingSearchRelease.entitlements */,
 				213D59EE27AF482D00022EDD /* weddingSearch.entitlements */,
 				21AD6C8027DEC32C008A0083 /* venues.csv */,
 				213D595B27AA29C500022EDD /* AppDelegate.swift */,
@@ -619,7 +621,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = weddingSearch/weddingSearch.entitlements;
+				CODE_SIGN_ENTITLEMENTS = weddingSearch/weddingSearchRelease.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;

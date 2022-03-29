@@ -66,10 +66,10 @@ class RequestTableView_new: RequestTableView {
         Ref.requests
             .whereField("userId", isEqualTo: uid)
             .whereField("done", isNotEqualTo: RequestState.requested.rawValue)
-            .getDocuments(RequestData.self) { snap, requests in
-            self.requests = requests
+            .addSnapshotListener { snap, e in
+                self.requests = Decoder.decodeAll(RequestData.self, from: snap)
                 self.onGet()
-            self.reloadData()
+                self.reloadData()
         }
     }
 }
@@ -81,10 +81,10 @@ class RequestTableView_done: RequestTableView {
         Ref.requests
             .whereField("userId", isEqualTo: uid)
             .whereField("done", isEqualTo: RequestState.requested.rawValue)
-            .getDocuments(RequestData.self) { snap, requests in
-            self.requests = requests
+            .addSnapshotListener { snap, e in
+                self.requests = Decoder.decodeAll(RequestData.self, from: snap)
                 self.onGet()
-            self.reloadData()
+                self.reloadData()
         }
     }
 }
@@ -107,8 +107,6 @@ class RequestTableView: UITableView, UITableViewDelegate, UITableViewDataSource 
         register(EstimateCell.self)
         addRefreshControll(target: self, action: #selector(refresh))
         refresh()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: .didPostRequest, object: nil)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
