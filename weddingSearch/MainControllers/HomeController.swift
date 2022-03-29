@@ -169,6 +169,8 @@ class EstimateCell: UITableViewCell {
         self.onDelete = onDelete
         
         if base == nil {
+            selectionStyle = .none
+            
             base = UIView(CGRect(x: 30, y: 5, w: w-60, h: 150), color: .white, to: contentView)
             base.round(16, clip: true)
             base.border(.superPaleGray, width: 2)
@@ -192,6 +194,7 @@ class EstimateCell: UITableViewCell {
         seeResultLbl = UIButton.coloredBtn(CGRect(x: 20, y: y, w: wd, h: 50), text: "結果を見る", to: base, action: {
             onSeeResult()
         })
+        print("request.objc._done", request.objc.done)
         if request.objc._done == .requested {
             yoyakuLbl = UIButton.coloredBtn(CGRect(x: base.w/2+5, y: y, w: wd, h: 50), text: "見学予約する", to: base, action: {})
             self.seeResultLbl.backgroundColor = .superPaleGray
@@ -214,11 +217,11 @@ class EstimateCell: UITableViewCell {
                     let vc = CheckInspecitionController(request: request)
                     self.parentViewController.presentFull(vc)
                 case .reserveCanceled:
-                    break
+                    let vc = InspectionCanceledController(request: request)
+                    self.parentViewController.presentFull(vc)
                 case .reserveDecided:
-                    break
-                case .reserveChecked:
-                    break
+                    let vc = InspectionDecidedController(request: request)
+                    self.parentViewController.presentFull(vc)
                 }
             })
         }

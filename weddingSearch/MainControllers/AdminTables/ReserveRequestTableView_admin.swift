@@ -84,11 +84,12 @@ class ReserveCheckController_admin: BasicViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         header("希望予約日程", withClose: true)
+        subHeader(text: request.objc.venueInfo?.name)
         
-        var y = head.maxY+40
+        var y = subHeadV.maxY+40
         for reserveKibou in request.objc.reserveKibou ?? [] {
-            let btn = UIButton.coloredBtn(.colorBtn(centerX: view.w/2, y: y), text: reserveKibou.toFullString(), color: .superPaleGray, to: view) {
-                self.showAlert(title: reserveKibou.toFullString(), message: "", btnTitle: "送信", cancelBtnTitle: "キャンセル") {
+            let btn = UIButton.coloredBtn(.colorBtn(centerX: view.w/2, y: y), text: reserveKibou.toFullString(), to: view) {
+                self.showAlert(title: reserveKibou.toFullString(), message: "上記の日程で決定しますか？", btnTitle: "決定", cancelBtnTitle: "キャンセル") {
                     self.request.objc.done = RequestState.reserveDecided.rawValue
                     self.request.objc.reserveDate = reserveKibou
                     try! Ref.requests.document(self.request.id).setData(from: self.request.objc)
@@ -98,7 +99,7 @@ class ReserveCheckController_admin: BasicViewController {
             }
             y = btn.maxY+20
         }
-        _ = UIButton.coloredBtn(.colorBtn(centerX: view.w/2, y: y), text: "希望に合う日程がない", color: .superPaleGray, to: view) {
+        _ = UIButton.coloredBtn(.colorBtn(centerX: view.w/2, y: y), text: "希望に合う日程がない", color: .lightGray, to: view) {
             self.showAlert(title: "希望に合う日程がない", message: "", btnTitle: "送信", cancelBtnTitle: "キャンセル") {
                 self.request.objc.done = RequestState.reserveCanceled.rawValue
                 try! Ref.requests.document(self.request.id).setData(from: self.request.objc)

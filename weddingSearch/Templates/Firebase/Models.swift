@@ -93,5 +93,5 @@ enum RequestState: String {
     case reserveRequested
     case reserveCanceled // 希望の時間に予約できなかった
     case reserveDecided //　管理者が予約時間を決めた
-    case reserveChecked //　ユーザーが予約を確定した
+   // case reserveChecked //　ユーザーが予約を確定した
 }

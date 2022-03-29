@@ -50,7 +50,7 @@ class BasicViewController: UIViewController {
         }
     }
     func setKindLbl(_ text: String) {
-        kindLbl = UILabel(CGRect(x: 30, y: subHeadV.maxY+10, w: view.w-100, h: 60),
+        kindLbl = UILabel(CGRect(x: 30, y: (subHeadV?.maxY ?? subHead?.maxY ?? head.maxY)+10, w: view.w-100, h: 60),
                           text: text, font: .bold, textSize: 24, to: view)
     }
     override func viewWillAppear(_ animated: Bool) {
