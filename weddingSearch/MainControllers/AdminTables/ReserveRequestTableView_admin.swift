@@ -59,7 +59,7 @@ class ReserveRequestTableView_admin: UITableView, UITableViewDelegate, UITableVi
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("didSelectRowAt")
-        let vc = EstimateDetailController_admin(request: requests[indexPath.row], onDone: {
+        let vc = ReserveCheckController_admin(request: requests[indexPath.row], onDone: {
             self.requests.remove(at: indexPath.row)
             self.reloadData()
         })
@@ -67,3 +67,44 @@ class ReserveRequestTableView_admin: UITableView, UITableViewDelegate, UITableVi
     }
 }
 
+class ReserveCheckController_admin: BasicViewController {
+    
+    var request: (objc: RequestData, id: String)
+    let onDone: () -> Void
+    
+    init(request: (objc: RequestData, id: String), onDone: @escaping () -> Void) {
+        self.request = request
+        self.onDone = onDone
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        header("希望予約日程", withClose: true)
+        
+        var y = head.maxY+40
+        for reserveKibou in request.objc.reserveKibou ?? [] {
+            let btn = UIButton.coloredBtn(.colorBtn(centerX: view.w/2, y: y), text: reserveKibou.toFullString(), color: .superPaleGray, to: view) {
+                self.showAlert(title: reserveKibou.toFullString(), message: "", btnTitle: "送信", cancelBtnTitle: "キャンセル") {
+                    self.request.objc.done = RequestState.reserveDecided.rawValue
+                    self.request.objc.reserveDate = reserveKibou
+                    try! Ref.requests.document(self.request.id).setData(from: self.request.objc)
+                    self.dismissSelf()
+                    self.onDone()
+                }
+            }
+            y = btn.maxY+20
+        }
+        _ = UIButton.coloredBtn(.colorBtn(centerX: view.w/2, y: y), text: "希望に合う日程がない", color: .superPaleGray, to: view) {
+            self.showAlert(title: "希望に合う日程がない", message: "", btnTitle: "送信", cancelBtnTitle: "キャンセル") {
+                self.request.objc.done = RequestState.reserveCanceled.rawValue
+                try! Ref.requests.document(self.request.id).setData(from: self.request.objc)
+                self.dismissSelf()
+                self.onDone()
+            }
+        }
+    }
+}

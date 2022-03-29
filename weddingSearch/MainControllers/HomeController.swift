@@ -65,7 +65,7 @@ class RequestTableView_new: RequestTableView {
         guard let uid = SignIn.uid else { return }
         Ref.requests
             .whereField("userId", isEqualTo: uid)
-            .whereField("done", isEqualTo: RequestState.resulted.rawValue)
+            .whereField("done", isNotEqualTo: RequestState.requested.rawValue)
             .getDocuments(RequestData.self) { snap, requests in
             self.requests = requests
                 self.onGet()

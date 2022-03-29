@@ -28,7 +28,7 @@ struct RequestData: Codable {
     
     var reserveKibou: [Timestamp]?
     var reserveComment: String?
-    var reserveDone: Timestamp?
+    var reserveDate: Timestamp?
     
     var venueInfo : VenueInfo?
     var basicInfo : BasicInfoData?
