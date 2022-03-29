@@ -70,6 +70,7 @@ class ReserveInspectionController: BasicViewController {
             self.showAlert(title: "この時間で予約リクエストを送信しますか？",
                            message: dates.map({ $0.toString(format: .full) }).joined(separator: "\n"),
                            btnTitle: "送信", cancelBtnTitle: "キャンセル") {
+                self.request.objc.done = RequestState.reserveRequested.rawValue
                 self.request.objc.reserveKibou = dates.map({ $0.timestamp() })
                 self.request.objc.reserveComment = self.textView.text ?? ""
                 try! Ref.requests.document(self.request.id).setData(from: self.request.objc, completion: { e in

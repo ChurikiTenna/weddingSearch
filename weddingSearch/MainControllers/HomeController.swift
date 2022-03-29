@@ -192,23 +192,34 @@ class EstimateCell: UITableViewCell {
         seeResultLbl = UIButton.coloredBtn(CGRect(x: 20, y: y, w: wd, h: 50), text: "結果を見る", to: base, action: {
             onSeeResult()
         })
-        if request.objc.reserveKibou == nil {
+        if request.objc._done == .requested {
+            yoyakuLbl = UIButton.coloredBtn(CGRect(x: base.w/2+5, y: y, w: wd, h: 50), text: "見学予約する", to: base, action: {})
+            self.seeResultLbl.backgroundColor = .superPaleGray
+            self.yoyakuLbl.backgroundColor = .superPaleGray
+            self.seeResultLbl.isUserInteractionEnabled = false
+            self.yoyakuLbl.isUserInteractionEnabled = false
+        } else if request.objc._done == .estimated {
             yoyakuLbl = UIButton.coloredBtn(CGRect(x: base.w/2+5, y: y, w: wd, h: 50), text: "見学予約する", to: base, action: {
                 let vc = ReserveInspectionController(request: request, onDone: {
                     onUpdate()
                 })
                 self.parentViewController.presentFull(vc)
             })
-            if request.objc.done == RequestState.requested.rawValue {
-                self.seeResultLbl.backgroundColor = .superPaleGray
-                self.yoyakuLbl.backgroundColor = .superPaleGray
-                self.seeResultLbl.isUserInteractionEnabled = false
-                self.yoyakuLbl.isUserInteractionEnabled = false
-            }
         } else {
             yoyakuLbl = UIButton.coloredBtn(CGRect(x: base.w/2+5, y: y, w: wd, h: 50), text: "見学日程", color: .brown, to: base, action: {
-                let vc = CheckInspecitionController(request: request)
-                self.parentViewController.presentFull(vc)
+                switch request.objc._done {
+                case .requested: break
+                case .estimated: break
+                case .reserveRequested:
+                    let vc = CheckInspecitionController(request: request)
+                    self.parentViewController.presentFull(vc)
+                case .reserveCanceled:
+                    break
+                case .reserveDecided:
+                    break
+                case .reserveChecked:
+                    break
+                }
             })
         }
     }

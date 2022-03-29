@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import FirebaseMessaging
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,8 +15,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        FirebaseApp.configure()
+        
+        #if DEBUG
+        let plistName = "GoogleService-Info-test"
+        #else
+        let plistName = "GoogleService-Info"
+        #endif
+        
+        guard let filePath = Bundle.main.path(forResource: plistName, ofType: "plist"),
+                let options = FirebaseOptions(contentsOfFile: filePath) else {
+            assert(false, "Could not load config file.")
+        }
+        FirebaseApp.configure(options: options)
+        
         sleep(2)
+        
+        UNUserNotificationCenter.current().delegate = self
+
+          let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+          UNUserNotificationCenter.current().requestAuthorization(
+            options: authOptions,
+            completionHandler: { _, _ in }
+          )
+        application.registerForRemoteNotifications()
+        
+        Messaging.messaging().delegate = self
+        
+        Messaging.messaging().token { token, error in
+          if let error = error {
+            print("Error fetching FCM registration token: \(error)")
+          } else if let token = token {
+            print("FCM registration token: \(token)")
+            //self.fcmRegTokenMessage.text  = "Remote FCM registration token: \(token)"
+          }
+        }
+        
         return true
     }
 
@@ -36,3 +70,75 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+
+        if let messageID = userInfo["gcm.message_id"] {
+            print("Message ID: \(messageID)")
+        }
+
+        print(userInfo)
+
+        completionHandler([])
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        if let messageID = userInfo["gcm.message_id"] {
+            print("Message ID: \(messageID)")
+        }
+
+        print(userInfo)
+
+        completionHandler()
+    }
+}
+extension AppDelegate: MessagingDelegate {
+    
+    func application(application: UIApplication,
+                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print("didRegisterForRemoteNotificationsWithDeviceToken")
+        Messaging.messaging().apnsToken = deviceToken
+        Messaging.messaging().isAutoInitEnabled = true
+    }
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        print("Firebase registration token: \(fcmToken)")
+        saveToken(fcmToken)
+    }
+    func saveToken(_ token: String) {
+        guard let uid = SignIn.uid, let email = SignIn.email else {
+            return
+        }
+        // ついでにメールアドレスも保存
+        Ref.users.document(uid).setData(["token": token, "email": email], merge: true)
+    }
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+           // Print message ID.
+           if let messageID = userInfo["gcm.message_id"] {
+               print("Message ID: \(messageID)")
+           }
+
+           // Print full message.
+           print(userInfo)
+       }
+
+       func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                        fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+           // Print message ID.
+           if let messageID = userInfo["gcm.message_id"] {
+               print("Message ID: \(messageID)")
+           }
+
+           // Print full message.
+           print(userInfo)
+
+           completionHandler(UIBackgroundFetchResult.newData)
+       }
+}

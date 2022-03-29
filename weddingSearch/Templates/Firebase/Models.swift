@@ -46,6 +46,10 @@ struct RequestData: Codable {
     var parentClothingData : ParentClothingData?
     var other : String?
     
+    var _done: RequestState {
+        return RequestState(rawValue: done) ?? .requested
+    }
+    
     init(userId: String,
          venueInfo: VenueInfo?,
          basicInfo: BasicInfoData?,
@@ -85,5 +89,9 @@ struct RequestData: Codable {
 }
 enum RequestState: String {
     case requested
-    case resulted
+    case estimated
+    case reserveRequested
+    case reserveCanceled // 希望の時間に予約できなかった
+    case reserveDecided //　管理者が予約時間を決めた
+    case reserveChecked //　ユーザーが予約を確定した
 }

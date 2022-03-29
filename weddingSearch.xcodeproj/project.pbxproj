@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2106605E27BB4B7E00217D55 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2106605D27BB4B7E00217D55 /* QuestionView.swift */; };
 		2106606027BB4C2100217D55 /* SelectVenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2106605F27BB4C2100217D55 /* SelectVenue.swift */; };
+		21094A7227EBF94E005497D8 /* GoogleService-Info-test.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21094A7127EBF94E005497D8 /* GoogleService-Info-test.plist */; };
+		21094A7D27F29830005497D8 /* RequestTableView_admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21094A7C27F2982F005497D8 /* RequestTableView_admin.swift */; };
+		21094A7F27F298AD005497D8 /* ReserveRequestTableView_admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21094A7E27F298AD005497D8 /* ReserveRequestTableView_admin.swift */; };
 		212EF87E27E98DFB00F5C89D /* AdminMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EF87D27E98DFB00F5C89D /* AdminMenuController.swift */; };
 		212EF88027E9932000F5C89D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 212EF87F27E9932000F5C89D /* GoogleService-Info.plist */; };
 		212EF88327E9B17400F5C89D /* EstimateResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EF88227E9B17400F5C89D /* EstimateResultController.swift */; };
@@ -54,13 +57,15 @@
 		21AF769527AFD1500009814D /* DateField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AF769427AFD1500009814D /* DateField.swift */; };
 		21AF769727AFD35E0009814D /* UICalender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AF769627AFD35E0009814D /* UICalender.swift */; };
 		21AF76FD27B5FA840009814D /* CheckBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AF76FC27B5FA840009814D /* CheckBtn.swift */; };
-		AE5CB6A09FD5D92F0F3F5E2D /* Pods_weddingSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6114A2B338B67F18C21D05BF /* Pods_weddingSearch.framework */; };
+		5A888E0472BFF1C34B090118 /* Pods_weddingSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB0DCA7379623B3E5B36DFFD /* Pods_weddingSearch.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0C1479D04B181DB1BB102CDF /* Pods-weddingSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weddingSearch.debug.xcconfig"; path = "Target Support Files/Pods-weddingSearch/Pods-weddingSearch.debug.xcconfig"; sourceTree = "<group>"; };
 		2106605D27BB4B7E00217D55 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		2106605F27BB4C2100217D55 /* SelectVenue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectVenue.swift; sourceTree = "<group>"; };
+		21094A7127EBF94E005497D8 /* GoogleService-Info-test.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info-test.plist"; sourceTree = SOURCE_ROOT; };
+		21094A7C27F2982F005497D8 /* RequestTableView_admin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTableView_admin.swift; sourceTree = "<group>"; };
+		21094A7E27F298AD005497D8 /* ReserveRequestTableView_admin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveRequestTableView_admin.swift; sourceTree = "<group>"; };
 		212EF87D27E98DFB00F5C89D /* AdminMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMenuController.swift; sourceTree = "<group>"; };
 		212EF87F27E9932000F5C89D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		212EF88227E9B17400F5C89D /* EstimateResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateResultController.swift; sourceTree = "<group>"; };
@@ -109,8 +114,9 @@
 		21AF769427AFD1500009814D /* DateField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateField.swift; sourceTree = "<group>"; };
 		21AF769627AFD35E0009814D /* UICalender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICalender.swift; sourceTree = "<group>"; };
 		21AF76FC27B5FA840009814D /* CheckBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBtn.swift; sourceTree = "<group>"; };
-		4DA5E8A715144A48BD9B2E8E /* Pods-weddingSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weddingSearch.release.xcconfig"; path = "Target Support Files/Pods-weddingSearch/Pods-weddingSearch.release.xcconfig"; sourceTree = "<group>"; };
-		6114A2B338B67F18C21D05BF /* Pods_weddingSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_weddingSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7409D1AC52EA25BA4458C327 /* Pods-weddingSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weddingSearch.release.xcconfig"; path = "Target Support Files/Pods-weddingSearch/Pods-weddingSearch.release.xcconfig"; sourceTree = "<group>"; };
+		CBC7F247795843451A6B3697 /* Pods-weddingSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weddingSearch.debug.xcconfig"; path = "Target Support Files/Pods-weddingSearch/Pods-weddingSearch.debug.xcconfig"; sourceTree = "<group>"; };
+		DB0DCA7379623B3E5B36DFFD /* Pods_weddingSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_weddingSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE5CB6A09FD5D92F0F3F5E2D /* Pods_weddingSearch.framework in Frameworks */,
+				5A888E0472BFF1C34B090118 /* Pods_weddingSearch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,8 +134,8 @@
 		167BA4985F03439B05181C92 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				0C1479D04B181DB1BB102CDF /* Pods-weddingSearch.debug.xcconfig */,
-				4DA5E8A715144A48BD9B2E8E /* Pods-weddingSearch.release.xcconfig */,
+				CBC7F247795843451A6B3697 /* Pods-weddingSearch.debug.xcconfig */,
+				7409D1AC52EA25BA4458C327 /* Pods-weddingSearch.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -157,6 +163,15 @@
 			path = QuestionViews;
 			sourceTree = "<group>";
 		};
+		21094A7B27F29805005497D8 /* AdminTables */ = {
+			isa = PBXGroup;
+			children = (
+				21094A7C27F2982F005497D8 /* RequestTableView_admin.swift */,
+				21094A7E27F298AD005497D8 /* ReserveRequestTableView_admin.swift */,
+			);
+			path = AdminTables;
+			sourceTree = "<group>";
+		};
 		212EF88127E9B14B00F5C89D /* EstimateResults */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,7 +188,7 @@
 				213D595A27AA29C500022EDD /* weddingSearch */,
 				213D595927AA29C500022EDD /* Products */,
 				167BA4985F03439B05181C92 /* Pods */,
-				9440CD101C5785A792AE4C44 /* Frameworks */,
+				286A134486F24A204D4BF425 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -197,6 +212,7 @@
 				213D59EF27AF48D100022EDD /* Templates */,
 				213D596127AA29C500022EDD /* Main.storyboard */,
 				212EF87F27E9932000F5C89D /* GoogleService-Info.plist */,
+				21094A7127EBF94E005497D8 /* GoogleService-Info-test.plist */,
 				213D596427AA29C700022EDD /* Assets.xcassets */,
 				213D596627AA29C700022EDD /* LaunchScreen.storyboard */,
 				213D596927AA29C700022EDD /* Info.plist */,
@@ -242,16 +258,17 @@
 				213D5A1427AF522D00022EDD /* RequestEstimateController.swift */,
 				212EF87D27E98DFB00F5C89D /* AdminMenuController.swift */,
 				213D5A1627AF526600022EDD /* MyPageController.swift */,
+				21094A7B27F29805005497D8 /* AdminTables */,
 				212EF88127E9B14B00F5C89D /* EstimateResults */,
 				2106605C27BB4B6800217D55 /* QuestionViews */,
 			);
 			path = MainControllers;
 			sourceTree = "<group>";
 		};
-		9440CD101C5785A792AE4C44 /* Frameworks */ = {
+		286A134486F24A204D4BF425 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6114A2B338B67F18C21D05BF /* Pods_weddingSearch.framework */,
+				DB0DCA7379623B3E5B36DFFD /* Pods_weddingSearch.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -263,11 +280,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 213D596C27AA29C700022EDD /* Build configuration list for PBXNativeTarget "weddingSearch" */;
 			buildPhases = (
-				EB2D60A42A1E757B480DBA3C /* [CP] Check Pods Manifest.lock */,
+				A55C854355A7DF07A97E9C04 /* [CP] Check Pods Manifest.lock */,
 				213D595427AA29C500022EDD /* Sources */,
 				213D595527AA29C500022EDD /* Frameworks */,
 				213D595627AA29C500022EDD /* Resources */,
-				38B4E6528AA401B5DDCE5406 /* [CP] Embed Pods Frameworks */,
+				09F207733ABB75FB25DCC848 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -321,13 +338,14 @@
 				212EF88027E9932000F5C89D /* GoogleService-Info.plist in Resources */,
 				21AD6C8127DEC32C008A0083 /* venues.csv in Resources */,
 				213D596327AA29C500022EDD /* Main.storyboard in Resources */,
+				21094A7227EBF94E005497D8 /* GoogleService-Info-test.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		38B4E6528AA401B5DDCE5406 /* [CP] Embed Pods Frameworks */ = {
+		09F207733ABB75FB25DCC848 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -344,7 +362,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-weddingSearch/Pods-weddingSearch-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EB2D60A42A1E757B480DBA3C /* [CP] Check Pods Manifest.lock */ = {
+		A55C854355A7DF07A97E9C04 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -383,6 +401,7 @@
 				2131706F27D9FA0500004E11 /* SelectTypeOfVideo.swift in Sources */,
 				213D595C27AA29C500022EDD /* AppDelegate.swift in Sources */,
 				212EF88527E9C0DC00F5C89D /* ReserveInspectionController.swift in Sources */,
+				21094A7F27F298AD005497D8 /* ReserveRequestTableView_admin.swift in Sources */,
 				2131705D27D9AF8300004E11 /* SelectBasicInfo.swift in Sources */,
 				213D5A0927AF48D200022EDD /* Firebase.swift in Sources */,
 				213D5A1527AF522D00022EDD /* RequestEstimateController.swift in Sources */,
@@ -392,6 +411,7 @@
 				2131706127D9BA7900004E11 /* SelectDrink.swift in Sources */,
 				212EF88327E9B17400F5C89D /* EstimateResultController.swift in Sources */,
 				21AF769527AFD1500009814D /* DateField.swift in Sources */,
+				21094A7D27F29830005497D8 /* RequestTableView_admin.swift in Sources */,
 				213D5A0627AF48D200022EDD /* Extensions.swift in Sources */,
 				213D5A1327AF51CB00022EDD /* HomeController.swift in Sources */,
 				212EF87E27E98DFB00F5C89D /* AdminMenuController.swift in Sources */,
@@ -558,7 +578,7 @@
 		};
 		213D596D27AA29C700022EDD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0C1479D04B181DB1BB102CDF /* Pods-weddingSearch.debug.xcconfig */;
+			baseConfigurationReference = CBC7F247795843451A6B3697 /* Pods-weddingSearch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -591,7 +611,7 @@
 		};
 		213D596E27AA29C700022EDD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4DA5E8A715144A48BD9B2E8E /* Pods-weddingSearch.release.xcconfig */;
+			baseConfigurationReference = 7409D1AC52EA25BA4458C327 /* Pods-weddingSearch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

@@ -30,8 +30,8 @@ class BasicViewController: UIViewController {
     }
     func headBtns(kindlbls: [String], selected: @escaping (Int) -> Void) {
         self.kindlbls = kindlbls
-        kindLbl = UILabel(CGRect(x: 30, y: subHeadV.maxY+10, w: view.w-100, h: 60),
-                          text: kindlbls[0], font: .bold, textSize: 24, to: view)
+        setKindLbl(kindlbls[0])
+        
         var x = view.w-100
         for i in 0..<kindlbls.count {
             let btn = UIButton_round(CGRect(x: x, y: kindLbl.center.y-20, w: 40, h: 40), to: view)
@@ -48,6 +48,10 @@ class BasicViewController: UIViewController {
         for idx in 0..<self.pankuzuBtns.count {
             self.pankuzuBtns[idx].selected(0==idx)
         }
+    }
+    func setKindLbl(_ text: String) {
+        kindLbl = UILabel(CGRect(x: 30, y: subHeadV.maxY+10, w: view.w-100, h: 60),
+                          text: text, font: .bold, textSize: 24, to: view)
     }
     override func viewWillAppear(_ animated: Bool) {
         overrideUserInterfaceStyle = .light

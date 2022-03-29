@@ -128,7 +128,7 @@ class FirstController: BasicViewController {
     }
     var startX = CGFloat()
     @objc func swiped(sender: UISwipeGestureRecognizer) {
-        print("swiped")
+        
         let x = sender.location(in: view).x
         switch sender.state {
         case .began: startX = x
