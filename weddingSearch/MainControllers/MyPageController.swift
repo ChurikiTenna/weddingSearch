@@ -5,11 +5,8 @@
 //  Created by 中力天和 on 2022/02/06.
 //
 
-
 import UIKit
-/*
- todo 番号認証機能を反映
- */
+
 class MyPageController: BasicViewController {
     
     enum Rows: CaseIterable {
