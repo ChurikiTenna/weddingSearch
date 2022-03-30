@@ -23,7 +23,7 @@ class LogInView: UIScrollView {
     
     // step0
     var emailInputF: TextFieldAndTtl!
-    //var passwordF: TextFieldAndTtl!
+    var passcordF: TextFieldAndTtl?
     var registerBtn: UIButton!
     var otherLbl: UILabel?
     var appleButton: UIButton!
@@ -101,15 +101,6 @@ class LogInView: UIScrollView {
         
         emailInputF = TextFieldAndTtl(textF_rect(y: &y, plusY: 20), ttl: "電話番号", to: base)
         emailInputF.textField.keyboardType = .phonePad
-        /*
-        passwordF = TextFieldAndTtl(.textF_rect(centerX: self.w/2, y: &y), ttl: "パスワード（８桁以上）", to: self)
-        passwordF.textField.isSecureTextEntry = true
-        passwordF.textField.keyboardType = .alphabet
-        
-        
-        let forgetBtn = UIButton(.full_rect(y: &y, h: 30, view: self),
-                                 text: "パスワードを忘れましたか？", textSize: 14, textColor: .gray, to: self)
-        forgetBtn.addTarget(self, action: #selector(passwordReset), for: .touchUpInside)*/
         
         registerBtn = UIButton.coloredBtn(.colorBtn(centerX: w/2, y: y),
                                           text: "SNS認証", to: base, action: registerWithPassword)
@@ -135,6 +126,28 @@ class LogInView: UIScrollView {
         kojinjouhou.sizeToFit()
         kojinjouhou.addTarget(self, action: #selector(open_kojinjouhouhogo), for: .touchUpInside)
         centerMe([kiyaku, kojinjouhou])
+        
+    }
+    
+    func snsCodeRegisterView() {
+        for sub in base.subviews { sub.removeFromSuperview() }
+        var y = setHead("SNS登録", sub: "SMSに記載された6ケタを入力してください。")
+        
+        passcordF = TextFieldAndTtl(textF_rect(y: &y, plusY: 20), ttl: "コードを入力", to: base)
+        passcordF!.textField.keyboardType = .numberPad
+        
+        
+        let oneMoreBtn = UIButton(.colorBtn(centerX: w/2, y: y),
+                                  text: "もう一度、認証用SMSを送信する", font: .bold, textSize: 15, textColor: .themeColor, to: base)
+        oneMoreBtn.contentHorizontalAlignment = .right
+        oneMoreBtn.addAction {
+            self.registerWithPassword()
+        }
+        y = oneMoreBtn.maxY+20
+        
+        registerBtn = UIButton.coloredBtn(.colorBtn(centerX: w/2, y: y),
+                                          text: "認証をおこなう", to: base, action: verifySMSCode)
+        y = registerBtn.maxY+20
         
     }
     
@@ -205,20 +218,7 @@ class LogInView: UIScrollView {
             x = v.maxX
         }
     }
-    /*@objc func passwordReset() {
-        endEditing(true)
-        if emailInputF.text.isEmpty {
-            showAlert(title: "電話番号を入力してください")
-            return
-        }
-        Auth.auth().sendPasswordReset(withEmail: emailInputF.text) { e in
-            if let e = e {
-                self.showAlert(title: "メール送信に失敗しました", message: e.localizedDescription)
-            } else {
-                self.showAlert(title: "パスワードリセットのメールを送信しました")
-            }
-        }
-    }*/
+    
     @objc func open_kiyaku() {
         guard let url = URL(string: "todo kiyaku")
         else {
@@ -314,6 +314,7 @@ class LogInView: UIScrollView {
             self.signIn(credential)
         }
     }
+    var verificationID = ""
     @objc func registerWithPassword() {
         
         var number = emailInputF.text
@@ -336,8 +337,14 @@ class LogInView: UIScrollView {
                   return
                 }
                 print("verificationID", verificationID)
+                self.verificationID = verificationID ?? ""
+                self.snsCodeRegisterView()
                 //self.registerUser(verificationID)
         }
+    }
+    func verifySMSCode() {
+        let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: passcordF?.text ?? "")
+        signIn(credential)
     }
     private func sha256(_ input: String) -> String {
         let inputData = Data(input.utf8)

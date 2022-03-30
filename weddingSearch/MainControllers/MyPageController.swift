@@ -59,7 +59,9 @@ class MyPageController: BasicViewController {
             btn.addAction {
                 switch row {
                 case .logout:
-                    SignIn.logout()
+                    self.showAlert(title: "ログアウトしますか？", btnTitle: "ログアウト", cancelBtnTitle: "キャンセル") {
+                        SignIn.logout()
+                    }
                 case .term:
                     break
                 case .privacy:
@@ -69,7 +71,7 @@ class MyPageController: BasicViewController {
                 case .evaluateApp:
                     break
                 case .inquiry:
-                    break
+                    self.openLineContact()
                 }
             }
             y = btn.maxY

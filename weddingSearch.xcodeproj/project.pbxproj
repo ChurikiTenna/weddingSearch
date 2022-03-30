@@ -58,7 +58,7 @@
 		21AF769527AFD1500009814D /* DateField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AF769427AFD1500009814D /* DateField.swift */; };
 		21AF769727AFD35E0009814D /* UICalender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AF769627AFD35E0009814D /* UICalender.swift */; };
 		21AF76FD27B5FA840009814D /* CheckBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AF76FC27B5FA840009814D /* CheckBtn.swift */; };
-		5A888E0472BFF1C34B090118 /* Pods_weddingSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB0DCA7379623B3E5B36DFFD /* Pods_weddingSearch.framework */; };
+		CFED19686C22DB824474DA34 /* Pods_weddingSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D32DB46A8BBD01B5E41CEF /* Pods_weddingSearch.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,9 +117,9 @@
 		21AF769427AFD1500009814D /* DateField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateField.swift; sourceTree = "<group>"; };
 		21AF769627AFD35E0009814D /* UICalender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICalender.swift; sourceTree = "<group>"; };
 		21AF76FC27B5FA840009814D /* CheckBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBtn.swift; sourceTree = "<group>"; };
-		7409D1AC52EA25BA4458C327 /* Pods-weddingSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weddingSearch.release.xcconfig"; path = "Target Support Files/Pods-weddingSearch/Pods-weddingSearch.release.xcconfig"; sourceTree = "<group>"; };
-		CBC7F247795843451A6B3697 /* Pods-weddingSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weddingSearch.debug.xcconfig"; path = "Target Support Files/Pods-weddingSearch/Pods-weddingSearch.debug.xcconfig"; sourceTree = "<group>"; };
-		DB0DCA7379623B3E5B36DFFD /* Pods_weddingSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_weddingSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7D32DB46A8BBD01B5E41CEF /* Pods_weddingSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_weddingSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D70A8DA9B8140A7513D04161 /* Pods-weddingSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weddingSearch.debug.xcconfig"; path = "Target Support Files/Pods-weddingSearch/Pods-weddingSearch.debug.xcconfig"; sourceTree = "<group>"; };
+		E66C529EF8976CE3D8C3D4DB /* Pods-weddingSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weddingSearch.release.xcconfig"; path = "Target Support Files/Pods-weddingSearch/Pods-weddingSearch.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A888E0472BFF1C34B090118 /* Pods_weddingSearch.framework in Frameworks */,
+				CFED19686C22DB824474DA34 /* Pods_weddingSearch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,8 +137,8 @@
 		167BA4985F03439B05181C92 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				CBC7F247795843451A6B3697 /* Pods-weddingSearch.debug.xcconfig */,
-				7409D1AC52EA25BA4458C327 /* Pods-weddingSearch.release.xcconfig */,
+				D70A8DA9B8140A7513D04161 /* Pods-weddingSearch.debug.xcconfig */,
+				E66C529EF8976CE3D8C3D4DB /* Pods-weddingSearch.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -192,7 +192,7 @@
 				213D595A27AA29C500022EDD /* weddingSearch */,
 				213D595927AA29C500022EDD /* Products */,
 				167BA4985F03439B05181C92 /* Pods */,
-				286A134486F24A204D4BF425 /* Frameworks */,
+				730631DC4F9F774B979CEF0E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -270,10 +270,10 @@
 			path = MainControllers;
 			sourceTree = "<group>";
 		};
-		286A134486F24A204D4BF425 /* Frameworks */ = {
+		730631DC4F9F774B979CEF0E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DB0DCA7379623B3E5B36DFFD /* Pods_weddingSearch.framework */,
+				B7D32DB46A8BBD01B5E41CEF /* Pods_weddingSearch.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -285,11 +285,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 213D596C27AA29C700022EDD /* Build configuration list for PBXNativeTarget "weddingSearch" */;
 			buildPhases = (
-				A55C854355A7DF07A97E9C04 /* [CP] Check Pods Manifest.lock */,
+				B81352D4A7E9D2C7F62125E3 /* [CP] Check Pods Manifest.lock */,
 				213D595427AA29C500022EDD /* Sources */,
 				213D595527AA29C500022EDD /* Frameworks */,
 				213D595627AA29C500022EDD /* Resources */,
-				09F207733ABB75FB25DCC848 /* [CP] Embed Pods Frameworks */,
+				A116BF976067FEAA5E5EC76C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -350,7 +350,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		09F207733ABB75FB25DCC848 /* [CP] Embed Pods Frameworks */ = {
+		A116BF976067FEAA5E5EC76C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -367,7 +367,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-weddingSearch/Pods-weddingSearch-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A55C854355A7DF07A97E9C04 /* [CP] Check Pods Manifest.lock */ = {
+		B81352D4A7E9D2C7F62125E3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -584,7 +584,7 @@
 		};
 		213D596D27AA29C700022EDD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CBC7F247795843451A6B3697 /* Pods-weddingSearch.debug.xcconfig */;
+			baseConfigurationReference = D70A8DA9B8140A7513D04161 /* Pods-weddingSearch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -617,7 +617,7 @@
 		};
 		213D596E27AA29C700022EDD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7409D1AC52EA25BA4458C327 /* Pods-weddingSearch.release.xcconfig */;
+			baseConfigurationReference = E66C529EF8976CE3D8C3D4DB /* Pods-weddingSearch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

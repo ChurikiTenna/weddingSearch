@@ -108,8 +108,9 @@ extension AppDelegate: MessagingDelegate {
         Messaging.messaging().isAutoInitEnabled = true
     }
     
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("Firebase registration token: \(fcmToken)")
+        guard let fcmToken = fcmToken else { return }
         saveToken(fcmToken)
     }
     func saveToken(_ token: String) {

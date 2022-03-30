@@ -290,17 +290,11 @@ extension UIButton {
         lineInquiry.setImage(UIImage(named: "lineInquiry"), for: .normal)
         lineInquiry.addAction {
             //todo https://www.linebiz.com/jp/service/line-official-account/
-            guard let url = URL(string: "https://line.me/R/ti/p/@266amezn")
-            else {
-                lineInquiry.parentViewController.showAlert(title: "URLを開けません")
-                return
-            }
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url)
-            }
+            lineInquiry.parentViewController.openLineContact()
         }
         return lineInquiry
     }
+    
     //dropdownボタン
     static func dropBtn(_ f: CGRect, text: String, to view: UIView,
                         action: (() -> Void)?) -> UIButton {
@@ -559,6 +553,16 @@ extension UIViewController {
     
     @objc func dismissSelf() {
         dismiss(animated: true, completion: nil)
+    }
+    func openLineContact() {
+        guard let url = URL(string: "https://line.me/R/ti/p/@266amezn")
+        else {
+            self.showAlert(title: "URLを開けません")
+            return
+        }
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        }
     }
     
     func presentFull(_ vc: UIViewController) {
