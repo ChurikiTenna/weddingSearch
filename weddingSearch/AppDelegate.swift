@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 import FirebaseMessaging
-
+//todo push 通知
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
