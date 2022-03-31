@@ -95,3 +95,16 @@ enum RequestState: String {
     case reserveDecided //　管理者が予約時間を決めた
    // case reserveChecked //　ユーザーが予約を確定した
 }
+
+enum UserNotificationType: String {
+    case estimateDone
+    case inspectionReserveDone
+}
+struct UserNotification: Codable {
+    var read = false
+    var message = ""
+    var userId: String! // アクションを起こした人
+    var date: Timestamp!
+    var docID: String!//通知をタップで表示するRef
+    var type: String!
+}

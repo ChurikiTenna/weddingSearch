@@ -59,7 +59,10 @@ class ReserveRequestTableView_admin: UITableView, UITableViewDelegate, UITableVi
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("didSelectRowAt")
-        let vc = ReserveCheckController_admin(request: requests[indexPath.row], onDone: {
+        let request = requests[indexPath.row]
+        let vc = ReserveCheckController_admin(request: request, onDone: {
+            Ref.sendNotification(userId: request.objc.userId, docID: request.id, type: .inspectionReserveDone,
+                                 message: "\(request.objc.venueInfo?.name ?? "")の見学予約日程が確定しました。", onSuccess: {})
             self.requests.remove(at: indexPath.row)
             self.reloadData()
         })

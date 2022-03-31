@@ -173,6 +173,16 @@ class Ref {
         }
     }
     
+    static func sendNotification(userId: String,
+                                 docID: String,
+                                 type: UserNotificationType,
+                                 message: String,
+                                 onSuccess: @escaping () -> Void) {
+        let notidication = UserNotification(message: message, userId: SignIn.uid!, date: now, docID: docID, type: type.rawValue)
+        Ref.users.document(userId).collection("notifications").addDocument(from: notidication) { (e) in
+            onSuccess()
+        }
+    }
 }
 class Decoder {
     

@@ -60,7 +60,10 @@ class RequestTableView_admin: UITableView, UITableViewDelegate, UITableViewDataS
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("didSelectRowAt")
-        let vc = EstimateDetailController_admin(request: requests[indexPath.row], onDone: {
+        let request = requests[indexPath.row]
+        let vc = EstimateDetailController_admin(request: request, onDone: {
+            Ref.sendNotification(userId: request.objc.userId, docID: request.id, type: .estimateDone,
+                                 message: "\(request.objc.venueInfo?.name ?? "")のお見積もりが完了しました。", onSuccess: {})
             self.requests.remove(at: indexPath.row)
             self.reloadData()
         })
