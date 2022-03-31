@@ -179,8 +179,20 @@ class Ref {
                                  message: String,
                                  onSuccess: @escaping () -> Void) {
         let notidication = UserNotification(message: message, userId: SignIn.uid!, date: now, docID: docID, type: type.rawValue)
-        Ref.users.document(userId).collection("notifications").addDocument(from: notidication) { (e) in
+        _=try! Ref.users.document(userId).collection("notifications").addDocument(from: notidication) { (e) in
             onSuccess()
+        }
+    }
+    static func getUnreadNotifications(onDone: @escaping ([(objc: UserNotification, id: String)]) -> Void) {
+        guard let userId = SignIn.uid else { return }
+        Ref.users.document(userId).collection("notifications").whereField("read", isEqualTo: false).getDocuments(UserNotification.self) { snap, notifications in
+            onDone(notifications)
+        }
+    }
+    static func readNotifications(_ notifications: [(objc: UserNotification, id: String)]) {
+        guard let userId = SignIn.uid else { return }
+        for notification in notifications {
+            Ref.users.document(userId).collection("notifications").document(notification.id).setData(["read": true])
         }
     }
 }

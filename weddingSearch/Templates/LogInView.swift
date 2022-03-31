@@ -133,7 +133,7 @@ class LogInView: UIScrollView {
         for sub in base.subviews { sub.removeFromSuperview() }
         var y = setHead("SNS登録", sub: "SMSに記載された6ケタを入力してください。")
         
-        passcordF = TextFieldAndTtl(textF_rect(y: &y, plusY: 20), ttl: "コードを入力", to: base)
+        passcordF = TextFieldAndTtl(textF_rect(y: &y, plusY: 20), ttl: "コード", to: base)
         passcordF!.textField.keyboardType = .numberPad
         
         

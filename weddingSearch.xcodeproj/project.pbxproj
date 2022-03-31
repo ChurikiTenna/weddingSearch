@@ -590,7 +590,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = weddingSearch/weddingSearch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = JP9XJC6239;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = weddingSearch/Info.plist;
@@ -624,7 +624,7 @@
 				CODE_SIGN_ENTITLEMENTS = weddingSearch/weddingSearchRelease.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 59AK3HJ65G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = weddingSearch/Info.plist;

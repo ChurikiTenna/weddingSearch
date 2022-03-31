@@ -27,6 +27,10 @@ class ViewController: UITabBarController {
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = appearance
         
+        Ref.getUnreadNotifications(onDone: { notifications in
+            UIApplication.shared.applicationIconBadgeNumber = 0
+            Ref.readNotifications(notifications)
+        })
     }
     func setUI() {
         vcs = []

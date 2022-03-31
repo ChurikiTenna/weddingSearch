@@ -32,21 +32,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UNUserNotificationCenter.current().delegate = self
 
-          let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-          UNUserNotificationCenter.current().requestAuthorization(
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(
             options: authOptions,
             completionHandler: { _, _ in }
-          )
+        )
         application.registerForRemoteNotifications()
         
         Messaging.messaging().delegate = self
         
         Messaging.messaging().token { token, error in
           if let error = error {
-            print("Error fetching FCM registration token: \(error)")
+              print("Error fetching FCM registration token: \(error)")
           } else if let token = token {
-            print("FCM registration token: \(token)")
-            //self.fcmRegTokenMessage.text  = "Remote FCM registration token: \(token)"
+              print("FCM registration token: \(token)")
+              self.saveToken(token)
           }
         }
         
@@ -114,11 +114,10 @@ extension AppDelegate: MessagingDelegate {
         saveToken(fcmToken)
     }
     func saveToken(_ token: String) {
-        guard let uid = SignIn.uid, let email = SignIn.email else {
+        guard let uid = SignIn.uid else {
             return
         }
-        // ついでにメールアドレスも保存
-        Ref.users.document(uid).setData(["token": token, "email": email], merge: true)
+        Ref.users.document(uid).setData(["token": token], merge: true)
     }
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
            // Print message ID.
