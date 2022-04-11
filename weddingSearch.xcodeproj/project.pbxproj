@@ -13,6 +13,7 @@
 		21094A7D27F29830005497D8 /* RequestTableView_admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21094A7C27F2982F005497D8 /* RequestTableView_admin.swift */; };
 		21094A7F27F298AD005497D8 /* ReserveRequestTableView_admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21094A7E27F298AD005497D8 /* ReserveRequestTableView_admin.swift */; };
 		21094A8127F2A083005497D8 /* InspectionCanceledController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21094A8027F2A083005497D8 /* InspectionCanceledController.swift */; };
+		2128BB102803FB2000149796 /* venues.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2128BB0F2803FB2000149796 /* venues.csv */; };
 		212EF87E27E98DFB00F5C89D /* AdminMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EF87D27E98DFB00F5C89D /* AdminMenuController.swift */; };
 		212EF88027E9932000F5C89D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 212EF87F27E9932000F5C89D /* GoogleService-Info.plist */; };
 		212EF88327E9B17400F5C89D /* EstimateResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EF88227E9B17400F5C89D /* EstimateResultController.swift */; };
@@ -54,7 +55,6 @@
 		21AD6C7227D9FDDF008A0083 /* SelectGrromClothing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AD6C7127D9FDDF008A0083 /* SelectGrromClothing.swift */; };
 		21AD6C7427D9FE81008A0083 /* SelectParentClothing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AD6C7327D9FE81008A0083 /* SelectParentClothing.swift */; };
 		21AD6C7627D9FF0C008A0083 /* EnterOtherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AD6C7527D9FF0C008A0083 /* EnterOtherInfo.swift */; };
-		21AD6C8127DEC32C008A0083 /* venues.csv in Resources */ = {isa = PBXBuildFile; fileRef = 21AD6C8027DEC32C008A0083 /* venues.csv */; };
 		21AF769527AFD1500009814D /* DateField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AF769427AFD1500009814D /* DateField.swift */; };
 		21AF769727AFD35E0009814D /* UICalender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AF769627AFD35E0009814D /* UICalender.swift */; };
 		21AF76FD27B5FA840009814D /* CheckBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AF76FC27B5FA840009814D /* CheckBtn.swift */; };
@@ -69,6 +69,7 @@
 		21094A7E27F298AD005497D8 /* ReserveRequestTableView_admin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveRequestTableView_admin.swift; sourceTree = "<group>"; };
 		21094A8027F2A083005497D8 /* InspectionCanceledController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionCanceledController.swift; sourceTree = "<group>"; };
 		21094A8227F2BD40005497D8 /* weddingSearchRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = weddingSearchRelease.entitlements; sourceTree = "<group>"; };
+		2128BB0F2803FB2000149796 /* venues.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = venues.csv; sourceTree = "<group>"; };
 		212EF87D27E98DFB00F5C89D /* AdminMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMenuController.swift; sourceTree = "<group>"; };
 		212EF87F27E9932000F5C89D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		212EF88227E9B17400F5C89D /* EstimateResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateResultController.swift; sourceTree = "<group>"; };
@@ -113,7 +114,6 @@
 		21AD6C7127D9FDDF008A0083 /* SelectGrromClothing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGrromClothing.swift; sourceTree = "<group>"; };
 		21AD6C7327D9FE81008A0083 /* SelectParentClothing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectParentClothing.swift; sourceTree = "<group>"; };
 		21AD6C7527D9FF0C008A0083 /* EnterOtherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterOtherInfo.swift; sourceTree = "<group>"; };
-		21AD6C8027DEC32C008A0083 /* venues.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = venues.csv; sourceTree = "<group>"; };
 		21AF769427AFD1500009814D /* DateField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateField.swift; sourceTree = "<group>"; };
 		21AF769627AFD35E0009814D /* UICalender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICalender.swift; sourceTree = "<group>"; };
 		21AF76FC27B5FA840009814D /* CheckBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBtn.swift; sourceTree = "<group>"; };
@@ -209,7 +209,7 @@
 			children = (
 				21094A8227F2BD40005497D8 /* weddingSearchRelease.entitlements */,
 				213D59EE27AF482D00022EDD /* weddingSearch.entitlements */,
-				21AD6C8027DEC32C008A0083 /* venues.csv */,
+				2128BB0F2803FB2000149796 /* venues.csv */,
 				213D595B27AA29C500022EDD /* AppDelegate.swift */,
 				213D595D27AA29C500022EDD /* SceneDelegate.swift */,
 				213D595F27AA29C500022EDD /* ViewController.swift */,
@@ -340,8 +340,8 @@
 			files = (
 				213D596827AA29C700022EDD /* LaunchScreen.storyboard in Resources */,
 				213D596527AA29C700022EDD /* Assets.xcassets in Resources */,
+				2128BB102803FB2000149796 /* venues.csv in Resources */,
 				212EF88027E9932000F5C89D /* GoogleService-Info.plist in Resources */,
-				21AD6C8127DEC32C008A0083 /* venues.csv in Resources */,
 				213D596327AA29C500022EDD /* Main.storyboard in Resources */,
 				21094A7227EBF94E005497D8 /* GoogleService-Info-test.plist in Resources */,
 			);
