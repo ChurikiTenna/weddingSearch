@@ -41,18 +41,26 @@ class RequestEstimateController: BasicViewController {
             self.showNewQuestion(0)
         })
     }
+    func resetQViews() {
+        while self.questionViews.count > 0 {
+            self.questionViews[0].removeFromSuperview()
+            self.questionViews.remove(at: 0)
+        }
+    }
     func showNewQuestion(_ idx: Int) {
+        if idx < 0 {
+            resetQViews()
+            return
+        }
         print("showNewQuestion", idx, currentType.rawValue)
         guard let type = QuestionType(rawValue: idx) else {
             view.endEditing(true)
             _ = DetailEnterDoneView(to: view, onDone: {
                 print("remove allquestionViews")
                 DispatchQueue.main.async {
-                    while self.questionViews.count > 0 {
-                        self.questionViews[0].removeFromSuperview()
-                        self.questionViews.remove(at: 0)
-                    }
+                    self.resetQViews()
                 }
+                
             })
             for venueInfo in self.getV(SelectVenueView.self)?.venueInfos ?? [] {
                 if venueInfo.name.isEmpty { continue }

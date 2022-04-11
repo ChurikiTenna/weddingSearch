@@ -37,14 +37,17 @@ class SelectVenueView: QuestionView {
     var prefBtns = [UIButton]()
     var nameHBtns = [UIButton]()
     var nameBtns = [UIButton]()
-    
+    func prefecture(idx: Int) -> String {
+        var pref = self.venueInfos[idx].prefecture
+        if pref.isEmpty { pref = "no" }
+        pref.removeLast()
+        return pref
+    }
     
     let venueSearch = VenueSearch()
     func venues(_ idx: Int) -> [String] {
         print("self.venueInfos[idx].head", self.venueInfos[idx].head, self.venueInfos[idx].prefecture)
-        var pref = self.venueInfos[idx].prefecture
-        if pref.isEmpty { pref = "no" }
-        pref.removeLast()
+        var pref = prefecture(idx: idx)
         return venueSearch.venues
         .filter({ $0.head == self.venueInfos[idx].head })
         .filter({ $0.prefecture.contains(pref) }) // 「県」は入っていないけど「道」は入ってるので
@@ -69,8 +72,21 @@ class SelectVenueView: QuestionView {
         })
         nameHBtns.append(selectionField(y: &y, btnTitle: .selectVenueHeadC, options: nil))
         nameHBtns[idx].addAction(action: {
+            var kanas = Katakana().kanas
+            let pref = self.prefecture(idx: idx)
+            let venues = self.venueSearch.venues.filter({ $0.prefecture.contains(pref) })
+            
+            for i in 0..<kanas.count {
+                for kana in kanas[i] {
+                    if !venues.contains(where: { $0.head == kana }) {
+                        guard let idx = kanas[i].firstIndex(of: kana) else { continue }
+                        kanas[i].remove(at: idx)
+                    }
+                }
+            }
             let vc = GridOptionController(ttl: "頭文字を選択",
                                           options: Katakana().kanas,
+                                          valid: kanas,
                                           selectedBef: self.venueInfos[idx].head,
                                           selected: { str in
                 self.venueInfos[idx].head = str

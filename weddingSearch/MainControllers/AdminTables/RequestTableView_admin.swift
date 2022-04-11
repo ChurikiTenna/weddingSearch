@@ -36,9 +36,12 @@ class RequestTableView_admin: UITableView, UITableViewDelegate, UITableViewDataS
         refreshControl?.endRefreshing()
         Ref.requests
             .whereField("done", isEqualTo: RequestState.requested.rawValue)
+            .order(by: "requestedAt", descending: true)
             .getDocuments(RequestData.self) { snap, requests in
-            self.requests = requests
-            self.reloadData()
+                var requests = requests
+                RequestData.removeOld(from: &requests)
+                self.requests = requests
+                self.reloadData()
         }
     }
     
@@ -288,13 +291,13 @@ class EstimateRequestDetailView: UIScrollView {
         addTxt(to: attr, text: request.objc.movieData?.endroll)
         
         addHead(to: &attr, type: .brideClothing)
-        addSub(to: attr, text: "洋装（WD）１着目")
+        addSub(to: attr, text: "洋装（ウェディングドレス）１着目")
         addTxt(to: attr, text: request.objc.brideClothingData?.western_wd_1)
-        addSub(to: attr, text: "洋装（WD）２着目")
+        addSub(to: attr, text: "洋装（ウェディングドレス）２着目")
         addTxt(to: attr, text: request.objc.brideClothingData?.western_wd_2)
-        addSub(to: attr, text: "洋装（CD）１着目")
+        addSub(to: attr, text: "洋装（カラードレス）１着目")
         addTxt(to: attr, text: request.objc.brideClothingData?.western_cd_1)
-        addSub(to: attr, text: "洋装（CD）２着目")
+        addSub(to: attr, text: "洋装（カラードレス）２着目")
         addTxt(to: attr, text: request.objc.brideClothingData?.western_cd_2)
         addSub(to: attr, text: "和装（打掛、白無垢）")
         addTxt(to: attr, text: request.objc.brideClothingData?.japanese)
@@ -308,10 +311,15 @@ class EstimateRequestDetailView: UIScrollView {
         addTxt(to: attr, text: request.objc.groomClothingData?.japanese)
         
         addHead(to: &attr, type: .parentClothing)
-        addSub(to: attr, text: "モーニングコート（お父様用）")
-        addTxt(to: attr, text: request.objc.parentClothingData?.dad)
-        addSub(to: attr, text: "留袖（お母様用）")
-        addTxt(to: attr, text: request.objc.parentClothingData?.mom)
+        addSub(to: attr, text: "新婦お父様用")
+        addTxt(to: attr, text: request.objc.parentClothingData?.dad_bride)
+        addSub(to: attr, text: "新婦お母様用")
+        addTxt(to: attr, text: request.objc.parentClothingData?.mom_bride)
+        addHead(to: &attr, type: .parentClothing)
+        addSub(to: attr, text: "新郎お父様用")
+        addTxt(to: attr, text: request.objc.parentClothingData?.dad_groom)
+        addSub(to: attr, text: "新郎お母様用")
+        addTxt(to: attr, text: request.objc.parentClothingData?.mom_groom)
         
         addHead(to: &attr, type: .otherInfo)
         addTxt(to: attr, text: "\n" + (request.objc.other ?? ""))

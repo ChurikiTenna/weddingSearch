@@ -9,7 +9,7 @@ import UIKit
 extension Int {
     func comma() -> String {
         let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
+        formatter.numberStyle = .decimal
         if let formattedTipAmount = formatter.string(from: self as NSNumber) {
             return formattedTipAmount
         }
@@ -33,7 +33,7 @@ class SelectFoodPriceView: QuestionView {
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page21")
         
-        let budgets = [15000,17000,20000,22500,25000,27500,30000]
+        let budgets = [15000,17500,20000,22500,25000,27500,30000]
         _ = selectionField(y: &y, btnTitle: .selectPrice, options: budgets.map({ "\($0.comma())円/人"}), onSelect: { str in
             self.foodPrice = str
         })

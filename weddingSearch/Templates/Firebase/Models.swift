@@ -86,6 +86,18 @@ struct RequestData: Codable {
         self.parentClothingData = parentClothingData
         self.other = other
     }
+    static func removeOld(from array: inout [(objc: RequestData, id: String)]) {
+        var idx = 0
+        while array.count > idx {
+            print("array[\(idx)].objc.requestedAt.dateValue()", array[idx].objc.requestedAt.dateValue())
+            if array[idx].objc.requestedAt.dateValue() < Date().addingTimeInterval(-60*60*24*30) {
+                Ref.requests.document(array[idx].id).delete()
+                array.remove(at: idx)
+            } else {
+                idx += 1
+            }
+        }
+    }
 }
 enum RequestState: String {
     case requested

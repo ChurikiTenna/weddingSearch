@@ -129,16 +129,16 @@ class QuestionView: UIScrollView {
         case selectVenueName = "式場名を選択"
         case selectSeason = "時期を選択"
     }
-    func selectionField(y: inout CGFloat, title: String, btnTitle: BtnTitleType = .selectAnswer,
+    func selectionField(y: inout CGFloat, margin: CGFloat = 0, title: String, btnTitle: BtnTitleType = .selectAnswer,
                         options: [String]?, onSelect: ((String) -> Void)? = nil) -> UIButton {
         let lbl = UILabel.grayTtl(.colorBtn(centerX: w/2, y: y), ttl: title, to: self)
-        y = lbl.maxY
+        y = lbl.maxY+margin
         return selectionField(y: &y, btnTitle: btnTitle, options: options, onSelect: onSelect)
     }
-    func selectionField(y: inout CGFloat, btnTitle: BtnTitleType = .selectAnswer,
+    func selectionField(y: inout CGFloat, margin: CGFloat = 0, btnTitle: BtnTitleType = .selectAnswer,
                         options: [String]?, onSelect: ((String) -> Void)? = nil) -> UIButton {
         let field = UIButton.dropBtn(.colorBtn(centerX: w/2, y: y), text: btnTitle.rawValue, to: self, action: nil)
-        y = field.maxY+10
+        y = field.maxY+10+(margin*2)
         if let options = options {
             field.addAction(action: {
                 let vc = OptionViewController(ttl: btnTitle.rawValue, options: options, selectedIdx: nil, selected: { str in

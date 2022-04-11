@@ -35,9 +35,12 @@ class ReserveRequestTableView_admin: UITableView, UITableViewDelegate, UITableVi
         refreshControl?.endRefreshing()
         Ref.requests
             .whereField("done", isEqualTo: RequestState.reserveRequested.rawValue)
+            .order(by: "requestedAt", descending: true)
             .getDocuments(RequestData.self) { snap, requests in
-            self.requests = requests
-            self.reloadData()
+                var requests = requests
+                RequestData.removeOld(from: &requests)
+                self.requests = requests
+                self.reloadData()
         }
     }
     

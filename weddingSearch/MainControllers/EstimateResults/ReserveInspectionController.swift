@@ -51,7 +51,7 @@ class ReserveInspectionController: BasicViewController {
             dateTimeF(y: &y)
         }
         
-        let lbl3 = nessesaryLbl(true, y: y)
+        let lbl3 = nessesaryLbl(false, y: y)
         let lbl4 = UILabel(CGRect(x: 90, y: lbl3.minY, w: view.w-120, h: 30), text: "伝えておきたいこと", font: .bold, textSize: 18, to: scroll)
         
         textView = TextView(CGRect(x: 30, y: lbl4.maxY+20, w: view.w-60, h: 120),

@@ -36,10 +36,7 @@ class BasicViewController: UIViewController {
         for i in 0..<kindlbls.count {
             let btn = UIButton_round(CGRect(x: x, y: kindLbl.center.y-20, w: 40, h: 40), to: view)
             btn.addAction {
-                self.kindLbl.text = kindlbls[i]
-                for idx in 0..<self.pankuzuBtns.count {
-                    self.pankuzuBtns[idx].selected(i==idx)
-                }
+                self.select_pankuzuBtns(i)
                 selected(i)
             }
             pankuzuBtns.append(btn)
@@ -47,6 +44,12 @@ class BasicViewController: UIViewController {
         }
         for idx in 0..<self.pankuzuBtns.count {
             self.pankuzuBtns[idx].selected(0==idx)
+        }
+    }
+    func select_pankuzuBtns(_ i: Int) {
+        self.kindLbl.text = kindlbls[i]
+        for idx in 0..<self.pankuzuBtns.count {
+            self.pankuzuBtns[idx].selected(i==idx)
         }
     }
     func setKindLbl(_ text: String) {

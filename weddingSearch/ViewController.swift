@@ -106,21 +106,22 @@ class FirstController: BasicViewController {
         
         base = UIView(s, to: view)
         base.isUserInteractionEnabled = false
-        let titleY = base.h-200
-        imgV = UIImageView(CGRect(x: view.w/2-160, y: (titleY-320)/2, w: 320, h: 320), name: "", to: base)
+        let titleY = base.h-240
+        imgV = UIImageView(CGRect(x: view.w/2-180, y: (titleY-320)/2, w: 360, h: 320), name: "", to: base)
+        
+        titleL = UILabel(CGRect(x: 40, y: titleY, w: view.w-80, h: 60),
+                         font: .bold, textSize: 22, lines: -1, align: .center, to: base)
+        subL = UILabel(CGRect(x: 20, y: titleL.maxY+10, w: view.w-40, h: 80),
+                       textSize: 18, lines: -1, align: .center, to: base)
         
         let count = CGFloat(pages.count)
         var x = (view.w-count*6-(count-1)*20)/2
         for _ in 0..<pages.count {
-            let round = UIView(CGRect(x: x, y: titleY-20+base.minY, w: 6, h: 6), color: .superPaleGray, to: view)
+            let round = UIView(CGRect(x: x, y: subL.maxY+20, w: 6, h: 6), color: .superPaleGray, to: view)
             round.round()
             self.idxIcons.append(round)
             x = round.maxX+20
         }
-        titleL = UILabel(CGRect(x: 40, y: titleY, w: view.w-80, h: 60),
-                         font: .bold, textSize: 20, lines: -1, align: .center, to: base)
-        subL = UILabel(CGRect(x: 40, y: titleL.maxY+10, w: view.w-80),
-                       textSize: 16, lines: -1, align: .center, to: base)
         
         view.addSwipe(self, action: #selector(swiped))
         NotificationCenter.addObserver(self, action: #selector(didLogIn), name: .logInStatusUpdated)

@@ -278,7 +278,7 @@ extension UIButton {
     //背景colorボタン
     static func coloredBtn(_ f: CGRect, text: String, color: UIColor = .themeColor, to view: UIView,
                            action: @escaping () -> Void) -> UIButton {
-        let btn = UIButton(f, text: text, font: .bold, textSize: 17, textColor: .white, color: color, to: view)
+        let btn = UIButton(f, text: text, font: .bold, textSize: 19, textColor: .white, color: color, to: view)
         btn.round(0.5)
         btn.addAction {
             action()
@@ -555,7 +555,7 @@ extension UIViewController {
         dismiss(animated: true, completion: nil)
     }
     func openLineContact() {
-        guard let url = URL(string: "https://line.me/R/ti/p/@266amezn")
+        guard let url = URL(string: "https://line.me/R/ti/p/@112orolv")
         else {
             self.showAlert(title: "URLを開けません")
             return

@@ -35,23 +35,20 @@ class SelectBrideClothing: QuestionView {
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page30")
         let options = ["はい（式場で選ぶ）","はい（持ち込む）","いいえ"]
-        _=selectionField(y: &y, title: "洋装(WD)※1着目", options: options, onSelect: { str in
+        _=selectionField(y: &y, title: "洋装(ウェディングドレス)※1着目", options: options, onSelect: { str in
             self.clothingData.western_wd_1 = str
         })
-        _=selectionField(y: &y, title: "洋装(WD)※2着目", options: options, onSelect: { str in
+        _=selectionField(y: &y, title: "洋装(ウェディングドレス)※2着目", options: options, onSelect: { str in
             self.clothingData.western_wd_2 = str
         })
-        _=selectionField(y: &y, title: "洋装(CD)※2着目", options: options, onSelect: { str in
+        _=selectionField(y: &y, title: "洋装(カラードレス)※2着目", options: options, onSelect: { str in
             self.clothingData.western_cd_1 = str
         })
-        _=selectionField(y: &y, title: "洋装(CD)※2着目", options: options, onSelect: { str in
+        _=selectionField(y: &y, title: "洋装(カラードレス)※2着目", options: options, onSelect: { str in
             self.clothingData.western_cd_2 = str
         })
         _=selectionField(y: &y, title: "和装(打掛、白無垢)", options: options, onSelect: { str in
             self.clothingData.japanese = str
         })
-        let texts = ["・WDはウェディングドレス、CDはカラードレスを指します",
-                    "・2着目はお色直し用の衣装を指します"]
-        bottomTexts(y: &y, text: texts.joined(separator: "\n\n"))
     }
 }

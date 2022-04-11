@@ -9,7 +9,7 @@ import UIKit
 
 struct BasicInfoData: Codable {
     var pplToInvite = ""
-    var childToInvite = ""
+    var childToInvite = "000"
     var season = ""
     var budget = ""
 }
@@ -22,7 +22,6 @@ class SelectBasicInfo: QuestionView {
         didSet {
             checkDone(check: {
                 if basicInfoData.pplToInvite.isEmpty { return false }
-                if basicInfoData.childToInvite.isEmpty { return false }
                 if basicInfoData.season.isEmpty { return false }
                 if basicInfoData.budget.isEmpty { return false }
                 return true
@@ -36,19 +35,24 @@ class SelectBasicInfo: QuestionView {
     var budgetBtn: UIButton!
     
     override func setUI(y: inout CGFloat) {
+        print("SelectBasicInfoh", frame)
         // ppls
-        DispatchQueue.main.asyncAfter(deadline: .now()+1, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
             self.isScrollEnabled = false
             self.contentInset.top = s.minY
         })
+        let small = frame.height < 700
+        if small {
+            y -= 40
+        }
         let lbl = UILabel.grayTtl(.colorBtn(centerX: w/2, y: y), ttl: "パーティーの招待人数は？", to: self)
-        y = lbl.maxY
+        y = lbl.maxY + (small ? -10 : 0)
         pplBtn = Drum3View(.drumBtn(centerX: w/2, y: y), to: self, didBPMchanged: {
             self.basicInfoData.pplToInvite = "\(self.pplBtn.bgm)"
         })
         y = pplBtn.maxY
         let lbl2 = UILabel.grayTtl(.colorBtn(centerX: w/2, y: y), ttl: "うち、子供の数は？", to: self)
-        y = lbl2.maxY
+        y = lbl2.maxY + (small ? -10 : 0)
         childBtn = Drum3View(.drumBtn(centerX: w/2, y: y), to: self, didBPMchanged: {
             self.basicInfoData.childToInvite = "\(self.childBtn.bgm)"
         })
@@ -58,15 +62,18 @@ class SelectBasicInfo: QuestionView {
         for i in 1...12 {
             seasons.append("\(i)月")
         }
-        seasonBtn = selectionField(y: &y, title: "結婚式の時期は？", btnTitle: .selectSeason,
+        seasonBtn = selectionField(y: &y, margin: (small ? -10 : 0), title: "結婚式の時期は？", btnTitle: .selectSeason,
                                    options: ["3ヵ月以内","半年以内","半年～1年後","1年以上先","未定"]) { str in
             self.basicInfoData.season = str
         }
         // budget
-        let budgetRange = RangeHelper.shared.rangeFrom([150,200,250,300,350,400,450,500], min: 100)
+        let budgetRange = RangeHelper.shared.rangeFrom([100,150,200,250,300,350,400,450,500])
         let budgets = RangeHelper.shared.toText(from: budgetRange, unit: "万円") + ["未定"]
-        budgetBtn = selectionField(y: &y, title: "結婚式のご予算は？（式場に支払う総額）", btnTitle: .selectPrice, options: budgets) { str in
+        budgetBtn = selectionField(y: &y, margin: (small ? -10 : 0), title: "結婚式のご予算は？（式場に支払う総額）", btnTitle: .selectPrice, options: budgets) { str in
             self.basicInfoData.budget = str
+        }
+        if small {
+            y -= 20
         }
     }
 }
@@ -92,7 +99,9 @@ class RangeHelper {
         for range in ranges {
             let lower = "\(range.lowerBound)"
             let upper = "\(range.upperBound-1)"
-            if range.upperBound == Int(rangeMax) {
+            if range.lowerBound == 0 {
+                texts.append("\(upper)\(unit)未満")
+            } else if range.upperBound == Int(rangeMax) {
                 texts.append("\(lower)\(unit)以上")
             } else {
                 texts.append("\(lower)〜\(upper)\(unit)")

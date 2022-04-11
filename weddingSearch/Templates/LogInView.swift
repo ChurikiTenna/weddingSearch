@@ -41,14 +41,13 @@ class LogInView: UIScrollView {
         backgroundColor = .superPaleBackGray
         
         v.addSubview(self)
-        _=UIButton.closeBtn(to: self, x: 10, y: s.minY+10, theme: .clearBlack, type: .multiply, action: closeSelf)
         base = UIView(fitRect, color: .clear, to: self)
         
         let wd: CGFloat = 30
         let gap: CGFloat = 80
         var x = (w-wd*3-gap*2)/2
         var idx = 1
-        let steps = ["SNS認証", "プロフイール入力", "登録完了"]
+        let steps = ["SMS認証", "プロフイール入力", "登録完了"]
         for text in steps {
             
             let round = UILabel(CGRect(x: x, y: s.minY+70, w: wd, h: wd),
@@ -92,6 +91,8 @@ class LogInView: UIScrollView {
         
         _ = UILabel(.full_rect(y: &y, h: 50, view: base), text: sub, lines: -1, to: base)
         
+        _=UIButton.closeBtn(to: base, x: 10, y: s.minY+10, theme: .clearBlack, type: .multiply, action: closeSelf)
+        
         return y
     }
     
@@ -103,7 +104,7 @@ class LogInView: UIScrollView {
         emailInputF.textField.keyboardType = .phonePad
         
         registerBtn = UIButton.coloredBtn(.colorBtn(centerX: w/2, y: y),
-                                          text: "SNS認証", to: base, action: registerWithPassword)
+                                          text: "SMS認証", to: base, action: registerWithPassword)
         y = registerBtn.maxY+20
         
         otherLbl = UILabel(.full_rect(y: &y, h: 30, view: base),
@@ -131,7 +132,7 @@ class LogInView: UIScrollView {
     
     func snsCodeRegisterView() {
         for sub in base.subviews { sub.removeFromSuperview() }
-        var y = setHead("SNS登録", sub: "SMSに記載された6ケタを入力してください。")
+        var y = setHead("SMS登録", sub: "SMSに記載された6ケタを入力してください。")
         
         passcordF = TextFieldAndTtl(textF_rect(y: &y, plusY: 20), ttl: "コード", to: base)
         passcordF!.textField.keyboardType = .numberPad
@@ -338,12 +339,14 @@ class LogInView: UIScrollView {
                 }
                 print("verificationID", verificationID)
                 self.verificationID = verificationID ?? ""
-                self.snsCodeRegisterView()
                 //self.registerUser(verificationID)
         }
+        self.snsCodeRegisterView()
     }
     func verifySMSCode() {
-        let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: passcordF?.text ?? "")
+        if verificationID.isEmpty { return }
+        let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID,
+                                                                 verificationCode: passcordF?.text ?? "")
         signIn(credential)
     }
     private func sha256(_ input: String) -> String {

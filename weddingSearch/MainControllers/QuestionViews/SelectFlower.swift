@@ -30,7 +30,7 @@ class SelectFlower: QuestionView {
     override func setUI(y: inout CGFloat) {
         y = halfImage(imageName: "page24")
         let budgets = [100,125,150,175,200]
-        _ = selectionField(y: &y, title: "メインテーブル", btnTitle: .selectPrice,
+        _ = selectionField(y: &y, title: "メインテーブル（高砂席）", btnTitle: .selectPrice,
                            options: budgets.map({ "\(($0*1000).comma())円" }) + ["不要"], onSelect: { str in
             self.flowerData.mainTable = str
         })

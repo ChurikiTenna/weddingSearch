@@ -66,7 +66,10 @@ class MyPageController: BasicViewController {
                 case .questions:
                     break
                 case .evaluateApp:
-                    break
+                    guard let url = URL(string: "https://apps.apple.com/us/app/my-chape/id1615359139") else { return }
+                    if UIApplication.shared.canOpenURL(url) {
+                        UIApplication.shared.open(url)
+                    }
                 case .inquiry:
                     self.openLineContact()
                 }

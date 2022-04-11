@@ -190,14 +190,16 @@ class GridOptionController: BasicViewController {
     let selectedBef: String?
     let ttl: String
     let options: [[String]]
+    let valid: [[String]]?
     let selected: (String) -> Void
     var btns = [[UIButton]]()
     
-    init(ttl: String, options: [[String]], selectedBef: String?, selected: @escaping (String) -> Void) {
+    init(ttl: String, options: [[String]], valid: [[String]]? = nil, selectedBef: String?, selected: @escaping (String) -> Void) {
         self.selected = selected
         self.selectedBef = selectedBef
         self.ttl = ttl
         self.options = options
+        self.valid = valid
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -233,6 +235,10 @@ class GridOptionController: BasicViewController {
                 })
                 if selectedBef == btn.title(for: .normal) {
                     btn.backgroundColor = .themePale
+                }
+                if let valid = valid, !valid[idx1].contains(options[idx1][idx2]) {
+                    btn.alpha = 0.3
+                    btn.isUserInteractionEnabled = false
                 }
                 x = btn.maxX+10
             }
