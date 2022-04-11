@@ -27,7 +27,7 @@ class RequestEstimateController: BasicViewController {
         
         header("見積もり依頼", withClose: false)
         
-        let lbl = UILabel(CGRect(x: 40, y: head.maxY, w: view.w-80, h: 300), textSize: 20, lines: -1, to: view)
+        let lbl = UILabel(CGRect(x: 30, y: head.maxY, w: view.w-60, h: 300), textSize: 20, lines: -1, to: view)
         let attr = NSMutableAttributedString(string: "気になる式場と希望条件を登録して\n見積もり費用を調べてみましょう\n（目安時間：",
                                              attributes: [.foregroundColor : UIColor.black])
         attr.append(NSAttributedString(string: "10分", attributes: [.foregroundColor : UIColor.themeColor]))
