@@ -22,6 +22,7 @@ struct User: Codable {
 struct RequestData: Codable {
     
     let userId: String
+    let userName: String?
     let requestedAt: Timestamp
     var done = RequestState.requested.rawValue
     var estimatePDFPath: String?
@@ -51,6 +52,7 @@ struct RequestData: Codable {
     }
     
     init(userId: String,
+         userName: String,
          venueInfo: VenueInfo?,
          basicInfo: BasicInfoData?,
          foodPrice: String?,
@@ -68,6 +70,7 @@ struct RequestData: Codable {
          other: String?) {
         
         self.userId = userId
+        self.userName = userName
         requestedAt = Ref.now
         
         self.venueInfo = venueInfo

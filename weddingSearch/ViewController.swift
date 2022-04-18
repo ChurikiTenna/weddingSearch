@@ -106,18 +106,18 @@ class FirstController: BasicViewController {
         
         base = UIView(s, to: view)
         base.isUserInteractionEnabled = false
-        let titleY = base.h-240
-        imgV = UIImageView(CGRect(x: view.w/2-180, y: (titleY-320)/2, w: 360, h: 320), name: "", to: base)
+        let titleY = base.h-300
+        imgV = UIImageView(CGRect(x: 10, y: titleY/2-180, w: view.w-20, h: 380), name: "", to: base)
         
         titleL = UILabel(CGRect(x: 40, y: titleY, w: view.w-80, h: 60),
                          font: .bold, textSize: 22, lines: -1, align: .center, to: base)
-        subL = UILabel(CGRect(x: 20, y: titleL.maxY+10, w: view.w-40, h: 80),
+        subL = UILabel(CGRect(x: 20, y: titleL.maxY+10, w: view.w-40, h: 150),
                        textSize: 18, lines: -1, align: .center, to: base)
         
         let count = CGFloat(pages.count)
         var x = (view.w-count*6-(count-1)*20)/2
         for _ in 0..<pages.count {
-            let round = UIView(CGRect(x: x, y: subL.maxY+20, w: 6, h: 6), color: .superPaleGray, to: view)
+            let round = UIView(CGRect(x: x, y: subL.maxY, w: 6, h: 6), color: .superPaleGray, to: view)
             round.round()
             self.idxIcons.append(round)
             x = round.maxX+20

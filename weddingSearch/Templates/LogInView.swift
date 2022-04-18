@@ -221,24 +221,10 @@ class LogInView: UIScrollView {
     }
     
     @objc func open_kiyaku() {
-        guard let url = URL(string: "todo kiyaku")
-        else {
-            showAlert(title: "URLを開けません")
-            return
-        }
-        if UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url)
-        }
+        parentViewController.open_kiyaku()
     }
     @objc func open_kojinjouhouhogo() {
-        guard let url = URL(string: "todo privacy")
-        else {
-            showAlert(title: "URLを開けません")
-            return
-        }
-        if UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url)
-        }
+        parentViewController.open_kojinjouhouhogo()
     }
     // Unhashed nonce.
     private(set) var currentNonce: String?

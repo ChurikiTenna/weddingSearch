@@ -551,6 +551,26 @@ extension UIImageView {
 
 extension UIViewController {
     
+    @objc func open_kiyaku() {
+        guard let url = URL(string: "https://churikitenna.github.io/MyChapeWeb/termOfUse.html")
+        else {
+            showAlert(title: "URLを開けません")
+            return
+        }
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        }
+    }
+    @objc func open_kojinjouhouhogo() {
+        guard let url = URL(string: "https://churikitenna.github.io/MyChapeWeb/privacyPolicy.html")
+        else {
+            showAlert(title: "URLを開けません")
+            return
+        }
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        }
+    }
     @objc func dismissSelf() {
         dismiss(animated: true, completion: nil)
     }

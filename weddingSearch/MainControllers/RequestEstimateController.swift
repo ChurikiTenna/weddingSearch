@@ -62,33 +62,37 @@ class RequestEstimateController: BasicViewController {
                 }
                 
             })
-            for venueInfo in self.getV(SelectVenueView.self)?.venueInfos ?? [] {
-                if venueInfo.name.isEmpty { continue }
-                let data = RequestData(userId: SignIn.uid!,
-                                       venueInfo: venueInfo,
-                                       basicInfo: self.getV(SelectBasicInfo.self)?.basicInfoData,
-                                       foodPrice: self.getV(SelectFoodPriceView.self)?.foodPrice,
-                                       drinkData: self.getV(SelectDrink.self)?.drinkData,
-                                       kyoshiki: self.getV(SelectKyoshiki.self)?.kyoshiki,
-                                       flowerData: self.getV(SelectFlower.self)?.flowerData,
-                                       otherFlowerData: self.getV(SelectOtherFlower.self)?.otherFlowerData,
-                                       itemData: self.getV(SelectItems.self)?.itemData,
-                                       hikidemonoData: self.getV(SelectHikidemono.self)?.hikidemonoData,
-                                       photoData: self.getV(SelectPhoto.self)?.photoData,
-                                       movieData: self.getV(SelectTypeOfVideo.self)?.movieData,
-                                       brideClothingData: self.getV(SelectBrideClothing.self)?.clothingData,
-                                       groomClothingData: self.getV(SelectGroomClothing.self)?.clothingData,
-                                       parentClothingData: self.getV(SelectParentClothing.self)?.clothingData,
-                                       other: self.getV(EnterOtherInfo.self)?.textV.text)
-                
-                Ref.sendRequest(data) { e in
-                    if let e = e {
-                        self.showAlert(title: "データの送信に失敗しました", message: e.localizedDescription)
-                    } else {
-                        NotificationCenter.default.post(name: .didPostRequest, object: nil)
+            Ref.user(uid: SignIn.uid!) { user in
+                for venueInfo in self.getV(SelectVenueView.self)?.venueInfos ?? [] {
+                    if venueInfo.name.isEmpty { continue }
+                    let data = RequestData(userId: SignIn.uid!,
+                                           userName: user.surnameKanji + " " + user.nameKanji,
+                                           venueInfo: venueInfo,
+                                           basicInfo: self.getV(SelectBasicInfo.self)?.basicInfoData,
+                                           foodPrice: self.getV(SelectFoodPriceView.self)?.foodPrice,
+                                           drinkData: self.getV(SelectDrink.self)?.drinkData,
+                                           kyoshiki: self.getV(SelectKyoshiki.self)?.kyoshiki,
+                                           flowerData: self.getV(SelectFlower.self)?.flowerData,
+                                           otherFlowerData: self.getV(SelectOtherFlower.self)?.otherFlowerData,
+                                           itemData: self.getV(SelectItems.self)?.itemData,
+                                           hikidemonoData: self.getV(SelectHikidemono.self)?.hikidemonoData,
+                                           photoData: self.getV(SelectPhoto.self)?.photoData,
+                                           movieData: self.getV(SelectTypeOfVideo.self)?.movieData,
+                                           brideClothingData: self.getV(SelectBrideClothing.self)?.clothingData,
+                                           groomClothingData: self.getV(SelectGroomClothing.self)?.clothingData,
+                                           parentClothingData: self.getV(SelectParentClothing.self)?.clothingData,
+                                           other: self.getV(EnterOtherInfo.self)?.textV.text)
+                    
+                    Ref.sendRequest(data) { e in
+                        if let e = e {
+                            self.showAlert(title: "データの送信に失敗しました", message: e.localizedDescription)
+                        } else {
+                            NotificationCenter.default.post(name: .didPostRequest, object: nil)
+                        }
                     }
                 }
             }
+            
             return
         }
         let lastType = currentType
@@ -126,13 +130,17 @@ class DetailEnterDoneView: UIView {
         lbl.attributedText = attr
         
         UNUserNotificationCenter.current().getNotificationSettings { settings in
-            if settings.authorizationStatus == .notDetermined {
+            if settings.authorizationStatus != .authorized {
                 DispatchQueue.main.async {
                     _ = UIButton.coloredBtn(.colorBtn(centerX: view.w/2, y: s.maxY-180), text: "プッシュ通知ON", to: self) {
-                        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-                        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { authorized, error in
-                            self.closeSelf()
-                            onDone()
+                        
+                        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                            return
+                        }
+                        if UIApplication.shared.canOpenURL(settingsUrl) {
+                            UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                                print("Settings opened: \(success)") // Prints true
+                            })
                         }
                     }
                     let attr = NSMutableAttributedString(string: "ご回答ありがとうございました。\n見積が届くまで、お待ちください。\n",
