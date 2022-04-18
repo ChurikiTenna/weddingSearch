@@ -65,14 +65,10 @@ class Ref {
     }
     
     // ユーザ取得
-    static func user(uid: String?, onSuccess: @escaping (User) -> Void) {
+    static func user(uid: String?, onSuccess: @escaping (User?) -> Void) {
         guard let uid = uid else { return }
         users.document(uid).getDocument(User.self) { user in
-            if let user = user {
-                onSuccess(user)
-            } else if uid == SignIn.uid {
-                SignIn.logout()
-            }
+            onSuccess(user)
         }
     }
     

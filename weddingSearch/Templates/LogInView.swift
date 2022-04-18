@@ -35,6 +35,7 @@ class LogInView: UIScrollView {
     var nameKanaF: TextFieldAndTtl!
     var birthDateF: BirthDateField!
     var genderF: TextFieldAndTtl!
+    var addressF: TextFieldAndTtl!
     
     init(to v: UIView) {
         super.init(frame: v.fitRect)
@@ -163,6 +164,7 @@ class LogInView: UIScrollView {
         birthDateF = BirthDateField.initMe(textF_rect(y: &y), user: User(), to: base)
         genderF = TextFieldAndTtl(textF_rect(y: &y), ttl: "性別", placeholder: "性別を選択", to: base)
         genderF.textField.addTap(self, action: #selector(selectGender))
+        addressF = TextFieldAndTtl(textF_rect(y: &y), ttl: "居住地", placeholder: "居住地を入力", text: "", to: base)
         _ = UIButton.coloredBtn(.colorBtn(centerX: base.w/2, y: y), text: "内容を確認して登録", to: base) {
             var errors = [String]()
             if self.surnameKanjiF.empty { errors.append("姓を入力してください") }
@@ -171,6 +173,7 @@ class LogInView: UIScrollView {
             if self.nameKanaF.empty { errors.append("メイを入力してください") }
             if self.birthDateF.empty { errors.append("生年月日を入力してください") }
             if self.genderF.empty { errors.append("性別を選択してください") }
+            if self.addressF.empty { errors.append("居住地を入力してください") }
             if errors.count > 0 {
                 self.showAlert(title: "未入力の項目があります", message: errors.joined(separator: "\n"))
             } else {
@@ -179,7 +182,8 @@ class LogInView: UIScrollView {
                                 nameKana: self.nameKanaF.text,
                                 surnameKana: self.surnameKanaF.text,
                                 birthDate: self.birthDateF.date!.toDate().timestamp(),
-                                gender: self.genderF.text)
+                                gender: self.genderF.text,
+                                address: self.addressF.text)
                 try! Ref.users.document(SignIn.uid!).setData(from: user, merge: true) {_ in
                     self.didSuccessLogin()
                 }

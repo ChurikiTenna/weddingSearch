@@ -11,8 +11,10 @@ class ReserveRequestTableView_admin: UITableView, UITableViewDelegate, UITableVi
     
     var requests = [(objc: RequestData, id: String)]()
     var notFoundLbl: UILabel!
+    let onScroll: (CGFloat) -> Void
     
-    init(_ f: CGRect, to view: UIView) {
+    init(_ f: CGRect, to view: UIView, onScroll: @escaping (CGFloat) -> Void) {
+        self.onScroll = onScroll
         super.init(frame: f, style: .plain)
         view.addSubview(self)
         dataSource = self
@@ -20,6 +22,8 @@ class ReserveRequestTableView_admin: UITableView, UITableViewDelegate, UITableVi
         separatorStyle = .none
         sectionHeaderTopPadding = 0
         contentInset.top = 10
+        alwaysBounceHorizontal = true
+        isDirectionalLockEnabled = true
         contentInset.bottom = 100
         register(EdtimateCell_admin.self)
         addRefreshControll(target: self, action: #selector(refresh))
@@ -70,6 +74,12 @@ class ReserveRequestTableView_admin: UITableView, UITableViewDelegate, UITableVi
             self.reloadData()
         })
         self.parentViewController.presentFull(vc)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if contentOffset.x != 0 {
+            onScroll(contentOffset.x)
+        }
     }
 }
 

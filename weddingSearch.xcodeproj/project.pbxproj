@@ -263,8 +263,8 @@
 			children = (
 				213D5A1227AF51CB00022EDD /* HomeController.swift */,
 				213D5A1427AF522D00022EDD /* RequestEstimateController.swift */,
-				212EF87D27E98DFB00F5C89D /* AdminMenuController.swift */,
 				213D5A1627AF526600022EDD /* MyPageController.swift */,
+				212EF87D27E98DFB00F5C89D /* AdminMenuController.swift */,
 				212F3022280D02D900128311 /* TextPageController.swift */,
 				21094A7B27F29805005497D8 /* AdminTables */,
 				212EF88127E9B14B00F5C89D /* EstimateResults */,

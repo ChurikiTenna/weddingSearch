@@ -32,12 +32,15 @@ class TextPageController: BasicViewController {
             y += 10
             let ttlLbl = UILabel(CGRect(x: 30, y: y, w: view.w-60, h: 30),
                                  text: content.ttl, font: .bold, textSize: 18, lines: -1, to: scroll)
+            ttlLbl.fitHeight()
+            y = ttlLbl.maxY
             for content in content.content {
-                let contentLbl = UILabel(CGRect(x: 30, y: ttlLbl.maxY, w: view.w-60, h: 0),
+                let contentLbl = UILabel(CGRect(x: 30, y: y, w: view.w-60, h: 0),
                                          text: content, textSize: 16, textColor: .gray, lines: -1, to: scroll)
                 contentLbl.fitHeight()
                 y = contentLbl.maxY
             }
+            y += 10
             _ = UIView(CGRect(x: 20, y: y, w: view.w-40, h: 1), color: .superPaleGray, to: scroll)
         }
         scroll.contentSize.height = y+40

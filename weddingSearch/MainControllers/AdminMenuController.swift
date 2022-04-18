@@ -21,14 +21,45 @@ class AdminMenuController: BasicViewController {
         headBtns(kindlbls: ["お見積もり依頼一覧", "日程予約依頼"], selected: pageSelected)
         
         let rect = CGRect(x: 0, y: kindLbl.maxY+10, w: view.w, h: view.h-kindLbl.maxY)
-        pages.append(RequestTableView_admin(rect, to: view))
-        pages.append(ReserveRequestTableView_admin(rect, to: view))
+        pages.append(RequestTableView_admin(rect, to: view, onScroll: onScrollNew))
+        pages.append(ReserveRequestTableView_admin(rect, to: view, onScroll: onScrolDone))
         
         pageSelected(0)
     }
+    func onScrollNew(x: CGFloat) {
+        if x > 50 {
+            pages[0].isUserInteractionEnabled = false
+            pages[1].isHidden = false
+            pages[1].frame.origin.x = view.w
+            UIView.animate(withDuration: 0.2) {
+                self.pages[0].frame.origin.x = -self.view.w
+                self.pages[1].frame.origin.x = 0
+            } completion: { Bool in
+                self.pages[0].isUserInteractionEnabled = true
+                self.pages[0].isHidden = true
+            }
+        }
+        select_pankuzuBtns(1)
+    }
+    func onScrolDone(x: CGFloat) {
+        if x < -50 {
+            pages[1].isUserInteractionEnabled = false
+            pages[0].isHidden = false
+            pages[0].frame.origin.x = -view.w
+            UIView.animate(withDuration: 0.2) {
+                self.pages[0].frame.origin.x = 0
+                self.pages[1].frame.origin.x = self.view.w
+            } completion: { Bool in
+                self.pages[1].isUserInteractionEnabled = true
+                self.pages[1].isHidden = true
+            }
+        }
+        select_pankuzuBtns(0)
+    }
     func pageSelected(_ idx: Int) {
-        for i in 0..<self.pages.count {
-            self.pages[i].isHidden = idx != i
+        switch idx {
+        case 0: onScrolDone(x: -100)
+        default: onScrollNew(x: 100)
         }
     }
 }
