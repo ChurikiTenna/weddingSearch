@@ -82,7 +82,7 @@ class ViewController: UITabBarController {
 class FirstController: BasicViewController {
     
     var pages = [(image: "page2", title: "気になる式場の費用がわかる！",
-                  sub: "ユーザーが入力した条件に基づいて、\n概算費用をお返しします"),
+                  sub: "あなたが入力した条件に基づいて、\n概算費用をお返しします"),
                  (image: "page3", title: "最終見積もりの金額に近い！",
                   sub: "過去の各式場の価格データを用いているため、\n最終的な金額とブレが少ない参考価格です"),
                  (image: "page4", title: "時間を節約できる！",
@@ -167,6 +167,7 @@ class FirstController: BasicViewController {
         default: break
         }
     }
+    var tapGesture: UITapGestureRecognizer!
     func movePage(_ idx: Int) {
         self.pageIdx = idx
         imgV.image = UIImage(named: pages[idx].image)
@@ -178,7 +179,12 @@ class FirstController: BasicViewController {
         subL.fitHeight()
         
         startBtn?.removeFromSuperview()
+        if tapGesture != nil {
+            subL.removeGestureRecognizer(tapGesture!)
+        }
+        
         if idx == pages.count-1 {
+            
             startBtn = UIButton.coloredBtn(.colorBtn(centerX: view.w/2, y: s.maxY-60), text: "はじめる", to: view, action: {
                 _ = LogInView(to: self.view)
             })
@@ -187,6 +193,18 @@ class FirstController: BasicViewController {
             attr.append(NSAttributedString(string: "利用規約", attributes: [.foregroundColor : UIColor.link]))
             attr.append(NSAttributedString(string: "に同意して", attributes: [.foregroundColor : UIColor.black]))
             subL.attributedText = attr
+            
+            tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapPrivacyAndTerm))
+            subL.isUserInteractionEnabled = true
+            subL.addGestureRecognizer(tapGesture)
+        }
+    }
+    @objc func didTapPrivacyAndTerm(sender: UITapGestureRecognizer) {
+        let x = sender.location(in: subL).x
+        if x > 160 {
+            self.open_kojinjouhouhogo()
+        } else {
+            self.open_kiyaku()
         }
     }
 }

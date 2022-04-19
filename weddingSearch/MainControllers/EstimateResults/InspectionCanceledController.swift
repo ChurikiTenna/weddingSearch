@@ -62,10 +62,14 @@ class InspectionDecidedController: BasicViewController {
         _ = UILabel(.colorBtn(centerX: view.w/2, y: greyBtn.maxY+20),
                     text: request.objc.reserveDate?.toFullString() ?? "", font: .bold, textSize: 20, align: .center, to: view)
         
+        let tank = UILabel(.colorBtn(centerX: view.w/2, y: greyBtn.maxY+80),
+                    text: "ご予約誠にありがとうございました。当日はご予約の時間に合わせて結婚式場を訪問いただき、受付にてお名前とマイチャペルで見学予約した旨をお伝えください。ご準備いただくものは特にございません。",
+                    textSize: 16, textColor: .gray, lines: -1, to: view)
+        tank.fitHeight()
         
-        _ = UILabel(.colorBtn(centerX: view.w/2, y: s.maxY+120),
-                    text: "日程変更や見学キャンセル等は\n以下よりお願いいたします",
-                    textSize: 16, textColor: .gray, lines: 2, to: view)
+        _ = UILabel(.colorBtn(centerX: view.w/2, y: s.maxY-120),
+                    text: "日程変更や見学キャンセル等は\n以下よりお願いいたします。",
+                    textSize: 16, textColor: .gray, lines: 2, align: .center, to: view)
         _ = UIButton.lineInquiry(y: s.maxY-60, to: view)
     }
 }

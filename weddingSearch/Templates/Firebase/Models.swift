@@ -20,6 +20,7 @@ struct User: Codable {
     var gender = ""
     
     var address = ""
+    var phoneNumber: String?
 }
 struct RequestData: Codable {
     

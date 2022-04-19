@@ -90,6 +90,7 @@ class ReserveInspectionController: BasicViewController {
         }
         
         datePicker.timeZone = NSTimeZone.local
+        datePicker.locale = Locale(identifier: "ja_JP")
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.backgroundColor = UIColor.white
         datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)

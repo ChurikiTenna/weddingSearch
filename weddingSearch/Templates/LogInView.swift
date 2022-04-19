@@ -164,7 +164,9 @@ class LogInView: UIScrollView {
         birthDateF = BirthDateField.initMe(textF_rect(y: &y), user: User(), to: base)
         genderF = TextFieldAndTtl(textF_rect(y: &y), ttl: "性別", placeholder: "性別を選択", to: base)
         genderF.textField.addTap(self, action: #selector(selectGender))
-        addressF = TextFieldAndTtl(textF_rect(y: &y), ttl: "居住地", placeholder: "居住地を入力", text: "", to: base)
+        addressF = TextFieldAndTtl(textF_rect(y: &y), ttl: "居住地", placeholder: "居住地を選択", text: "", to: base)
+        addressF.textField.addTap(self, action: #selector(selectPrefecture))
+        
         _ = UIButton.coloredBtn(.colorBtn(centerX: base.w/2, y: y), text: "内容を確認して登録", to: base) {
             var errors = [String]()
             if self.surnameKanjiF.empty { errors.append("姓を入力してください") }
@@ -192,6 +194,12 @@ class LogInView: UIScrollView {
         contentSize.height = y+300
     }
     
+    @objc func selectPrefecture() {
+        let vc = OptionWithHeadersViewController(ttl: "居住地を選択", options: Prefecture.jp) { str in
+            self.addressF.textField.text = str
+        }
+        self.parentViewController.present(vc, animated: true)
+    }
     @objc func selectGender() {
         let gray = UIView.grayBack(to: self)
         let white = UIView(CGRect(x: self.w/2-150, y: self.h/2-70, w: 300, h: 140), color: .white, to: gray)

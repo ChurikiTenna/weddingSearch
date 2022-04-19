@@ -13,13 +13,13 @@
 		21094A7D27F29830005497D8 /* RequestTableView_admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21094A7C27F2982F005497D8 /* RequestTableView_admin.swift */; };
 		21094A7F27F298AD005497D8 /* ReserveRequestTableView_admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21094A7E27F298AD005497D8 /* ReserveRequestTableView_admin.swift */; };
 		21094A8127F2A083005497D8 /* InspectionCanceledController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21094A8027F2A083005497D8 /* InspectionCanceledController.swift */; };
-		2128BB102803FB2000149796 /* venues.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2128BB0F2803FB2000149796 /* venues.csv */; };
 		212EF87E27E98DFB00F5C89D /* AdminMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EF87D27E98DFB00F5C89D /* AdminMenuController.swift */; };
 		212EF88027E9932000F5C89D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 212EF87F27E9932000F5C89D /* GoogleService-Info.plist */; };
 		212EF88327E9B17400F5C89D /* EstimateResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EF88227E9B17400F5C89D /* EstimateResultController.swift */; };
 		212EF88527E9C0DC00F5C89D /* ReserveInspectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EF88427E9C0DC00F5C89D /* ReserveInspectionController.swift */; };
 		212EF88727E9D8DD00F5C89D /* CheckInspecitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212EF88627E9D8DD00F5C89D /* CheckInspecitionController.swift */; };
 		212F3023280D02DA00128311 /* TextPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212F3022280D02D900128311 /* TextPageController.swift */; };
+		212F3025280E86E800128311 /* venues.csv in Resources */ = {isa = PBXBuildFile; fileRef = 212F3024280E86E700128311 /* venues.csv */; };
 		2131705D27D9AF8300004E11 /* SelectBasicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131705C27D9AF8300004E11 /* SelectBasicInfo.swift */; };
 		2131705F27D9B18D00004E11 /* SelectFoodPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131705E27D9B18D00004E11 /* SelectFoodPriceView.swift */; };
 		2131706127D9BA7900004E11 /* SelectDrink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2131706027D9BA7900004E11 /* SelectDrink.swift */; };
@@ -70,13 +70,13 @@
 		21094A7E27F298AD005497D8 /* ReserveRequestTableView_admin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveRequestTableView_admin.swift; sourceTree = "<group>"; };
 		21094A8027F2A083005497D8 /* InspectionCanceledController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionCanceledController.swift; sourceTree = "<group>"; };
 		21094A8227F2BD40005497D8 /* weddingSearchRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = weddingSearchRelease.entitlements; sourceTree = "<group>"; };
-		2128BB0F2803FB2000149796 /* venues.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = venues.csv; sourceTree = "<group>"; };
 		212EF87D27E98DFB00F5C89D /* AdminMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMenuController.swift; sourceTree = "<group>"; };
 		212EF87F27E9932000F5C89D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		212EF88227E9B17400F5C89D /* EstimateResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateResultController.swift; sourceTree = "<group>"; };
 		212EF88427E9C0DC00F5C89D /* ReserveInspectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveInspectionController.swift; sourceTree = "<group>"; };
 		212EF88627E9D8DD00F5C89D /* CheckInspecitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInspecitionController.swift; sourceTree = "<group>"; };
 		212F3022280D02D900128311 /* TextPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPageController.swift; sourceTree = "<group>"; };
+		212F3024280E86E700128311 /* venues.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = venues.csv; sourceTree = "<group>"; };
 		2131705C27D9AF8300004E11 /* SelectBasicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBasicInfo.swift; sourceTree = "<group>"; };
 		2131705E27D9B18D00004E11 /* SelectFoodPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFoodPriceView.swift; sourceTree = "<group>"; };
 		2131706027D9BA7900004E11 /* SelectDrink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDrink.swift; sourceTree = "<group>"; };
@@ -211,7 +211,7 @@
 			children = (
 				21094A8227F2BD40005497D8 /* weddingSearchRelease.entitlements */,
 				213D59EE27AF482D00022EDD /* weddingSearch.entitlements */,
-				2128BB0F2803FB2000149796 /* venues.csv */,
+				212F3024280E86E700128311 /* venues.csv */,
 				213D595B27AA29C500022EDD /* AppDelegate.swift */,
 				213D595D27AA29C500022EDD /* SceneDelegate.swift */,
 				213D595F27AA29C500022EDD /* ViewController.swift */,
@@ -343,7 +343,7 @@
 			files = (
 				213D596827AA29C700022EDD /* LaunchScreen.storyboard in Resources */,
 				213D596527AA29C700022EDD /* Assets.xcassets in Resources */,
-				2128BB102803FB2000149796 /* venues.csv in Resources */,
+				212F3025280E86E800128311 /* venues.csv in Resources */,
 				212EF88027E9932000F5C89D /* GoogleService-Info.plist in Resources */,
 				213D596327AA29C500022EDD /* Main.storyboard in Resources */,
 				21094A7227EBF94E005497D8 /* GoogleService-Info-test.plist in Resources */,
@@ -594,7 +594,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = weddingSearch/weddingSearch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = JP9XJC6239;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = weddingSearch/Info.plist;
@@ -603,7 +603,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -615,7 +615,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -628,7 +628,7 @@
 				CODE_SIGN_ENTITLEMENTS = weddingSearch/weddingSearchRelease.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 59AK3HJ65G;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = weddingSearch/Info.plist;
@@ -637,7 +637,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -650,7 +650,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "shiyoung kim";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

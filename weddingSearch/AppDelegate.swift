@@ -117,7 +117,7 @@ extension AppDelegate: MessagingDelegate {
         guard let uid = SignIn.uid else {
             return
         }
-        Ref.users.document(uid).setData(["token": token], merge: true)
+        Ref.users.document(uid).setData(["token": token, "phoneNumber": SignIn.phone ?? ""], merge: true)
     }
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
            // Print message ID.

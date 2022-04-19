@@ -92,7 +92,7 @@ class QuestionView: UIScrollView {
         var y = questionLbl.maxY+40
         setUI(y: &y)
         
-        answerBtn = UIButton.coloredBtn(.colorBtn(centerX: w/2, y: y+20), text: "回答する", to: self, action: {
+        answerBtn = UIButton.coloredBtn(.colorBtn(centerX: w/2, y: y+20), text: type == .otherInfo ? "提出する" : "次の設問に進む", to: self, action: {
             self.onNext()
         })
         contentSize.height = answerBtn.maxY+40

@@ -9,7 +9,6 @@ import UIKit
 
 struct VenueInfo: Codable {
     var prefecture = ""
-    var head = ""
     var name = ""
 }
 
@@ -35,7 +34,6 @@ class SelectVenueView: QuestionView {
     }
     
     var prefBtns = [UIButton]()
-    var nameHBtns = [UIButton]()
     var nameBtns = [UIButton]()
     func prefecture(idx: Int) -> String {
         var pref = self.venueInfos[idx].prefecture
@@ -46,10 +44,9 @@ class SelectVenueView: QuestionView {
     
     let venueSearch = VenueSearch()
     func venues(_ idx: Int) -> [String] {
-        print("self.venueInfos[idx].head", self.venueInfos[idx].head, self.venueInfos[idx].prefecture)
+        print("self.venueInfos[idx].head", self.venueInfos[idx].prefecture)
         var pref = prefecture(idx: idx)
         return venueSearch.venues
-        .filter({ $0.head == self.venueInfos[idx].head })
         .filter({ $0.prefecture.contains(pref) }) // 「県」は入っていないけど「道」は入ってるので
         .map({ $0.name })
     }
@@ -68,43 +65,14 @@ class SelectVenueView: QuestionView {
                 self.didResetHeadOrPref(idx)
             }
             self.parentViewController.present(vc, animated: true)
-            //self.parentViewController.presentFull(vc) nazeka questionViewが閉じる
-        })
-        nameHBtns.append(selectionField(y: &y, btnTitle: .selectVenueHeadC, options: nil))
-        nameHBtns[idx].addAction(action: {
-            var kanas = Katakana().kanas
-            let pref = self.prefecture(idx: idx)
-            let venues = self.venueSearch.venues.filter({ $0.prefecture.contains(pref) })
-            
-            for i in 0..<kanas.count {
-                for kana in kanas[i] {
-                    if !venues.contains(where: { $0.head == kana }) {
-                        guard let idx = kanas[i].firstIndex(of: kana) else { continue }
-                        kanas[i].remove(at: idx)
-                    }
-                }
-            }
-            let vc = GridOptionController(ttl: "頭文字を選択",
-                                          options: Katakana().kanas,
-                                          valid: kanas,
-                                          selectedBef: self.venueInfos[idx].head,
-                                          selected: { str in
-                self.venueInfos[idx].head = str
-                self.nameHBtns[idx].setTitle(str, for: .normal)
-                self.didResetHeadOrPref(idx)
-            })
-            self.parentViewController.present(vc, animated: true)
         })
         nameBtns.append(selectionField(y: &y, btnTitle: .selectVenueName, options: nil))
         nameBtns[idx].addAction(action: {
             print("possibles", self.possibles)
-            let vc = OptionViewController(ttl: "式場名を選択",
-                                          options: self.possibles[idx],
-                                          selectedIdx: nil,
-                                          selected: { str in
+            let vc = VenueSearchController(options: self.possibles[idx]) { str in
                 self.venueInfos[idx].name = str
                 self.nameBtns[idx].setTitle(str, for: .normal)
-            })
+            }
             self.parentViewController.present(vc, animated: true)
         })
     }
@@ -153,7 +121,7 @@ class Katakana {
 }
 class VenueSearch {
     
-    var venues = [(prefecture: String, head: String, name: String)]()
+    var venues = [(prefecture: String, name: String)]()
     
     init() {
         
@@ -167,12 +135,80 @@ class VenueSearch {
             for data in csvLines {
                 let venue = data.components(separatedBy: ",")
                 //print("venue", venue)
-                if venue.count < 3 { continue }
-                venues.append((prefecture: venue[0], head: venue[1], name: venue[2]))
+                if venue.count < 2 { continue }
+                venues.append((prefecture: venue[0], name: venue[1]))
             }
         } catch let error as NSError {
             print("エラー: \(error)")
             return
         }
     }
+}
+
+class VenueSearchController: BasicViewController {
+    
+    let onSelected: (String) -> Void
+    let options: [String]
+    var optionBtns = [UIButton]()
+    var searchF: SearchFieldView!
+    var availables: [String] {
+        if searchF.text==nil || searchF.text!.isEmpty { return options }
+        else { return options.filter({ $0.contains(searchF.text!) }) }
+    }
+    
+    init(options: [String], onSelected: @escaping (String) -> Void) {
+        self.options = options
+        self.onSelected = onSelected
+        super.init(nibName: nil, bundle: nil)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        header("式場を選択", y: 0, withClose: true)
+        var y = head.maxY+1
+        searchF = SearchFieldView(full_rect(h: 50, y: &y), placeholder: "式場名で検索", searchDelegate: self, to: view)
+        
+        setScrollView(y: searchF.maxY)
+        reloadBtns()
+    }
+    func reloadBtns() {
+        optionBtns.forEach({ $0.removeFromSuperview() })
+        optionBtns = []
+        
+        var y = CGFloat()
+        availables.forEach { str in
+            let btn = UIButton(CGRect(x: 20, y: y+10, w: self.view.w-40, h: 60), color: .white, to: self.scroll)
+            btn.round(20)
+            btn.addAction {
+                self.onSelected(str)
+                self.dismissSelf()
+            }
+            _ = UILabel(CGRect(x: 20, w: btn.w-40, h: btn.h),
+                        text: str, font: .bold, textSize: 15, textColor: .darkGray, lines: -1, align: .center, to: btn)
+            self.optionBtns.append(btn)
+            y = btn.maxY
+        }
+        scroll.contentSize.height = y+40
+    }
+}
+extension VenueSearchController: SearchFieldViewDelegate {
+    func searchTextDidChange() {
+        DispatchQueue.main.async {
+            self.reloadBtns()
+        }
+    }
+    
+    func doSearch() {
+        
+    }
+    
+    func doBegin() {
+        
+    }
+    
+    
 }
