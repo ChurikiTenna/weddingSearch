@@ -105,7 +105,7 @@ class FirstController: BasicViewController {
         super.viewDidLoad()
         
         base = UIView(s, to: view)
-        base.isUserInteractionEnabled = false
+        //base.isUserInteractionEnabled = false
         let titleY = base.h-300
         imgV = UIImageView(CGRect(x: 10, y: titleY/2-180, w: view.w-20, h: 380), name: "", to: base)
         
@@ -175,13 +175,8 @@ class FirstController: BasicViewController {
             idxIcons[i].backgroundColor = i==idx ? .themeColor : .superPaleGray
         }
         titleL.text = pages[idx].title
-        subL.text = pages[idx].sub
-        subL.fitHeight()
         
         startBtn?.removeFromSuperview()
-        if tapGesture != nil {
-            subL.removeGestureRecognizer(tapGesture!)
-        }
         
         if idx == pages.count-1 {
             
@@ -197,11 +192,16 @@ class FirstController: BasicViewController {
             tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapPrivacyAndTerm))
             subL.isUserInteractionEnabled = true
             subL.addGestureRecognizer(tapGesture)
+            subL.addTap(self, action: #selector(didTapPrivacyAndTerm))
+        } else {
+            subL.text = pages[idx].sub
         }
+        subL.fitHeight()
     }
     @objc func didTapPrivacyAndTerm(sender: UITapGestureRecognizer) {
+        print("didTapPrivacyAndTerm")
         let x = sender.location(in: subL).x
-        if x > 160 {
+        if x < 160 {
             self.open_kojinjouhouhogo()
         } else {
             self.open_kiyaku()

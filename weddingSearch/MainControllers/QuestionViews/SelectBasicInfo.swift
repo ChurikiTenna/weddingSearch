@@ -44,6 +44,8 @@ class SelectBasicInfo: QuestionView {
         let small = frame.height < 700
         if small {
             y -= 40
+        } else {
+            y -= 20
         }
         let lbl = UILabel.grayTtl(.colorBtn(centerX: w/2, y: y), ttl: "パーティーの招待人数は？", to: self)
         y = lbl.maxY + (small ? -10 : 0)

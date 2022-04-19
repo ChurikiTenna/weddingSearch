@@ -95,7 +95,10 @@ class QuestionView: UIScrollView {
         answerBtn = UIButton.coloredBtn(.colorBtn(centerX: w/2, y: y+20), text: type == .otherInfo ? "提出する" : "次の設問に進む", to: self, action: {
             self.onNext()
         })
-        contentSize.height = answerBtn.maxY+40
+        guard let idx = QuestionType.allCases.firstIndex(of: type) else { return }
+        let questionleftCount = UILabel(CGRect(x: 10, y: answerBtn.maxY, w: w-20, h: 40),
+                                        text: "残りの設問数：あと\(QuestionType.allCases.count-idx)問", textSize: 14, textColor: .lightGray, align: .center, to: self)
+        contentSize.height = questionleftCount.maxY+40
         
         checkDone(check: { return false })
     }
