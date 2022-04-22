@@ -299,6 +299,7 @@ class TextFieldAndTtl: UIView {
     var empty: Bool {
         text.isEmpty
     }
+    var didChange: ((String) -> Void)?
     
     init(_ f: CGRect, ttl: String, placeholder: String? = nil, text: String? = nil, to view: UIView) {
         super.init(frame: f)
@@ -323,6 +324,58 @@ class TextFieldAndTtl: UIView {
 extension TextFieldAndTtl: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        return true
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        DispatchQueue.main.async {
+            self.didChange?(textField.text ?? "")
+        }
+        return true
+    }
+}
+
+
+class CoolTextFieldAndTtl: UIView {
+    
+    var ttlLbl: UILabel!
+    var textField: TextField!
+    var text: String {
+        textField.text ?? ""
+    }
+    var empty: Bool {
+        text.isEmpty
+    }
+    var didChange: ((String) -> Void)?
+    
+    init(_ f: CGRect, ttl: String, placeholder: String? = nil, text: String? = nil, to view: UIView) {
+        super.init(frame: f)
+        view.addSubview(self)
+        
+        ttlLbl = UILabel.grayTtl(CGRect(w: w-20, h: ttl.count==0 ? 0 : 30), ttl: ttl, to: self)
+        ttlLbl.fitWidth(maxW: w-ttlLbl.maxX)
+        
+        textField = TextField(CGRect(y: ttlLbl.maxY, w: w, h: h), delegate: self,
+                              placeholder: (placeholder == nil ? "\(ttl)を入力" : placeholder!), to: self)
+        textField.round(10, clip: true)
+        if let text = text {
+            textField.text = text
+        }
+        frame.size.height = textField.maxY
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+extension CoolTextFieldAndTtl: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        DispatchQueue.main.async {
+            self.didChange?(textField.text ?? "")
+        }
         return true
     }
 }

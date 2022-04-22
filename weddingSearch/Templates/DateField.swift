@@ -15,6 +15,9 @@ class BirthDateField: YearMonthDateField {
 }
 class YearMonthDateField: TextFieldAndTtl {
     
+    let datePicker = UIDatePicker()
+    var datePickerH: UIView!
+    
     var date: YMD? {
         didSet {
             setText()
@@ -26,18 +29,54 @@ class YearMonthDateField: TextFieldAndTtl {
         super.init(f, ttl: title, placeholder: "\(title)を選択", text: "", to: view)
         view.addSubview(self)
         self.date = date?.ymd()
-        textField.addTap(self, action: #selector(selectDate))
+        textField.addTap(self, action: #selector(showDatePicker))
         
         setText()
+        
+        datePickerH = UIView(CGRect(y: parentViewController.view.h, w: parentViewController.view.w, h: 50), color: .themePale, to: parentViewController.view)
+        let closeBtn = ImageBtn(CGPoint(x: parentViewController.view.w-50, y: 0), image: .chevronD, width: 50, theme: .clearTheme, to: datePickerH)
+        closeBtn.addAction {
+            self.closeDatePicker()
+        }
+        
+        datePicker.timeZone = NSTimeZone.local
+        datePicker.locale = Locale(identifier: "ja_JP")
+        datePicker.preferredDatePickerStyle = .wheels
+        datePicker.backgroundColor = UIColor.white
+        datePicker.datePickerMode = .date
+        datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
+        closeDatePicker()
     }
-    @objc func selectDate() {
+    /*@objc func selectDate() {
         superview?.endEditing(true)
+        
         let vc = SelectDateController(selectedDate: date, allowAnyMonth: allowAnyMonth(), title: ttlLbl.text!) { ymd in
             self.date = ymd
         }
         parentViewController.presentFull(vc)
-    }
+    }*/
     
+    @objc func datePickerValueChanged() {
+        let date = datePicker.date
+        textField.text = date.toString(format: .yearMonthDate)
+        self.date = date.ymd()
+    }
+    func closeDatePicker() {
+        UIView.animate(withDuration: 0.2, delay: 0, options: []) {
+            self.datePicker.frame.origin.y = self.parentViewController.view.h
+            self.datePickerH.frame.origin.y = self.parentViewController.view.h
+        } completion: { Bool in
+            self.datePicker.removeFromSuperview()
+        }
+    }
+    @objc func showDatePicker() {
+        parentViewController.view.endEditing(true)
+        parentViewController.view.addSubview(self.datePicker)
+        UIView.animate(withDuration: 0.2, delay: 0, options: []) {
+            self.datePicker.frame = CGRect(x: 0, y: self.parentViewController.view.h-200, width: self.parentViewController.view.w, height: 200)
+            self.datePickerH.frame.origin.y = self.parentViewController.view.h-250
+        }
+    }
     func setText() {
         if let date = date {
             textField.text = date.toDate().toString(format: .yearMonthDate)

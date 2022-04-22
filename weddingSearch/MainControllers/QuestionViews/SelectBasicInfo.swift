@@ -28,26 +28,39 @@ class SelectBasicInfo: QuestionView {
             })
         }
     }
-    
-    var pplBtn: Drum3View!
-    var childBtn: Drum3View!
+    var pplF: CoolTextFieldAndTtl!
+    var childF: CoolTextFieldAndTtl!
+    //var pplBtn: Drum3View!
+    //var childBtn: Drum3View!
     var seasonBtn: UIButton!
     var budgetBtn: UIButton!
     
     override func setUI(y: inout CGFloat) {
         print("SelectBasicInfoh", frame)
         // ppls
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
+        /*DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
             self.isScrollEnabled = false
             self.contentInset.top = s.minY
-        })
+        })*/
         let small = frame.height < 700
         if small {
             y -= 40
         } else {
             y -= 20
         }
-        let lbl = UILabel.grayTtl(.colorBtn(centerX: w/2, y: y), ttl: "パーティーの招待人数は？", to: self)
+        pplF = CoolTextFieldAndTtl(.colorBtn(centerX: w/2, y: y), ttl: "パーティーの招待人数は？", text: "0", to: self)
+        pplF.textField.setUnitLbl(unit: "人", keyboardType: .numberPad)
+        pplF.didChange = { text in
+            self.basicInfoData.pplToInvite = text
+        }
+        y = pplF.maxY
+        childF = CoolTextFieldAndTtl(.colorBtn(centerX: w/2, y: y), ttl: "うち、子供の数は？", text: "0", to: self)
+        childF.textField.setUnitLbl(unit: "人", keyboardType: .numberPad)
+        childF.didChange = { text in
+            self.basicInfoData.childToInvite = text
+        }
+        y = childF.maxY
+        /*let lbl = UILabel.grayTtl(.colorBtn(centerX: w/2, y: y), ttl: "パーティーの招待人数は？", to: self)
         y = lbl.maxY + (small ? -10 : 0)
         pplBtn = Drum3View(.drumBtn(centerX: w/2, y: y), to: self, didBPMchanged: {
             self.basicInfoData.pplToInvite = "\(self.pplBtn.bgm)"
@@ -58,7 +71,7 @@ class SelectBasicInfo: QuestionView {
         childBtn = Drum3View(.drumBtn(centerX: w/2, y: y), to: self, didBPMchanged: {
             self.basicInfoData.childToInvite = "\(self.childBtn.bgm)"
         })
-        y = childBtn.maxY
+        y = childBtn.maxY*/
         // season
         var seasons = [String]()
         for i in 1...12 {

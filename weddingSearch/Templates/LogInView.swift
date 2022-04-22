@@ -195,7 +195,11 @@ class LogInView: UIScrollView {
     }
     
     @objc func selectPrefecture() {
-        let vc = OptionWithHeadersViewController(ttl: "居住地を選択", options: Prefecture.jp) { str in
+        var all = [String]()
+        Prefecture.jp.forEach({ element in
+            all.append(contentsOf: element.texts)
+        })
+        let vc = OptionViewController(ttl: "居住地を選択", options: all, selectedIdx: nil) { str in
             self.addressF.textField.text = str
         }
         self.parentViewController.present(vc, animated: true)
@@ -365,15 +369,9 @@ extension LogInView: ASAuthorizationControllerPresentationContextProviding {
 extension LogInView {
     
     func registerUser(_ uid: String) {
-        
-        Ref.users.document(uid).getDocument { (snapshot, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                self.noticeFailDelegate(cause: "ユーザー情報の取得に失敗しました")
-                return
-            }
+        Ref.user(uid: uid) { user in
             // ログインしたことがある
-            if snapshot?.data() != nil {
+            if user != nil {
                 self.didSuccessLogin()
                 return
             }

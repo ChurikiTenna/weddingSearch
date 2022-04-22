@@ -12,6 +12,11 @@ class ViewController: UITabBarController {
     var adminData: AdminData?
     var vcs = [UIViewController]()
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    override var shouldAutorotate: Bool { return false }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white

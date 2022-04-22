@@ -45,7 +45,7 @@ class SelectVenueView: QuestionView {
     let venueSearch = VenueSearch()
     func venues(_ idx: Int) -> [String] {
         print("self.venueInfos[idx].head", self.venueInfos[idx].prefecture)
-        var pref = prefecture(idx: idx)
+        let pref = prefecture(idx: idx)
         return venueSearch.venues
         .filter({ $0.prefecture.contains(pref) }) // 「県」は入っていないけど「道」は入ってるので
         .map({ $0.name })
@@ -106,6 +106,19 @@ class Prefecture {
                              (title: "近畿", texts: kinki),
                              //(title: "中国・四国", texts: chugoku_shikoku),
                              (title: "九州・沖縄", texts: kyushu_okinawa)]
+}
+class AllPrefecture {
+        
+    static let hokkaido_tohoku = ["北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県"]
+    static let kanto = ["茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県"]
+    static let hokuriku_kousinetsu = ["新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県"]
+    static let tokai = ["岐阜県", "静岡県", "愛知県", "三重県"]
+    static let kinki = ["滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県"]
+    static let chugoku_shikoku = ["鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県"]
+    static let kyushu_okinawa = ["福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"]
+
+    internal static let jp: KeyValuePairs = ["北海道・東北": hokkaido_tohoku, "関東": kanto, "北陸・甲信越": hokuriku_kousinetsu, "東海": tokai, "近畿": kinki, "中国・四国": chugoku_shikoku, "九州・沖縄": kyushu_okinawa, "海外": ["海外"]]
+    
 }
 class Katakana {
     let kanas = [["ア","イ","ウ","エ","オ"],

@@ -22,6 +22,8 @@ class BasicViewController: UIViewController {
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
+    override var shouldAutorotate: Bool { return false }
+    
     func subHeader(text: String?) {
         subHeadV = UIView(CGRect(y: head.maxY, w: view.w, h: 50), color: .themePale, to: view)
         subHead = UILabel(CGRect(x: 20, w: view.w-120, h: subHeadV.h), textSize: 16, to: subHeadV)

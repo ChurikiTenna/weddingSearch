@@ -758,7 +758,7 @@ class TextField: UITextField {
         self.init(frame: f)
         backgroundColor = .white
         round(8)
-        font = Font.normal.with(f.height*0.5)
+        font = Font.normal.with(18)
         textColor = .black
         returnKeyType = .done
         self.delegate = delegate
@@ -769,8 +769,9 @@ class TextField: UITextField {
     func setUnitLbl(unit: String, keyboardType: UIKeyboardType) {
         textAlignment = .right
         self.keyboardType = keyboardType
+        attributedPlaceholder = nil
         padding.right = 40
-        _=UILabel(CGRect(x: w-padding.right, w: padding.right, h: 40), text: unit, textSize: 16, textColor: .lightGray, align: .center, to: self)
+        _=UILabel(CGRect(x: w-padding.right, w: padding.right, h: h), text: unit, textSize: 16, textColor: .lightGray, align: .center, to: self)
     }
     
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
