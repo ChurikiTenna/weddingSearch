@@ -196,8 +196,8 @@ class LogInView: UIScrollView {
     
     @objc func selectPrefecture() {
         var all = [String]()
-        Prefecture.jp.forEach({ element in
-            all.append(contentsOf: element.texts)
+        AllPrefecture.jp.forEach({ element in
+            all.append(contentsOf: element.value)
         })
         let vc = OptionViewController(ttl: "居住地を選択", options: all, selectedIdx: nil) { str in
             self.addressF.textField.text = str

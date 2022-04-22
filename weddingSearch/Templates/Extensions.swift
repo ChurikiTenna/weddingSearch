@@ -552,7 +552,7 @@ extension UIImageView {
 extension UIViewController {
     
     @objc func open_kiyaku() {
-        guard let url = URL(string: "https://churikitenna.github.io/MyChapeWeb/termOfUse.html")
+        guard let url = URL(string: "https://siyoung0324.github.io/mychape/termOfUse.html")
         else {
             showAlert(title: "URLを開けません")
             return
@@ -562,7 +562,7 @@ extension UIViewController {
         }
     }
     @objc func open_kojinjouhouhogo() {
-        guard let url = URL(string: "https://churikitenna.github.io/MyChapeWeb/privacyPolicy.html")
+        guard let url = URL(string: "https://siyoung0324.github.io/mychape/privacyPolicy.html")
         else {
             showAlert(title: "URLを開けません")
             return
