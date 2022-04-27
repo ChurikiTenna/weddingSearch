@@ -185,13 +185,19 @@ class LogInView: UIScrollView {
                                 surnameKana: self.surnameKanaF.text,
                                 birthDate: self.birthDateF.date!.toDate().timestamp(),
                                 gender: self.genderF.text,
-                                address: self.addressF.text)
-                try! Ref.users.document(SignIn.uid!).setData(from: user, merge: true) {_ in
-                    self.didSuccessLogin()
+                                address: self.addressF.text, phoneNumber: SignIn.phone ?? "")
+                try! Ref.users.document(SignIn.uid!).setData(from: user, merge: true) { e in
+                    if let e = e {
+                        self.showAlert(title: e.localizedDescription)
+                    } else {
+                        self.didSuccessLogin()
+                    }
+                    
                 }
             }
         }
         contentSize.height = y+300
+        base.frame.size.height = contentSize.height
     }
     
     @objc func selectPrefecture() {

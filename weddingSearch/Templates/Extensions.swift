@@ -552,7 +552,7 @@ extension UIImageView {
 extension UIViewController {
     
     @objc func open_kiyaku() {
-        guard let url = URL(string: "https://siyoung0324.github.io/mychape/termOfUse.html")
+        guard let url = URL(string: "https://mychapeapp.github.io/mychape/termOfUse.html")
         else {
             showAlert(title: "URLを開けません")
             return
@@ -562,7 +562,7 @@ extension UIViewController {
         }
     }
     @objc func open_kojinjouhouhogo() {
-        guard let url = URL(string: "https://siyoung0324.github.io/mychape/privacyPolicy.html")
+        guard let url = URL(string: "https://mychapeapp.github.io/mychape/privacyPolicy.html")
         else {
             showAlert(title: "URLを開けません")
             return
@@ -764,13 +764,13 @@ class TextField: UITextField {
         self.delegate = delegate
         attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor: UIColor.lightGray])
         v.addSubview(self)
-        //addDoneToolbar("Done")
     }
     func setUnitLbl(unit: String, keyboardType: UIKeyboardType) {
         textAlignment = .right
         self.keyboardType = keyboardType
         attributedPlaceholder = nil
         padding.right = 40
+        addDoneToolbar("OK")
         _=UILabel(CGRect(x: w-padding.right, w: padding.right, h: h), text: unit, textSize: 16, textColor: .lightGray, align: .center, to: self)
     }
     
@@ -785,6 +785,21 @@ class TextField: UITextField {
     override open func editingRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: padding)
     }
+    
+    func addDoneToolbar(_ title: String) {
+        
+        let toolbar = UIToolbar()
+        toolbar.barStyle = .default
+        toolbar.items = [
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
+            UIBarButtonItem(title: title, style: .done, target: self, action: #selector(doneButtonTapped))
+        ]
+        toolbar.sizeToFit()
+        toolbar.translatesAutoresizingMaskIntoConstraints = false
+        self.inputAccessoryView = toolbar
+    }
+    @objc func doneButtonTapped() { self.resignFirstResponder() }
+    
 }
 
 extension UISearchBar {

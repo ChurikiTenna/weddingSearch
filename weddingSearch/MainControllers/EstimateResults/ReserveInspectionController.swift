@@ -43,7 +43,7 @@ class ReserveInspectionController: BasicViewController {
         let lbl = nessesaryLbl(true, y: 10)
         let lbl2 = UILabel(CGRect(x: 90, y: lbl.minY, w: view.w-120, h: 40), lines: 2, to: scroll)
         let attr = NSMutableAttributedString(string: "見学希望日時", attributes: [.font : Font.bold.with(18)])
-        attr.append(NSAttributedString(string: "\n※候補枠を３つ登録ください", attributes: [.font : Font.normal.with(14)]))
+        attr.append(NSAttributedString(string: "\n※候補枠を3つ登録ください(3ヵ月以内を目処)", attributes: [.font : Font.normal.with(14)]))
         lbl2.attributedText = attr
         
         var y = lbl.maxY+20

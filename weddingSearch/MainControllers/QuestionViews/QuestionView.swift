@@ -93,6 +93,7 @@ class QuestionView: UIScrollView {
         setUI(y: &y)
         
         answerBtn = UIButton.coloredBtn(.colorBtn(centerX: w/2, y: y+20), text: type == .otherInfo ? "提出する" : "次の設問に進む", to: self, action: {
+            self.endEditing(true)
             self.onNext()
         })
         guard let idx = QuestionType.allCases.firstIndex(of: type) else { return }

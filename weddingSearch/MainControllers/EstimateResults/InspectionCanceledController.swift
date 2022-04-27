@@ -63,7 +63,7 @@ class InspectionDecidedController: BasicViewController {
                     text: request.objc.reserveDate?.toFullString() ?? "", font: .bold, textSize: 20, align: .center, to: view)
         
         let tank = UILabel(.colorBtn(centerX: view.w/2, y: greyBtn.maxY+80),
-                    text: "ご予約誠にありがとうございました。当日はご予約の時間に合わせて結婚式場を訪問いただき、受付にてお名前とマイチャペルで見学予約した旨をお伝えください。ご準備いただくものは特にございません。",
+                    text: "ご予約誠にありがとうございました。当日はご予約の時間に合わせて結婚式場を訪問いただき、受付にてお名前とマイチャペルで見学予約した旨をお伝えください。ご準備いただくものは特にございません。また、見学当日等に式場から直接連絡が届く可能性がございますので、予めご了承ください。",
                     textSize: 16, textColor: .gray, lines: -1, to: view)
         tank.fitHeight()
         
