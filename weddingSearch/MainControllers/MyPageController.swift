@@ -15,7 +15,7 @@ class MyPageController: BasicViewController {
         case questions
         case evaluateApp
         case inquiry
-        case logout
+        //case logout
         
         var title: String {
             switch self {
@@ -24,7 +24,7 @@ class MyPageController: BasicViewController {
             case .questions: return "よくある質問"
             case .evaluateApp: return "アプリを評価する"
             case .inquiry: return "お問い合わせ（LINE）"
-            case .logout: return "ログアウト"
+            //case .logout: return "ログアウト"
             }
         }
         var image: String {
@@ -34,7 +34,7 @@ class MyPageController: BasicViewController {
             case .questions: return "questionmark.app"
             case .evaluateApp: return "star.fill"
             case .inquiry: return "line"
-            case .logout: return ""
+            //case .logout: return ""
             }
         }
     }
@@ -56,10 +56,10 @@ class MyPageController: BasicViewController {
             btn.underBar()
             btn.addAction {
                 switch row {
-                case .logout:
+                /*case .logout:
                     self.showAlert(title: "ログアウトしますか？", btnTitle: "ログアウト", cancelBtnTitle: "キャンセル") {
                         SignIn.logout()
-                    }
+                    }*/
                 case .term:
                     self.open_kiyaku()
                 case .privacy:
@@ -97,7 +97,7 @@ class MyPageController: BasicViewController {
                           content: ["見積もり依頼を頂いてから通常数時間以内、遅くとも翌日までにはお返しいたします"])])
                         self.presentFull(vc)
                 case .evaluateApp:
-                    guard let url = URL(string: "https://apps.apple.com/us/app/my-chape/id1615359139") else { return }
+                    guard let url = URL(string: "https://itunes.apple.com/jp/app/id1615359139?mt=8") else { return }
                     if UIApplication.shared.canOpenURL(url) {
                         UIApplication.shared.open(url)
                     }
