@@ -15,7 +15,9 @@ class MyPageController: BasicViewController {
         case questions
         case evaluateApp
         case inquiry
-        //case logout
+        #if DEBUG
+        case logout
+        #endif
         
         var title: String {
             switch self {
@@ -24,7 +26,9 @@ class MyPageController: BasicViewController {
             case .questions: return "よくある質問"
             case .evaluateApp: return "アプリを評価する"
             case .inquiry: return "お問い合わせ（LINE）"
-            //case .logout: return "ログアウト"
+            #if DEBUG
+            case .logout: return "ログアウト"
+            #endif
             }
         }
         var image: String {
@@ -34,7 +38,9 @@ class MyPageController: BasicViewController {
             case .questions: return "questionmark.app"
             case .evaluateApp: return "star.fill"
             case .inquiry: return "line"
-            //case .logout: return ""
+            #if DEBUG
+            case .logout: return ""
+            #endif
             }
         }
     }
@@ -56,10 +62,12 @@ class MyPageController: BasicViewController {
             btn.underBar()
             btn.addAction {
                 switch row {
-                /*case .logout:
+#if DEBUG
+                case .logout:
                     self.showAlert(title: "ログアウトしますか？", btnTitle: "ログアウト", cancelBtnTitle: "キャンセル") {
                         SignIn.logout()
-                    }*/
+                    }
+#endif
                 case .term:
                     self.open_kiyaku()
                 case .privacy:

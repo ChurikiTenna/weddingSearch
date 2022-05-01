@@ -37,6 +37,9 @@ class LogInView: UIScrollView {
     var genderF: TextFieldAndTtl!
     var addressF: TextFieldAndTtl!
     
+    var tempSurname = ""
+    var tempName = ""
+    
     init(to v: UIView) {
         super.init(frame: v.fitRect)
         backgroundColor = .superPaleBackGray
@@ -158,7 +161,9 @@ class LogInView: UIScrollView {
         var y = setHead("プロフィール入力", sub: "必要なプロフィールを入力してください。\n事前登録で、式場をスムーズに予約できます。")
         
         surnameKanjiF = TextFieldAndTtl(textF_rect(y: &y), ttl: "姓", to: base)
+        surnameKanjiF.textField.text = tempSurname
         nameKanjiF = TextFieldAndTtl(textF_rect(y: &y), ttl: "名", to: base)
+        nameKanjiF.textField.text = tempName
         surnameKanaF = TextFieldAndTtl(textF_rect(y: &y), ttl: "セイ", to: base)
         nameKanaF = TextFieldAndTtl(textF_rect(y: &y), ttl: "メイ", to: base)
         birthDateF = BirthDateField.initMe(textF_rect(y: &y), user: User(), to: base)
@@ -173,7 +178,6 @@ class LogInView: UIScrollView {
             if self.nameKanjiF.empty { errors.append("名を入力してください") }
             if self.surnameKanaF.empty { errors.append("セイを入力してください") }
             if self.nameKanaF.empty { errors.append("メイを入力してください") }
-            if self.birthDateF.empty { errors.append("生年月日を入力してください") }
             if self.genderF.empty { errors.append("性別を選択してください") }
             if self.addressF.empty { errors.append("居住地を入力してください") }
             if errors.count > 0 {
@@ -183,7 +187,7 @@ class LogInView: UIScrollView {
                                 surnameKanji: self.surnameKanjiF.text,
                                 nameKana: self.nameKanaF.text,
                                 surnameKana: self.surnameKanaF.text,
-                                birthDate: self.birthDateF.date!.toDate().timestamp(),
+                                birthDate: self.birthDateF.date?.toDate().timestamp(),
                                 gender: self.genderF.text,
                                 address: self.addressF.text, phoneNumber: SignIn.phone ?? "")
                 try! Ref.users.document(SignIn.uid!).setData(from: user, merge: true) { e in
@@ -424,6 +428,7 @@ extension LogInView: ASAuthorizationControllerDelegate {
                 self.noticeFailDelegate(cause: "Appleのデータを取得できませんでした")
                 return
             }
+            self.tempSurname = result.user.displayName ?? ""
             self.registerUser(result.user.uid)
         }
     }

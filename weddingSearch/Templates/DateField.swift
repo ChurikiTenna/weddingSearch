@@ -9,7 +9,7 @@ import UIKit
 
 class BirthDateField: YearMonthDateField {
     static func initMe(_ f: CGRect, user: User, to scroll: UIView) -> BirthDateField {
-        return BirthDateField(f, title: "生年月日", date: YMD(year: 1985, month: 1, day: 1).toDate(), to: scroll)
+        return BirthDateField(f, title: "生年月日（任意）", date: nil, to: scroll)
     }
     override func allowAnyMonth() -> Bool { return true }
 }

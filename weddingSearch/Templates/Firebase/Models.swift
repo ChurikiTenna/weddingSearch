@@ -16,7 +16,7 @@ struct User: Codable {
     var nameKana = ""
     var surnameKana = ""
     
-    var birthDate: Timestamp!
+    var birthDate: Timestamp?
     var gender = ""
     
     var address = ""

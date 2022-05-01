@@ -42,7 +42,7 @@ class RequestEstimateController: BasicViewController {
             self.showNewQuestion(0)
         })
         
-        Ref.user(uid: SignIn.uid!) { user in
+        Ref.user(uid: SignIn.uid) { user in
             self.user = user
             if user == nil {
                 _ = LogInView(to: self.view)
